@@ -54,7 +54,7 @@ python3 experiments/expected_partition_sum.py
 python3 experiments/large_n_audit_numpy.py
 ```
 
-The CI workflow runs all three Python audits and `lake build`.
+The CI workflow runs all three Python audits, the standard `lake build`, and an explicit `lake build RandomKripke.ExactSmallN`.
 
 ## Research discipline
 
