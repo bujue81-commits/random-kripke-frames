@@ -207,3 +207,10 @@ The F0001 central Poisson range contains at most two indices, each at least \(A_
 \Pr(G_n\twoheadrightarrow F0001)=O(1/\sqrt{\ln n}).
 \]
 This is a hand-proof upper bound only, with no matching lower bound or asymptotic equivalent.
+
+
+## 11. Separate side finding: Goranko Proposition 4.7
+
+The project now contains a finite counterexample to the preservation step used in Goranko (2020), Proposition 4.7. The complete irreflexive three-point frame satisfies \(\eta=\forall x\exists y(Rxy\land\neg Ryy)\). It maps onto the two-point target with relation \(\{(0,0),(0,1),(1,0)\}\) via \(h(0)=h(1)=0,h(2)=1\). The target fails \(\eta\) at point 1. Direct inspection verifies forth, back, and surjectivity. Both frames have two-step reachability.
+
+This is independent of the F0001/F1001 first-moment arguments. It refutes the stated preservation step, and therefore leaves a gap in that proof of Proposition 4.7; it does not alone refute the proposition's final conclusion. The finite statement is in RandomKripke/GorankoEtaCounterexample.lean. The first CI attempt failed at decidability synthesis; the theorem now uses decide, with the corrected module build pending.
