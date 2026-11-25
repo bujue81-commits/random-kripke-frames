@@ -33,6 +33,45 @@ theorem goranko_eta_not_preserved_counterexample :
     IsBoundedMorphism CompleteIrreflexive3 GorankoF1 Collapse3toGorankoF1 ∧
     ¬ HasNonLoopSuccessorEverywhere GorankoF1 ∧
     HasTwoStepReachability GorankoF1 := by
-  decide
+  refine ⟨?_, ?_, ?_, ?_, ?_⟩
+  · intro x
+    fin_cases x
+    · exact ⟨1, by decide, by decide⟩
+    · exact ⟨0, by decide, by decide⟩
+    · exact ⟨0, by decide, by decide⟩
+  · intro x z
+    fin_cases x <;> fin_cases z
+    · exact ⟨1, by decide, by decide⟩
+    · exact ⟨2, by decide, by decide⟩
+    · exact ⟨1, by decide, by decide⟩
+    · exact ⟨2, by decide, by decide⟩
+    · exact ⟨0, by decide, by decide⟩
+    · exact ⟨0, by decide, by decide⟩
+    · exact ⟨1, by decide, by decide⟩
+    · exact ⟨0, by decide, by decide⟩
+    · exact ⟨0, by decide, by decide⟩
+  · refine ⟨?_, ?_, ?_⟩
+    · intro y
+      fin_cases y
+      · exact ⟨0, by decide⟩
+      · exact ⟨2, by decide⟩
+    · intro x y hxy
+      fin_cases x <;> fin_cases y <;>
+        simp_all [CompleteIrreflexive3, GorankoF1, Collapse3toGorankoF1]
+    · intro x z htarget
+      fin_cases x <;> fin_cases z
+      · exact ⟨1, by decide, by decide⟩
+      · exact ⟨2, by decide, by decide⟩
+      · exact ⟨0, by decide, by decide⟩
+      · exact ⟨2, by decide, by decide⟩
+      · exact ⟨0, by decide, by decide⟩
+      · simp [GorankoF1, Collapse3toGorankoF1] at htarget
+  · intro h
+    obtain ⟨y, hy, hloop⟩ := h 1
+    fin_cases y <;> simp [GorankoF1] at *
+  · intro x z
+    refine ⟨0, ?_, ?_⟩
+    · fin_cases x <;> decide
+    · fin_cases z <;> decide
 
 end RandomKripke
