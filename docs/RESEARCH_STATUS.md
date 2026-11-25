@@ -159,3 +159,20 @@ The proof splits at \(A_n=\lfloor\frac12\log_2 n\rfloor\): small fibres are expo
 RandomKripke/F0001Witness.lean formalizes the weaker necessary-condition event used in this argument and proves that every surjective bounded morphism onto F0001 satisfies it. The module is imported by RandomKripke.lean and explicitly compiled in CI.
 
 Latest verified head: c1efeb9418e14505ee287e3093489aa0d5a18cfb. CI run [45569425119](https://github.com/bujue81-commits/random-kripke-frames/actions/runs/45569425119) passed all three Python audits, the standard Lean build, and explicit builds of ExactSmallN, F1001Characterization, and F0001Witness. The F0001 and F1001 asymptotic probability estimates remain hand proofs, not Lean theorems.
+
+
+## Quantitative F0001 result
+
+The F0001 proof has also been sharpened. Its central Poisson point-mass range has at most two indices and contributes O(1/sqrt(ln n)); the noncentral tail is exponentially small in A_n, while the small-fibre range is o(1/sqrt(ln n)). Thus the hand proof now claims
+[
+\Pr(G_n\twoheadrightarrow F0001)=O(1/\sqrt{\ln n}).
+]
+This is an upper bound only, not an asymptotic equivalent. See proofs/F0001_first_moment.md.
+
+## Lean witness-condition formalization
+
+RandomKripke/F0001Witness.lean proves that every bounded morphism onto F0001 satisfies the weaker fibrewise witness conditions used in the F0001 first-moment upper bound. CI run [45569425119](https://github.com/bujue81-commits/random-kripke-frames/actions/runs/45569425119) explicitly built this module successfully, together with the F1001 characterization and exact n=3 module.
+
+## Potential issue in Goranko Proposition 4.7
+
+A finite counterexample has been added in RandomKripke/GorankoEtaCounterexample.lean to test the claimed preservation of eta = forall x exists y (Rxy and not Ryy) under bounded morphic images. The first CI attempt exposed a missing classical decidability instance; the file has been corrected with classical, and the new CI result is pending. See docs/RELATED_WORK.md for the mathematical construction and careful interpretation. Do not treat the counterexample as Lean-verified until the explicit module build passes.
