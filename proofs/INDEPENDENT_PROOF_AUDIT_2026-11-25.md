@@ -5,8 +5,8 @@ Scope: internal mathematical audit of the current first-moment drafts and their 
 
 ## Executive verdict
 
-- **F0001:** the selected necessary-condition event is correctly defined. Its probability factors over disjoint edge rectangles, the one-dimensional reduction is valid, and the Poisson point-mass sum is summably dominated. No gap was found in the displayed first-moment argument.
-- **F1001:** the exact bounded-morphism event and first-moment formula are correct. The small-fibre and large-fibre bounds are valid. The Poisson cross-sum lemma has a valid summable majorant. The middle-tail estimate is valid; the current proof has been expanded to state the uniform approximation error and an explicit Stirling constant.
+- **F0001:** the selected necessary-condition event is correctly defined. Its probability factors over disjoint edge rectangles, the one-dimensional reduction is valid, and the Poisson point-mass sum is summably dominated. The quantitative estimate is \(\Pr(G_n\twoheadrightarrow F_0)=O(1/\sqrt{\ln n})\). Lean checks that every bounded morphism onto F0001 satisfies the selected witness conditions; it does not formalize their probability.
+- **F1001:** the exact bounded-morphism event and first-moment formula are correct. The small-fibre and large-fibre bounds are valid. The Poisson cross-sum admits the quantitative bound \(S_n=O(1/m_n)\), and the refined remaining middle tail is \(O(1/\ln n)\). Together these give the hand-proof upper bound \(\Pr(G_n\twoheadrightarrow F_1)=O(1/\ln n)\). Lean checks the exact fibrewise characterization, not the asymptotic estimates.
 - **Numerical code:** a fibre-order mismatch was found in the generic audit script. The target matrices use vertex order (c,a,b), whereas the summation variables are named (a,b,c). Because the script sums over every positive triple, permuting all three coordinates leaves the final total unchanged. Nevertheless, the per-triple terms were not aligned with the proof. The script now passes (c,a,b) to the matrix and includes a termwise F1001 formula check.
 - These checks support the hand proofs but do **not** constitute Lean formalization, independent peer review, or a bibliographic priority claim.
 
@@ -125,7 +125,7 @@ Using
 e^{a(2+2\ln(r/2)-r)}.
 \]
 The function \(r^2e^{a(2+2\ln(r/2)-r)}\) is at most 16 for all \(r>0,a\geq1\). Therefore the total middle-tail contribution is
-\(O(\ln\ln n/\ln n)\to0\).
+\(O(1/\ln n)\).
 
 ## 5. F0001 audit
 
@@ -160,7 +160,7 @@ The mapping of mask 8/9 to the “No growth”/“Slow growth” cells in Figure
 
 ## 8. Formalization boundary
 
-Lean currently checks finite frame definitions, bounded-morphism facts, finite quotient statements, and exact n=3 labelled counts. It does not formalize the probability spaces, real-valued estimates, dominated-convergence argument, Stirling bounds, or the asymptotic limits in either proof.
+Lean checks finite frame definitions, bounded-morphism facts and composition, finite quotient statements, exact n=3 labelled counts, the F1001 fibrewise characterization, and the implication from an F0001 bounded morphism to the weaker witness event. It does not formalize the probability spaces, real-valued estimates, dominated-convergence argument, Stirling bounds, or either asymptotic limit.
 
 
 ## 9. Quantitative strengthening of F1001
@@ -180,3 +180,21 @@ The remaining middle-tail sum can also be improved from the crude \(O(\ln\ln n/\
 \]
 
 This is a quantitative upper bound, not an asymptotic equivalent or a lower bound. It is an internal hand proof and remains unformalized in Lean and not externally refereed.
+
+
+## 10. Quantitative status and latest Lean coverage
+
+The current hand-proof conclusions are:
+\[
+\Pr(G_n\twoheadrightarrow F_{0001})=O(1/\sqrt{\ln n}),
+\qquad
+\Pr(G_n\twoheadrightarrow F_{1001})=O(1/\ln n).
+\]
+These are upper bounds only. No matching lower bounds or asymptotic equivalents are established.
+
+The finite Lean layer now consists of:
+- RandomKripke/ExactSmallN.lean: exact labelled n=3 source-frame counts;
+- RandomKripke/F1001Characterization.lean: equivalence between an F1001 bounded morphism and the exact fibrewise conditions used in its first-moment summand;
+- RandomKripke/F0001Witness.lean: implication from a bounded morphism onto F0001 to the weaker necessary event used in its first-moment upper bound.
+
+The latest head at the time of this audit, c1efeb9418e14505ee287e3093489aa0d5a18cfb, passed CI run [45569425119](https://github.com/bujue81-commits/random-kripke-frames/actions/runs/45569425119). The log explicitly records successful builds of all three Lean modules and successful Python finite/numerical audits. None of the asymptotic probability arguments is formalized in Lean.
