@@ -365,7 +365,7 @@ For the diagonal, recall \(r_i=n/(i2^i)\). There are at most two indices with \(
 r_i=r_m\frac{m}{i}2^{m-i}
 \geq \frac13\,2^{m/2},
 \]
-so the lower-tail Chernoff bound makes the sum of these diagonal terms \(o(1/m)\). This proves (12).
+so the lower-tail Chernoff bound makes the sum of these diagonal terms \(o(1/m)\). This proves (13).
 
 By the uniform approximation (9), the contribution of \(b=a\) and \(b=a+1\) in the middle range is therefore \(O(1/m_n)\).
 
@@ -402,7 +402,7 @@ Therefore \(e^{x+q(a+2)}=1+O((\ln n)^{10}/n)\), and this is
 (1+o(1))
 \frac{n^{-2}\lambda_a^{2a+4}e^{-\lambda_a}}
 {a!(a+2)!}.
-\tag{13}
+\tag{14}
 \]
 
 Put \(r=\lambda_a/a\) and
