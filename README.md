@@ -37,6 +37,7 @@ F_{1001}=\begin{pmatrix}1&1&1\\1&1&0\\1&0&1\end{pmatrix}.
 The repository contains:
 - Lean 4 definitions and finite theorems for frames and bounded morphisms (`RandomKripke/FiniteFrames.lean`);
 - Lean equivalence between F1001 bounded morphisms and fibrewise partition conditions (`RandomKripke/F1001Characterization.lean`);
+- Lean implication from an F0001 bounded morphism to the weaker witness event used in its first-moment estimate (`RandomKripke/F0001Witness.lean`);
 - Lean exact n=3 labelled source-frame counts (`RandomKripke/ExactSmallN.lean`);
 - exact Python quotient audits;
 - exact small-n random-frame enumeration;
@@ -55,7 +56,7 @@ python3 experiments/expected_partition_sum.py
 python3 experiments/large_n_audit_numpy.py
 ```
 
-The CI workflow runs all three Python audits, the standard `lake build`, and an explicit `lake build RandomKripke.ExactSmallN`.
+The CI workflow runs all three Python audits, the standard `lake build`, and explicit builds of `RandomKripke.ExactSmallN`, `RandomKripke.F1001Characterization`, and `RandomKripke.F0001Witness`.
 
 ## Research discipline
 
