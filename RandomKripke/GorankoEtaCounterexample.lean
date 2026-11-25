@@ -10,6 +10,18 @@ def HasNonLoopSuccessorEverywhere {α : Type} (R : Frame α) : Prop :=
 def HasTwoStepReachability {α : Type} (R : Frame α) : Prop :=
   ∀ x z, ∃ y, R x y = true ∧ R y z = true
 
+instance instDecidableHasNonLoopSuccessorEverywhere
+    {α : Type} [Fintype α] (R : Frame α) :
+    Decidable (HasNonLoopSuccessorEverywhere R) := by
+  unfold HasNonLoopSuccessorEverywhere
+  infer_instance
+
+instance instDecidableHasTwoStepReachability
+    {α : Type} [Fintype α] (R : Frame α) :
+    Decidable (HasTwoStepReachability R) := by
+  unfold HasTwoStepReachability
+  infer_instance
+
 /-- The three-point complete irreflexive directed frame. -/
 def CompleteIrreflexive3 : Frame (Fin 3) :=
   fun x y => decide (x ≠ y)
