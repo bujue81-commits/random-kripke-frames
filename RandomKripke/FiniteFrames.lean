@@ -62,17 +62,21 @@ def toE1 (i : Fin 3) : Fin 1 := 0
 
 theorem F1001_to_T2 :
     IsBoundedMorphism F1001 T2 collapse1001 := by
-  refine ⟨?_, ?_, ?_⟩
-  · intro y
-    fin_cases y
-    · exact ⟨0, by simp [collapse1001]⟩
-    · exact ⟨1, by simp [collapse1001]⟩
-  · intro x y h
-    simp [T2]
-  · intro x z h
-    fin_cases z
-    · exact ⟨0, by simp [F1001, collapse1001]⟩
-    · exact ⟨1, by simp [F1001, collapse1001]⟩
+  decide
+
+/-- Exhaustive finite classification: F0001 has no two-point
+    surjective bounded-morphic image. -/
+theorem F0001_no_two_point_quotient :
+    ¬ ∃ (S : Frame (Fin 2)) (f : Fin 3 → Fin 2),
+      IsBoundedMorphism F0001 S f := by
+  decide
+
+/-- Every two-point bounded-morphic image of F1001 is the
+    complete reflexive two-point frame. -/
+theorem F1001_two_point_quotient_target :
+    ∀ (S : Frame (Fin 2)) (f : Fin 3 → Fin 2),
+      IsBoundedMorphism F1001 S f → S = T2 := by
+  decide
 
 theorem F0001_to_E1 :
     IsBoundedMorphism F0001 E1 toE1 := by
