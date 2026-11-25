@@ -33,6 +33,7 @@ theorem goranko_eta_not_preserved_counterexample :
     IsBoundedMorphism CompleteIrreflexive3 GorankoF1 Collapse3toGorankoF1 ∧
     ¬ HasNonLoopSuccessorEverywhere GorankoF1 ∧
     HasTwoStepReachability GorankoF1 := by
+  classical
   native_decide
 
 end RandomKripke
