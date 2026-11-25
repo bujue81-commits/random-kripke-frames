@@ -39,13 +39,13 @@ Indeed the forbidden coordinates and every individual required-hit row/fibre blo
 
 ## 2. Uniform first-moment upper bound
 
-All asymptotic estimates are for sufficiently large m, with constants allowed to depend on D,theta. Set C=8r and b_0=L-3 log_B L.
+All asymptotic estimates are for sufficiently large m, with constants allowed to depend on D,theta. Set C=8r^2 and b_0=L-3 log_B L.
 
 Large S>C L: the number of maps for fixed S is at most (mr)^S. Since log_B r<=L eventually, their contribution is at most
 
     B^{2LS-S^2/r} <= B^{-S^2/(2r)}.
 
-Summing at most m possible values of S gives B^{L-C^2 L^2/(2r)}, negligible because C^2/(2r)=32r may be smaller than d for large fixed r. To avoid this issue choose instead C=8r^2 throughout, so C^2/(2r)=32r^3>d. With this choice the displayed inequality still holds.
+Summing at most m possible values of S gives B^{L-C^2 L^2/(2r)}, negligible since C^2/(2r)=32r^3>d.
 
 Small fibre with S<=C L and some a_i<b_0: a_0>=m/2 eventually and m rho^{a_i}>L^3. The corresponding hit factor is at most exp(-L^3/2). There are at most (m+1)(mr)^{C L} maps in this range. Their total contribution is exp(-L^3/2+O(L^2)), negligible.
 
@@ -137,9 +137,30 @@ since t-1-ln t>=0 for t>0. For t_a outside [1/2,2], the quantity t_a-1-ln t_a is
 
 Combining with the negligible tails proves E[Z_m]=O(L^(-r/2)), hence the same upper bound for p_m. This does not assert that the bound is attained: discrete rounding of the critical fibre scale can be important. In particular, the case r=1 includes the two-point central frame; its almost-sure-validity consequence is known in the literature, and priority for this quantitative bound must be checked.
 
-## 6. Further work
+## 6. Critical first-moment lattice oscillations
+
+The critical first-moment bound is attained in order along one subsequence, but is much smaller along another. This concerns E[X_m] and E[Z_m], not a matching lower bound for p_m.
+
+For integer k tending to infinity, choose m_k to be a nearest integer to k B^k. Use the balanced size vector a_i=k (1<=i<=r). Then lambda=m_k rho^k=k+O(rho^k) and L/k tends to 1. The multinomial factor is (1+o(1))m_k^{rk}/(k!)^r since (rk)^2/m_k tends to zero. The central-to-noncentral hit factor is
+
+    (1-rho^k)^{r(m_k-rk)} = exp(-r lambda+o(1)),
+
+by m_k rho^{2k}->0 and k rho^k->0. All additional full-map hit factors tend to 1: all m_k rows must hit the central fibre of size m_k-rk, and the r(r-1) noncentral directed rectangles require only r(r-1)k row hits of fibres of size k. Hence the contribution of this single size vector to E[X_m] is
+
+    (1+o(1)) [exp(-lambda) lambda^k/k!]^r
+      = (1+o(1))(2 pi k)^(-r/2),
+
+by Stirling and lambda=k+o(1). The upper bound of section 5 shows both expectations are Theta(L^(-r/2)) on this subsequence.
+
+In contrast, fix c strictly between 1 and B and choose n_k nearest to c k B^k. The consecutive ratios t_k=n_k rho^k/k and t_{k+1}=n_k rho^{k+1}/(k+1) tend respectively to c>1 and c/B<1. For all sufficiently large k these are bounded away from 1 by a fixed positive distance. Since t_a decreases strictly with integer a, every t_a stays away from 1. Consequently the rate function t-1-ln t has a uniform positive lower bound. Applying the same Stirling estimate as in section 5 to all a in the main range gives T_{n_k}<=O(L exp(-epsilon L)) for some epsilon>0. The two discarded tails are negligible. After absorbing polynomial factors into the exponent there exists delta>0 with
+
+    E[X_{n_k}] <= E[Z_{n_k}] <= exp(-delta L).
+
+Thus there is genuine arithmetic oscillation of the critical first moments: no positive two-sided Theta(L^(-r/2)) estimate holds uniformly in m. Markov implies the faster upper bound for p_m on the nonresonant subsequence as well; the resonant probability lower bound remains unresolved.
+
+## 7. Further work
 
 - Noncentral looped vertices remain outside this proof. In particular F0001 and F1001 are not covered.
-- Critical-case matching lower bounds, arithmetic oscillations, and the order-L coefficient in the noncritical regime are not settled.
+- Critical-case matching probability lower bounds and the order-L coefficient in the noncritical regime are not settled. Section 6 establishes first-moment oscillation but not an exact existence-probability oscillation.
 - Audit novelty against the literature and obtain independent review.
 - Existing Lean CI blocker remains; no claim of machine verification. The fixed-coordinate probability and factorial-based overlap sum are good formalization targets.
