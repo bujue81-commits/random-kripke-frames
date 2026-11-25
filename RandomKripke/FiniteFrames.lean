@@ -139,7 +139,13 @@ theorem F1001_two_point_quotient_target :
     fin_cases h10 : S 1 0 <;> fin_cases h11 : S 1 1 <;>
     fin_cases h0 : f 0 <;> fin_cases h1 : f 1 <;>
     fin_cases h2 : f 2 <;>
-    simp_all [Function.Surjective, F1001, T2]
+    try simp_all [Function.Surjective, F1001]
+  all_goals
+    apply funext
+    intro x
+    apply funext
+    intro y
+    fin_cases x <;> fin_cases y <;> simp_all [T2]
 
 
 theorem F0001_to_E1 :
@@ -157,7 +163,7 @@ theorem F1001_to_E1 :
     IsBoundedMorphism F1001 E1 toE1 := by
   refine ⟨?_, ?_, ?_⟩
   · intro y
-    exact ⟨0, by simp [toE1]⟩
+    exact ⟨0, Subsingleton.elim _ _⟩
   · intro x y h
     simp [E1]
   · intro x z h
