@@ -112,3 +112,10 @@ The same summary states that the unrestricted random frame has Ext_m properties 
 
 
 The latest completed code-and-proof CI run is [45566445869](https://github.com/bujue81-commits/random-kripke-frames/actions/runs/45566445869), commit 72603e73e696f8fb5934a2363cd6f14e0b90b889. All three Python audits and lake build passed. Subsequent commits only update documentation and bibliography notes.
+
+
+## Lean CI coverage correction (2026-11-25)
+
+A source-level audit found that the F1001 exact-count theorem had accidentally stated the F0001 source-set cardinality equals 3. This contradicted the preceding F0001 theorem and was a real source error. It is corrected to use SourcesOfF1001OnThreePoints.
+
+More importantly, the previous CI log for run 45566445869 showed that the default lake build compiled RandomKripke.FiniteFrames but did not compile RandomKripke.ExactSmallN. Thus the earlier green CI did not verify the exact n=3 Lean enumeration module. The workflow now explicitly runs lake build RandomKripke.ExactSmallN after the standard Lean action. The new CI result is pending; do not call the exact-count Lean module verified until that explicit step passes.
