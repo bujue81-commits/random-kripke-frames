@@ -316,7 +316,7 @@ Thus the squares are dominated by the summable sequence \(e^{-2\gamma i}\). For 
 In fact, the same argument gives
 \[
 S_n=O(1/m_n).
-\tag{12}
+\tag{13}
 \]
 Here are the rate details. Write \(m=m_n\). For the off-diagonal part, first take \(i\geq m/2\). The bounds (11)–(12) give
 \[
@@ -419,7 +419,7 @@ for \(k=a,a+2\), and substituting \(n=ar2^a\), gives
 {a!(a+2)!}
 \leq
 \frac{e^2}{2\pi}\frac{r^2}{a}e^{a g(r)}.
-\tag{14}
+\tag{15}
 \]
 For this inequality, use \(\sqrt{a(a+2)}\geq a\) and
 \((a+2)^{a+2}\geq a^{a+2}\) in the denominator.
@@ -444,16 +444,16 @@ Thus the entire remaining middle tail is \(O(1/\ln n)\).
 
 ## 7. Conclusion
 
-The small- and large-fibre contributions are (o(1/m_n)); the central
-Poisson contribution is (O(1/m_n)) by (12); and the remaining middle
-tail is (O(1/ln n)=O(1/m_n)). Therefore
-[
-mathbb E X_n=O(1/m_n)=O(1/ln n).
-]
+The small- and large-fibre contributions are \(o(1/m_n)\); the central
+Poisson contribution is \(O(1/m_n)\) by (13); and the remaining middle
+tail is \(O(1/\ln n)=O(1/m_n)\). Therefore
+\[
+\mathbb E X_n=O(1/m_n)=O(1/\ln n).
+\]
 By (2) and Markov's inequality, we obtain the quantitative bound
-[
-oxed{Pr(G_n	woheadrightarrow F_1)=O(1/ln n).}
-]
+\[
+\boxed{\Pr(G_n\twoheadrightarrow F_1)=O(1/\ln n).}
+\]
 In particular, the probability tends to zero.
 \(\square\)
 
