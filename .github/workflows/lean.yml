@@ -1,0 +1,32 @@
+name: Lean build and finite audit
+
+on:
+  push:
+    branches: ["main", "research/**"]
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Exhaustive finite quotient audit
+        run: python3 experiments/finite_quotient_audit.py
+      - name: Exact random-frame counts for n=3,4
+        run: python3 experiments/exact_random_frames.py
+      - name: Goranko chain-frame first-moment numerical audit
+        run: python3 experiments/goranko_chain_first_moment.py
+      - name: First-moment numerical audit for F0001 and F1001
+        run: python3 experiments/expected_partition_sum.py
+      - uses: leanprover/lean-action@v1
+        with:
+          build: true
+      - name: Explicitly build exact finite enumeration module
+        run: lake build RandomKripke.ExactSmallN
+      - name: Explicitly build F1001 fibre characterization
+        run: lake build RandomKripke.F1001Characterization
+      - name: Explicitly build F0001 witness module
+        run: lake build RandomKripke.F0001Witness
+      - name: Explicitly build Goranko eta counterexample
+        run: lake build RandomKripke.GorankoEtaCounterexample
