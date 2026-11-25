@@ -70,7 +70,11 @@ theorem F1001_two_point_maps_are_canonical :
     ∀ (f : Fin 3 → Fin 2),
       IsBoundedMorphism F1001 T2 f →
         f = collapse1001 ∨ f = swap2 ∘ collapse1001 := by
-  decide
+  intro f hf
+  fin_cases h0 : f 0 <;> fin_cases h1 : f 1 <;> fin_cases h2 : f 2 <;>
+    simp_all [IsBoundedMorphism, Function.Surjective, F1001, T2,
+      collapse1001, swap2]
+
 
 /-- Bounded morphisms compose. -/
 theorem boundedMorphism_comp
@@ -88,7 +92,7 @@ theorem boundedMorphism_comp
     obtain ⟨x, hx⟩ := hfs y
     exact ⟨x, by simpa [Function.comp, hx] using hy⟩
   · intro x y hxy
-    exact hgf (hff x y hxy)
+    exact hgf (f x) (f y) (hff x y hxy)
   · intro x z hxz
     obtain ⟨z', hz', hzcomp⟩ := hgb (f x) z hxz
     obtain ⟨y, hxy, hycomp⟩ := hfb x z' hz'
@@ -97,27 +101,52 @@ theorem boundedMorphism_comp
 
 theorem F1001_to_T2 :
     IsBoundedMorphism F1001 T2 collapse1001 := by
-  decide
+  refine ⟨?_, ?_, ?_⟩
+  · intro z
+    fin_cases z
+    · exact ⟨0, rfl⟩
+    · exact ⟨1, rfl⟩
+  · intro x y h
+    trivial
+  · intro x z h
+    fin_cases z
+    · exact ⟨0, by simp [F1001, collapse1001]⟩
+    · fin_cases x
+      · exact ⟨1, by simp [F1001, collapse1001]⟩
+      · exact ⟨1, by simp [F1001, collapse1001]⟩
+      · exact ⟨2, by simp [F1001, collapse1001]⟩
 
 /-- Exhaustive finite classification: F0001 has no two-point
     surjective bounded-morphic image. -/
 theorem F0001_no_two_point_quotient :
     ¬ ∃ (S : Frame (Fin 2)) (f : Fin 3 → Fin 2),
       IsBoundedMorphism F0001 S f := by
-  decide
+  rintro ⟨S, f, hf⟩
+  rcases hf with ⟨hsurj, hforth, hback⟩
+  fin_cases h00 : S 0 0 <;> fin_cases h01 : S 0 1 <;>
+    fin_cases h10 : S 1 0 <;> fin_cases h11 : S 1 1 <;>
+    fin_cases h0 : f 0 <;> fin_cases h1 : f 1 <;>
+    fin_cases h2 : f 2 <;>
+    simp_all [Function.Surjective, F0001]
 
-/-- Every two-point bounded-morphic image of F1001 is the
-    complete reflexive two-point frame. -/
+/-- Every two-point bounded-morphic image of F1001 is T2. -/
 theorem F1001_two_point_quotient_target :
     ∀ (S : Frame (Fin 2)) (f : Fin 3 → Fin 2),
       IsBoundedMorphism F1001 S f → S = T2 := by
-  decide
+  intro S f hf
+  rcases hf with ⟨hsurj, hforth, hback⟩
+  fin_cases h00 : S 0 0 <;> fin_cases h01 : S 0 1 <;>
+    fin_cases h10 : S 1 0 <;> fin_cases h11 : S 1 1 <;>
+    fin_cases h0 : f 0 <;> fin_cases h1 : f 1 <;>
+    fin_cases h2 : f 2 <;>
+    simp_all [Function.Surjective, F1001, T2]
+
 
 theorem F0001_to_E1 :
     IsBoundedMorphism F0001 E1 toE1 := by
   refine ⟨?_, ?_, ?_⟩
   · intro y
-    exact ⟨0, by simp [toE1]⟩
+    exact ⟨0, Subsingleton.elim _ _⟩
   · intro x y h
     simp [E1]
   · intro x z h
