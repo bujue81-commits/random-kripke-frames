@@ -145,3 +145,15 @@ Primary source locations: Goranko (2020), Definition 2.1 (bounded morphisms), pp
 
 
 A standalone write-up with the forth/back verification and the general three-copy blow-up construction is available in proofs/GORANKO_2020_PROP_4_7_ETA_COUNTEREXAMPLE.md.
+
+
+## Alternative first-moment proof for the chain family F_r, r >= 2
+
+A separate hand proof has now been added in proofs/GORANKO_CHAIN_FRAMES_FIRST_MOMENT.md. For every fixed r >= 2, it proves
+\[
+\Pr(G_m\twoheadrightarrow F_r)
+\leq \exp(-\Omega_r((\ln m)^2)).
+\]
+The proof counts a weaker necessary event: all forbidden noncentral-to-noncentral rectangles must be empty, and every row in the central fibre must hit every noncentral fibre. If the total noncentral fibre size S is small, at least one noncentral fibre is smaller than (3/4)log_2(m), and the central-hit probability is at most exp(-m^(1/4)/2). If S is large, the forbidden-edge count is at least 3S^2/4 by splitting the chain fibres into odd and even indices; this beats the number of partitions once S >= (3r/4)log_2(m).
+
+This supplies an alternative route to the asymptotic validity of chi_F_r for every fixed r >= 2, without using the false eta-preservation assertion. The r=1 case K2 is covered by Le Bars' known result. The proof is an internal hand argument, not Lean-formalized or externally refereed; bibliographic priority for this exact estimate has not been checked. The numerical script experiments/goranko_chain_first_moment.py sums the selected-event expectation in log space for r=2,3.
