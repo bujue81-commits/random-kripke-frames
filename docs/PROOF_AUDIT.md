@@ -87,3 +87,8 @@ The previous green CI run compiled RandomKripke.FiniteFrames only; its log did n
 ## Quantitative F1001 conclusion
 
 The F1001 proof now establishes the stronger upper bound (\Pr(G_n\twoheadrightarrow F1001)=O(1/\ln n)), not merely convergence to zero. The refinement sharpens both the Poisson cross-sum to (O(1/m_n)) and the remaining middle tail to (O(1/\ln n)). It remains a hand proof and is not formalized in Lean or externally refereed.
+
+
+## Lean fibre characterization
+
+RandomKripke/F1001Characterization.lean now proves boundedMorphism_F1001_iff_partitionConditions, translating the F1001 p-morphism definition exactly into the five fibrewise conditions used in the probability calculation. CI run [45568777128](https://github.com/bujue81-commits/random-kripke-frames/actions/runs/45568777128) explicitly built this module and RandomKripke.ExactSmallN successfully. This formalizes the finite combinatorial event, not its random probability or asymptotics.
