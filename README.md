@@ -36,6 +36,7 @@ F_{1001}=\begin{pmatrix}1&1&1\\1&1&0\\1&0&1\end{pmatrix}.
 
 The repository contains:
 - Lean 4 definitions and finite theorems for frames and bounded morphisms (`RandomKripke/FiniteFrames.lean`);
+- Lean equivalence between F1001 bounded morphisms and fibrewise partition conditions (`RandomKripke/F1001Characterization.lean`);
 - Lean exact n=3 labelled source-frame counts (`RandomKripke/ExactSmallN.lean`);
 - exact Python quotient audits;
 - exact small-n random-frame enumeration;
