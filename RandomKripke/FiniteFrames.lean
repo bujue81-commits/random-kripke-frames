@@ -52,6 +52,44 @@ def HasCentralPoint {α : Type} (R : Frame α) : Prop :=
 def IsSerial {α : Type} (R : Frame α) : Prop :=
   ∀ x, ∃ y, R x y = true
 
+
+/-- A nonempty frame maps onto the reflexive singleton exactly when it is serial. -/
+theorem boundedMorphism_to_E1_iff_serial
+    {α : Type} [Nonempty α] (R : Frame α) :
+    IsBoundedMorphism R E1 (fun _ : α => (0 : Fin 1)) ↔ IsSerial R := by
+  constructor
+  · intro h x
+    obtain ⟨y, hxy, hy⟩ := h.2.2 x 0 (by simp [E1])
+    exact ⟨y, hxy⟩
+  · intro hs
+    refine ⟨?_, ?_, ?_⟩
+    · intro z
+      exact ⟨Classical.choice ‹Nonempty α›, Subsingleton.elim _ _⟩
+    · intro x y hxy
+      simp [E1]
+    · intro x z hz
+      obtain ⟨y, hxy⟩ := hs x
+      exact ⟨y, hxy, Subsingleton.elim _ _⟩
+
+/-- A map onto T2 is bounded precisely when every source point
+    reaches every target fibre. The forth condition is automatic. -/
+theorem boundedMorphism_to_T2_iff
+    {α : Type} (R : Frame α) (f : α → Fin 2) :
+    IsBoundedMorphism R T2 f ↔
+      Function.Surjective f ∧
+        (∀ x z, ∃ y, R x y = true ∧ f y = z) := by
+  constructor
+  · intro h
+    refine ⟨h.1, ?_⟩
+    intro x z
+    exact h.2.2 x z (by simp [T2])
+  · rintro ⟨hs, hhit⟩
+    refine ⟨hs, ?_, ?_⟩
+    · intro x y hxy
+      simp [T2]
+    · intro x z hz
+      exact hhit x z
+
 theorem F0001_central : HasCentralPoint F0001 := by
   refine ⟨0, ?_⟩
   intro x
