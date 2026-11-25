@@ -330,7 +330,13 @@ Stirling's lower bound, together with
 \]
 for an absolute constant \(C\).
 
-Now \(g(r)\leq0\), with equality only at \(r=2\). If \(r\leq1\), then \(g(r)\leq g(1)<0\) and \(r^2\leq1\). If \(r\geq4\), then \(g(r)\leq g(4)<0\), and the function \(r\mapsto r^2e^{ag(r)}\) is decreasing on \([4,\infty)\). Finally, at most two indices can satisfy \(1<r_a<4\), by (3); each contributes \(O(1/a)\). Since all middle indices have \(a=\Theta(\ln n)\), and there are \(O(\ln\ln n)\) of them, the sum of (14) tends to zero.
+Now \(g(r)\leq0\), with equality only at \(r=2\). We claim that \(r^2e^{ag(r)}\leq16\) for every \(r>0\) and integer \(a\geq1\). If \(r\leq1\), then \(g(r)\leq g(1)<0\) and \(r^2\leq1\). If \(1\leq r\leq4\), the claim follows from \(r^2\leq16\) and \(g(r)\leq0\). If \(r\geq4\), then
+\[
+\frac{d}{dr}\log\bigl(r^2e^{ag(r)}\bigr)
+=\frac{2a+2}{r}-a
+\leq\frac{1-a}{2}\leq0,
+\]
+so the function is decreasing on \([4,\infty)\) and is at most its value at \(4\), which is at most \(16\). Thus every term in (14) is at most \(16C/a\). There are \(O(\ln\ln n)\) middle indices and each has \(a=\Theta(\ln n)\), so their total is \(O(\ln\ln n/\ln n)\to0.
 
 ## 7. Conclusion
 
