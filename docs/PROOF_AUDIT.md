@@ -26,7 +26,7 @@ there is exactly one two-block fibre partition, up to swapping target labels, th
 ```
 The quotient is T2, the complete reflexive two-point frame. The other two partitions fail the back condition. For example, under {a}|{c,b}, the quotient relation from the second fibre to {a} is forced by c->a, but b has no edge to a. The third partition fails symmetrically.
 
-The earlier statement in this file that all three partitions work was wrong. The corrected classification is checked by `experiments/finite_quotient_audit.py` and the finite Lean theorems. CI run [45552607072](https://github.com/bujue81-commits/random-kripke-frames/actions/runs/45552607072) passed.
+The earlier statement in this file that all three partitions work was wrong. The corrected classification is checked by `experiments/finite_quotient_audit.py` and the finite Lean theorems. Latest CI run [45554576671](https://github.com/bujue81-commits/random-kripke-frames/actions/runs/45554576671) passed all Python audits and `lake build`.
 
 ## F0001 first moment
 
