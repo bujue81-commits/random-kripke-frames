@@ -65,7 +65,10 @@ def audit(name, source):
         print(f"  map={f}, target={target}")
 
     partitions = {
-        frozenset((i for i in range(3) if f[i] == 0))
+        tuple(sorted((
+            tuple(i for i in range(3) if f[i] == 0),
+            tuple(i for i in range(3) if f[i] == 1),
+        )))
         for f, _ in witnesses
     }
     print(f"  distinct fibre partitions: {len(partitions)}")
@@ -82,7 +85,10 @@ if __name__ == "__main__":
         ((1, 1), (1, 1))
     }
     assert len({
-        frozenset(i for i in range(3) if f[i] == 0)
+        tuple(sorted((
+            tuple(i for i in range(3) if f[i] == 0),
+            tuple(i for i in range(3) if f[i] == 1),
+        )))
         for f, _ in w1
     }) == 1
 
