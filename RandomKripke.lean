@@ -1,1 +1,2 @@
 import RandomKripke.FiniteFrames
+import RandomKripke.ExactSmallN
