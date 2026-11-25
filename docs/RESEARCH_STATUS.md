@@ -65,7 +65,7 @@ The proper-image note now distinguishes minimality among frames whose characteri
 ## Lean status
 
 - `RandomKripke/FiniteFrames.lean` and `RandomKripke/ExactSmallN.lean` both pass `lake build` together. The exact-count search uses a finite filter of all maps and `native_decide`.
-- CI run [45554576671](https://github.com/bujue81-commits/random-kripke-frames/actions/runs/45554576671), on commit `a8a46c437d5546b84f733a02d38c321d73dc1212`, passed all three Python audits and the Lean build.
+- CI run [45555290042](https://github.com/bujue81-commits/random-kripke-frames/actions/runs/45555290042), on commit `48128fc80a2b3b877012dab0628a4b3e3c4ffba6`, passed all three Python audits and the Lean build.
 - The finite Lean scope includes exact n=3 labelled counts: 6 source relations for F0001 and 3 for F1001. No asymptotic probability theorem is formalized in Lean.
 
 ## Next tasks
@@ -88,4 +88,4 @@ The 2025/2026 Sliusarev thesis is also relevant adjacent work: it develops a gen
 
 ## Current verification snapshot
 
-The latest complete CI run is [45554576671](https://github.com/bujue81-commits/random-kripke-frames/actions/runs/45554576671), commit `a8a46c437d5546b84f733a02d38c321d73dc1212`. It passed: (1) the six-surjection/sixteen-target finite quotient audit; (2) exhaustive source-frame and surjective-map counts for n=3,4; (3) the log-stable first-moment numerical audit, including exact n=3,4 cross-checks; and (4) `lake build`. No asymptotic theorem is formalized in Lean.
+The latest complete code-and-proof CI run is [45555290042](https://github.com/bujue81-commits/random-kripke-frames/actions/runs/45555290042), commit `48128fc80a2b3b877012dab0628a4b3e3c4ffba6`. It passed: (1) the six-surjection/sixteen-target finite quotient audit; (2) exhaustive source-frame and surjective-map counts for n=3,4; (3) the log-stable first-moment numerical audit, including exact n=3,4 cross-checks; and (4) `lake build`. The subsequent change to the minimality note is documentation-only and has its own CI run pending. No asymptotic theorem is formalized in Lean.
