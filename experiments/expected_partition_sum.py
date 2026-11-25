@@ -21,7 +21,23 @@ F1001 = (
     (1, 0, 1),
 )
 
+# Both matrices above use vertex order (c, a, b).
 LOG2 = log(2.0)
+
+
+def log_fixed_partition_term(n, target, sizes):
+    """Log probability that one fixed map is a bounded morphism.
+
+    The sizes must follow the target matrix's vertex order (c, a, b).
+    """
+    value = lgamma(n + 1) - sum(lgamma(k + 1) for k in sizes)
+    for i, ki in enumerate(sizes):
+        for j, kj in enumerate(sizes):
+            if target[i][j]:
+                value += ki * log1p(-(2.0 ** (-kj)))
+            else:
+                value -= ki * kj * LOG2
+    return value
 
 
 def logsumexp(values):
@@ -37,22 +53,10 @@ def log_expected_morphisms(n, target):
     for a in range(1, n - 1):
         for b in range(1, n - a):
             c = n - a - b
-            sizes = (a, b, c)
-
-            # Number of ordered labelled partitions with these fibre sizes.
-            value = lgamma(n + 1) - sum(lgamma(k + 1) for k in sizes)
-
-            # For each target edge i->j, every source row in fibre i
-            # must hit fibre j. For each absent edge, the whole rectangle
-            # fibre_i x fibre_j must contain no source edge.
-            for i, ki in enumerate(sizes):
-                for j, kj in enumerate(sizes):
-                    if target[i][j]:
-                        value += ki * log1p(-(2.0 ** (-kj)))
-                    else:
-                        value -= ki * kj * LOG2
-
-            terms.append(value)
+            # The target matrices are ordered (c,a,b), whereas the
+            # proof variables are the non-central fibre sizes (a,b,c).
+            sizes = (c, a, b)
+            terms.append(log_fixed_partition_term(n, target, sizes))
 
     return logsumexp(terms)
 
@@ -65,6 +69,20 @@ def main():
         e0 = exp(l0) if l0 > -745 else 0.0
         e1 = exp(l1) if l1 > -745 else 0.0
         print(f"{n},{l0:.12f},{e0:.12g},{l1:.12f},{e1:.12g}")
+
+    # Termwise check: for F1001 in (c,a,b) order, the exact fixed-map
+    # probability agrees with the formula in the hand proof.
+    n, a, b = 30, 4, 5
+    c = n - a - b
+    term = log_fixed_partition_term(n, F1001, (c, a, b))
+    direct = (
+        lgamma(n + 1) - lgamma(a + 1) - lgamma(b + 1) - lgamma(c + 1)
+        - 2 * a * b * LOG2
+        + n * log1p(-(2.0 ** (-c)))
+        + (n - b) * log1p(-(2.0 ** (-a)))
+        + (n - a) * log1p(-(2.0 ** (-b)))
+    )
+    assert abs(term - direct) < 1e-12
 
     # Cross-check the exact first moments against brute-force enumeration.
     exact_map_counts = {
