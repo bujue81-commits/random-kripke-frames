@@ -114,3 +114,31 @@ In Section 3.2 (summary pp. 13–14), Sliusarev recalls the extension properties
 The thesis's main finite axiomatizations concern KD5, KD45, K5B, S5, Grz.3, GL.3 and SL, not the unrestricted K case. Its conclusion explicitly lists further classification work for extensions of K5 and additional Horn closures as future directions. Thus it is an important methodological source, but it does not appear to settle the F0001/F1001 image-probability questions.
 
 Primary source: [Sliusarev, Modal Logic of Random Kripke Frames, English thesis summary](https://www.hse.ru/data/2025/10/24/1949835949/2resume_en.pdf), especially Theorems 68 and 83 and Section 3.2.
+
+
+## Potential preservation gap in Goranko (2020), Proposition 4.7
+
+A separate issue was found in the proof of Proposition 4.7, distinct from the F0001/F1001 estimates. The proof says that
+\[
+\eta:=\forall x\exists y\,(Rxy\land\neg Ryy)
+\]
+is preserved in bounded-morphic images, and uses this to infer that because \(\eta\) fails in \(F_n\), it must fail in every \(G\) with \(G\twoheadrightarrow F_n\).
+
+Under Definition 2.1 of the same paper, this preservation assertion has a finite counterexample already for \(F_1\). The frame \(F_1\) in Proposition 4.7 is the two-point frame \(K_2\) with
+\[
+W=\{0,1\},\quad R=\{(0,0),(0,1),(1,0)\}.
+\]
+Let \(G\) be the three-point complete irreflexive directed frame, and define \(h(0)=h(1)=0\), \(h(2)=1\). Then:
+- \(G\models\eta\), since every point has a distinct successor and no point has a loop;
+- \(G\twoheadrightarrow K_2\): forth holds because all target edges except \(1\to1\) are present, and no two distinct source points both map to 1; back holds because each point over 0 has a successor over 0 and over 1, while the point over 1 has a successor over 0;
+- \(K_2\not\models\eta\), since point 1 has only successor 0, and 0 has a loop.
+
+Both frames also have two-step reachability between every ordered pair. Thus the counterexample persists inside the diameter-two class used in Section 3.1.
+
+This is formalized in Lean in RandomKripke/GorankoEtaCounterexample.lean as goranko_eta_not_preserved_counterexample. The CI build of this new module is pending at the time of this note.
+
+There is also a general blow-up construction for every \(F_n\), \(n\geq1\). Replace each target vertex by three copies and define \(uR'v\) iff \(u\ne v\) and \(\pi(u)R_n\pi(v)\), where \(\pi\) is the projection to \(F_n\). The projection is a surjective bounded morphism: forth is immediate; for back, if the target successor is different, choose any point in its fibre, and if it is the same vertex, choose another copy in that fibre. Every source point has a non-loop successor because every vertex of \(F_n\) has a distinct successor (0 has successor 1, and each k>0 has successor 0). Hence the blow-up satisfies \(\eta\), while \(F_n\) fails \(\eta\) at its terminal point n. Since \(F_n\) has a central point and two-step reachability, the blow-up can also be chosen to have two-step reachability by using three copies per vertex.
+
+**Interpretation:** this refutes the stated preservation claim and therefore leaves a gap in the proof of Proposition 4.7's assertion that every \(\chi_{F_n}\) is almost-surely valid. It does not, by itself, refute the proposition's final conclusion: those characteristic formulas might be almost-surely valid for other reasons. In particular, the \(n=1\) case \(K_2\) is known to be almost-surely valid by Le Bars' result, so the counterexample only invalidates the claimed shortcut, not that known conclusion. Any claim about the \(n\geq2\) cases requires a separate proof or further literature audit.
+
+Primary source locations: Goranko (2020), Definition 2.1 (bounded morphisms), pp. 254–255; Proposition 4.7 and its proof, pp. 264–265.
