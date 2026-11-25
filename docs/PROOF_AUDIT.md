@@ -77,3 +77,8 @@ Lean currently formalizes finite frame data, bounded-morphism facts, and finite 
 ## 2026-11-25 independent audit update
 
 See [the detailed audit](../proofs/INDEPENDENT_PROOF_AUDIT_2026-11-25.md). No fatal gap was found in the current F0001 or F1001 first-moment derivations. The F1001 proof has been strengthened with an explicit uniform central-Poisson error and a fully displayed Stirling bound. The generic Python audit's (a,b,c) versus (c,a,b) matrix-order mismatch has been corrected; the aggregate total was invariant under the permutation, but the fixed-fibre term now matches the proof and is checked directly. Large-n exploratory values through n=30,000 are reproducible with the optional NumPy/SciPy script. None of this formalizes the asymptotic proof in Lean.
+
+
+## Lean build coverage correction
+
+The previous green CI run compiled RandomKripke.FiniteFrames only; its log did not include RandomKripke.ExactSmallN. The exact-count module therefore was not covered by the default lake build. A further source audit found the F1001 count theorem referenced the F0001 source set (claiming that same finite set had both cardinalities 6 and 3). This has been corrected, and the workflow now explicitly invokes lake build RandomKripke.ExactSmallN. The explicit build result is pending. The exact n=3 counts should be treated as Python-verified but not yet Lean-verified until this step passes.
