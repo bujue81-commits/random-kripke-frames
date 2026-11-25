@@ -63,3 +63,7 @@ The Lean files in this branch are source drafts only. No lake build has yet been
 4. Replace the F1001 Poisson lemma with a fully explicit, correctly dominated estimate.
 5. Verify the 0101 and 1011 constructions.
 6. Complete primary-source audit and novelty check.
+
+## Exact small-n computation
+
+The repository now contains `experiments/exact_random_frames.py`, which exhaustively enumerates all labelled source relations for n=3 and n=4 and checks every surjective map with bitset implementations of forth/back. The exact counts are recorded in `experiments/results/exact_small_n.md`: F0001 has 6/512 and 1332/65536 source frames mapping onto it; F1001 has 3/512 and 787/65536. These finite counts are reproducibility checks only, not evidence by themselves for an asymptotic limit. Both exhaustive scripts are included in CI.
