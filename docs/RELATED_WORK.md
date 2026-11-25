@@ -90,3 +90,27 @@ The optional vectorized script experiments/large_n_audit_numpy.py reproduces the
 | 30,000 | 0.016048503 |
 
 The script requires NumPy and SciPy and is intentionally not part of the standard CI workflow. The values are finite numerical evidence only. The first-moment proof, not this table, is what would establish convergence to zero.
+
+
+## Sliusarev thesis: the precise connection to the unrestricted K model
+
+The official English thesis summary (2025 manuscript; defended 15 January 2026) contains two general results relevant to this project.
+
+1. **Theorem 68 / Corollary 69 (summary pp. 8–9):** for any nonempty class of frames, its almost-sure logic is a normal modal logic extending the ordinary logic of that class. This applies to the class of all frames, so it gives the normality of \(K^{as}\), but it does not axiomatize \(K^{as}\).
+2. **Theorem 83 (summary p. 9):** under a nonemptiness assumption for connected \(L\)-frames and the additional condition
+   \[
+   \varphi\notin\operatorname{Log}^{as}(\operatorname{ConFr}L)
+   \Longrightarrow
+   \limsup_n\Pr(\widehat F_n(\operatorname{ConFr}L)\models\varphi)<1,
+   \]
+   one obtains
+   \[
+   L^{as}\subseteq\operatorname{Log}^{as}(\operatorname{ConFr}L).
+   \]
+   The condition is stronger than merely saying that the probability does not converge to 1. For \(L=K\), connected frames exist at every size, but the displayed limsup condition has not been established here for all modal formulas. It must not be silently assumed.
+
+In Section 3.2 (summary pp. 13–14), Sliusarev recalls the extension properties \(Ext_m\) of the unrestricted random frame and states that they hold asymptotically almost surely. These imply the frame properties characterizing \(\mathbf{ML}^r\), hence \(\mathbf{ML}^r\subseteq K^{as}\), as already established in Goranko's programme. The thesis generalizes the corresponding axioms to Horn closures. This does not determine the additional axioms in \(K^{as}\).
+
+The thesis's main finite axiomatizations concern KD5, KD45, K5B, S5, Grz.3, GL.3 and SL, not the unrestricted K case. Its conclusion explicitly lists further classification work for extensions of K5 and additional Horn closures as future directions. Thus it is an important methodological source, but it does not appear to settle the F0001/F1001 image-probability questions.
+
+Primary source: [Sliusarev, Modal Logic of Random Kripke Frames, English thesis summary](https://www.hse.ru/data/2025/10/24/1949835949/2resume_en.pdf), especially Theorems 68 and 83 and Section 3.2.
