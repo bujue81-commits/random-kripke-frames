@@ -65,13 +65,15 @@ Do not infer independence merely from non-isomorphism. The proposed independence
 
 ## Formalization boundary
 
-Lean currently formalizes finite frame data, bounded-morphism facts, and finite enumeration only. It does not formalize probability, characteristic formulas, almost-sure validity, or asymptotic limits.
+Lean formalizes finite frame data, bounded-morphism facts and composition, finite quotient statements, exact n=3 labelled counts, the F1001 fibrewise characterization, and the implication from an F0001 bounded morphism to the weaker witness event. It does not formalize probability, characteristic formulas, almost-sure validity, or asymptotic limits.
 
 ## Reproducible checks
 
 - `experiments/finite_quotient_audit.py`: all six surjections Fin 3 -> Fin 2 and all sixteen possible target relations.
 - `experiments/exact_random_frames.py`: exhaustive labelled random source-frame counts for n=3,4.
-- `RandomKripke/ExactSmallN.lean`: exact n=3 counts, currently being checked by CI after replacing a noncomputable existential filter with a finite Boolean search.
+- `RandomKripke/ExactSmallN.lean`: exact n=3 counts, now explicitly built in CI;
+- `RandomKripke/F1001Characterization.lean`: exact F1001 fibrewise characterization;
+- `RandomKripke/F0001Witness.lean`: bounded morphisms onto F0001 imply the weaker necessary witness conditions.
 
 
 ## 2026-11-25 independent audit update
@@ -110,3 +112,6 @@ The Lean modules now cover three distinct finite statements:
 - F0001Witness: implication from a bounded morphism onto F0001 to the weaker event counted in the F0001 first moment.
 
 CI run [45569425119](https://github.com/bujue81-commits/random-kripke-frames/actions/runs/45569425119), head c1efeb9418e14505ee287e3093489aa0d5a18cfb, passed the Python audits and explicitly built all three Lean modules. The probability estimates themselves remain unformalized.
+
+
+The latest CI run [45569425119](https://github.com/bujue81-commits/random-kripke-frames/actions/runs/45569425119), head c1efeb9418e14505ee287e3093489aa0d5a18cfb, passed all Python audits and explicitly built all three Lean modules. The asymptotic probability bounds remain hand proofs.
