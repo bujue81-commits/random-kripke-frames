@@ -31,12 +31,12 @@ The previous statement that all three two-block partitions of F1001 work was err
 
 Exhaustive enumeration gives:
 
-| n | F0001 source relations | F1001 source relations | Total relations |
-|---:|---:|---:|---:|
-| 3 | 6 | 3 | 512 |
-| 4 | 1,332 | 787 | 65,536 |
+| n | F0001 source relations | F1001 source relations | F0001 surjective maps | F1001 surjective maps | Total relations |
+|---:|---:|---:|---:|---:|---:|
+| 3 | 6 | 3 | 6 | 6 | 512 |
+| 4 | 1,332 | 787 | 1,332 | 1,620 | 65,536 |
 
-These are exact finite counts, not Monte Carlo estimates and not asymptotic evidence by themselves. The Python script is run in CI.
+The map columns count all surjective bounded morphisms over all source relations, so dividing by the total relation count gives the exact first moment. The separate log-stable partition-sum script agrees with these exact n=3,4 counts. These are finite checks, not asymptotic evidence by themselves.
 
 ## Asymptotic probability arguments
 
@@ -65,7 +65,7 @@ The proper-image note now distinguishes minimality among frames whose characteri
 ## Lean status
 
 - `RandomKripke/FiniteFrames.lean` and `RandomKripke/ExactSmallN.lean` both pass `lake build` together. The exact-count search uses a finite filter of all maps and `native_decide`.
-- CI run [45552607072](https://github.com/bujue81-commits/random-kripke-frames/actions/runs/45552607072), on commit `12314a1839ee6aa91d50c784c7dba45a763e4337`, passed both Python audits and the Lean build.
+- CI run [45554576671](https://github.com/bujue81-commits/random-kripke-frames/actions/runs/45554576671), on commit `a8a46c437d5546b84f733a02d38c321d73dc1212`, passed all three Python audits and the Lean build.
 - The finite Lean scope includes exact n=3 labelled counts: 6 source relations for F0001 and 3 for F1001. No asymptotic probability theorem is formalized in Lean.
 
 ## Next tasks
@@ -84,3 +84,8 @@ A direct precursor has been identified: Rainer Franz Schamm, *Zero-One Laws and 
 The plausible new contribution is a rigorous asymptotic proof for particular cases that Schamm treated experimentally, plus Lean formalization of finite structural facts and reproducible computation. Under the thesis Java-code bit convention, F0001 has mask 8 and F1001 mask 9. The natural reading of Figure 4.1 appears to label mask 8 “No growth” and mask 9 “Slow growth”, but the visual ordering has not yet been independently confirmed. Our log-stable exact first-moment script gives a decreasing expectation for F1001 from about 0.128 at n=50 to 0.0405 at n=1000. The hand proof claims the limit is zero. This potential conflict with the old empirical label is an explicit audit task, not a settled correction.
 
 The 2025/2026 Sliusarev thesis is also relevant adjacent work: it develops a general random-L-frame framework and a connected-frame transfer theorem, with main applications to KD5, KD45, K5B, S5, Grz.3, GL.3, SL and Horn closures. The unrestricted K case and our two target frames are not among its listed main results, but its publications still need checking.
+
+
+## Current verification snapshot
+
+The latest complete CI run is [45554576671](https://github.com/bujue81-commits/random-kripke-frames/actions/runs/45554576671), commit `a8a46c437d5546b84f733a02d38c321d73dc1212`. It passed: (1) the six-surjection/sixteen-target finite quotient audit; (2) exhaustive source-frame and surjective-map counts for n=3,4; (3) the log-stable first-moment numerical audit, including exact n=3,4 cross-checks; and (4) `lake build`. No asymptotic theorem is formalized in Lean.
