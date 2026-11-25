@@ -66,3 +66,11 @@ Optional: experiments/large_n_audit_numpy.py requires NumPy and SciPy. See .gith
 ## Restart prompt
 
 Read docs/RESEARCH_HANDOFF.md, inspect current PR #1 head, latest CI jobs and raw logs, and verify the current source tree. Continue the earliest unresolved milestone above. Work in small GitHub commits, update this handoff, and distinguish Lean-checked theorems from hand proofs and experiments. Do not merge without explicit approval.
+
+## Incremental checkpoint: general chain-frame formalization
+
+- Rechecked Proposition 4.7 of Goranko (2020), printed p. 264, at https://www.aiml.net/volumes/volume13/Goranko.pdf. Its target relation is exactly the union of all arrows into/out of 0 and the successive arrows from 1 to r. The extracted primary-source text confirms the target definition used in the hand proof. The PDF page-image retrieval timed out; the text was available. This confirms identification, not bibliographic novelty.
+- ce53710d120c30b56f43db57f335697f6569f3b0: added RandomKripke/ChainFrames.lean, with the general target, necessary-event implication and six arithmetic lemmas. In particular, for an arbitrary list xs of noncentral fibre sizes, chainAdjacentWeight xs is the sum of successive products, and chain_forbidden_weight_lower states 3*(xs.sum)^2 <= 4*((xs.sum)^2-chainAdjacentWeight xs). The proof uses induction via odd/even position sums and a square inequality. This is the arithmetic part of Q >= 3S^2/4, not yet its identification with actual forbidden ordered-pair cardinalities.
+- eba43d5edcb3bdadaf0b179a92859f468f74d64b: imported ChainFrames in the root module, so the dynamic CI module build and theorem report should include it.
+- At the start of this checkpoint the connector reported no PR workflow runs or combined commit statuses for c226d57654d32afe6873cc5613c096594acca301. The prior verified baseline remains e4c0063. Neither the new CI guard nor the new seven theorem declarations is claimed compiled yet.
+- Next: inspect CI for this checkpoint's actual latest head; resolve any compiler or audit failure first. Reproduce with lake build RandomKripke.ChainFrames. Then bridge the list arithmetic to a Finset of actual forbidden noncentral ordered pairs and establish the finite fair-edge probability space. Do not count the new theorem declarations as verified until logs confirm compilation.
