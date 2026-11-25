@@ -176,3 +176,10 @@ RandomKripke/F0001Witness.lean proves that every bounded morphism onto F0001 sat
 ## Potential issue in Goranko Proposition 4.7
 
 A finite counterexample has been added in RandomKripke/GorankoEtaCounterexample.lean to test the claimed preservation of eta = forall x exists y (Rxy and not Ryy) under bounded morphic images. The first CI attempt exposed a missing classical decidability instance; the file has been corrected with classical, and the new CI result is pending. See docs/RELATED_WORK.md for the mathematical construction and careful interpretation. Do not treat the counterexample as Lean-verified until the explicit module build passes.
+
+
+## Goranko Proposition 4.7: preservation counterexample
+
+A separate finite counterexample has been identified to the preservation step used in the proof of Proposition 4.7. The paper asserts that \(\eta=\forall x\exists y(Rxy\land\neg Ryy)\) is preserved under surjective bounded morphic images. Let G be the complete irreflexive directed frame on three points, let F1 have edges (0,0),(0,1),(1,0), and map 0,1 to 0 and 2 to 1. Then G satisfies eta, G maps onto F1 by a surjective bounded morphism, but F1 fails eta at 1. Both frames have two-step reachability. Thus the stated preservation step is false under Definition 2.1 as printed.
+
+The Lean theorem is in RandomKripke/GorankoEtaCounterexample.lean. The initial CI attempts failed because native_decide did not synthesize an executable Decidable instance for the whole proposition; the proof has been changed to finite kernel reduction with decide. The current CI run for the latest head is pending. The result invalidates the proof shortcut, not necessarily Proposition 4.7's final conclusion: those characteristic formulas may still be almost-surely valid by another argument. See docs/RELATED_WORK.md for the construction and caveats.
