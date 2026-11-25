@@ -26,3 +26,5 @@ jobs:
         run: lake build RandomKripke.F1001Characterization
       - name: Explicitly build F0001 witness module
         run: lake build RandomKripke.F0001Witness
+      - name: Explicitly build Goranko eta counterexample
+        run: lake build RandomKripke.GorankoEtaCounterexample
