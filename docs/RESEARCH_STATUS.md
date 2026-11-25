@@ -118,4 +118,9 @@ The latest completed code-and-proof CI run is [45566445869](https://github.com/b
 
 A source-level audit found that the F1001 exact-count theorem had accidentally stated the F0001 source-set cardinality equals 3. This contradicted the preceding F0001 theorem and was a real source error. It is corrected to use SourcesOfF1001OnThreePoints.
 
-More importantly, the previous CI log for run 45566445869 showed that the default lake build compiled RandomKripke.FiniteFrames but did not compile RandomKripke.ExactSmallN. Thus the earlier green CI did not verify the exact n=3 Lean enumeration module. The workflow now explicitly runs lake build RandomKripke.ExactSmallN after the standard Lean action. The new CI result is pending; do not call the exact-count Lean module verified until that explicit step passes.
+More importantly, the previous CI log for run 45566445869 showed that the default lake build compiled RandomKripke.FiniteFrames but did not compile RandomKripke.ExactSmallN. Thus the earlier green CI did not verify the exact n=3 Lean enumeration module. The workflow now explicitly runs lake build RandomKripke.ExactSmallN after the standard Lean action. The explicit module build has now passed in CI run [45567277661](https://github.com/bujue81-commits/random-kripke-frames/actions/runs/45567277661), commit 9853990185486a656cd5f7adefb9a2e65f2b4353. The corrected F1001 theorem and both exact n=3 Lean counts are now actually compiled by the explicit target.
+
+
+## Exact-count Lean verification confirmed
+
+CI run [45567277661](https://github.com/bujue81-commits/random-kripke-frames/actions/runs/45567277661) completed successfully. Its log explicitly shows the command lake build RandomKripke.ExactSmallN and “Build completed successfully”. Thus the corrected exact_count_F0001_n3 and exact_count_F1001_n3 declarations are now genuinely checked by Lean. The preceding default build alone did not cover this module; the workflow now has the explicit target.
