@@ -72,3 +72,8 @@ Lean currently formalizes finite frame data, bounded-morphism facts, and finite 
 - `experiments/finite_quotient_audit.py`: all six surjections Fin 3 -> Fin 2 and all sixteen possible target relations.
 - `experiments/exact_random_frames.py`: exhaustive labelled random source-frame counts for n=3,4.
 - `RandomKripke/ExactSmallN.lean`: exact n=3 counts, currently being checked by CI after replacing a noncomputable existential filter with a finite Boolean search.
+
+
+## 2026-11-25 independent audit update
+
+See [the detailed audit](../proofs/INDEPENDENT_PROOF_AUDIT_2026-11-25.md). No fatal gap was found in the current F0001 or F1001 first-moment derivations. The F1001 proof has been strengthened with an explicit uniform central-Poisson error and a fully displayed Stirling bound. The generic Python audit's (a,b,c) versus (c,a,b) matrix-order mismatch has been corrected; the aggregate total was invariant under the permutation, but the fixed-fibre term now matches the proof and is checked directly. Large-n exploratory values through n=30,000 are reproducible with the optional NumPy/SciPy script. None of this formalizes the asymptotic proof in Lean.
