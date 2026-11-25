@@ -113,3 +113,12 @@ For each fixed \(n\geq2\), determine whether
 and, if so, obtain a quantitative upper bound. This would either repair the missing part of Proposition 4.7 by a different combinatorial-probabilistic argument or reveal a genuine failure of the claimed infinite family of additional axioms.
 
 Primary source: [Goranko (2020), *The Modal Logic of Almost Sure Frame Validities in the Finite*](https://www.aiml.net/volumes/volume13/Goranko.pdf), Definition 2.1, Section 3.1, Proposition 4.7.
+
+
+## New follow-up: an alternative first-moment proof
+
+The follow-up question above now has an internal hand-proof answer for every fixed \(r\geq2\): see proofs/GORANKO_CHAIN_FRAMES_FIRST_MOMENT.md. It gives the stronger estimate
+\[
+\Pr(G_m\twoheadrightarrow F_r)\leq\exp(-\Omega_r((\ln m)^2)).
+\]
+The proof uses a selected necessary event and a split by the total noncentral fibre size. The r=1 case K2 is already known by Le Bars. The new argument does not rely on eta being preserved under bounded morphisms. It remains a hand proof, not Lean-formalized or externally refereed, and its bibliographic priority has not been checked.
