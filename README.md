@@ -2,28 +2,69 @@
 
 Research project on the almost-sure modal logic of random finite Kripke frames.
 
-## Scope
+## Probability model
 
-The probability model is the labelled random directed frame
-\[
-G_n=([n],R_n),\qquad \Pr(xR_ny)=1/2
-\]
-independently for every ordered pair \((x,y)\), including loops.
+For each n, let
 
-The project studies probabilities of surjective bounded morphisms
 \[
-p_n(F)=\Pr(G_n\twoheadrightarrow F)
+G_n=([n],R_n),\\qquad \\Pr(xR_ny)=1/2
 \]
-and their connection with almost-sure frame validity.
+
+independently for every ordered pair (x,y), including loops. The sample space is labelled.
+
+For a fixed finite frame F, write
+
+\[
+p_n(F)=\\Pr(G_n\\twoheadrightarrow F),
+\]
+
+where the arrow denotes a surjective bounded morphism. Under the Jankov–Fine characteristic-formula correspondence,
+
+\[
+\\mu_n(\\chi_F)=1-p_n(F).
+\]
+
+## Current research target
+
+Three-point central frames with vertex order (c,a,b):
+
+\[
+F_{0001}=\\begin{pmatrix}1&1&1\\\\1&0&0\\\\1&0&1\\end{pmatrix},
+\\qquad
+F_{1001}=\\begin{pmatrix}1&1&1\\\\1&1&0\\\\1&0&1\\end{pmatrix}.
+\]
+
+The repository contains:
+- Lean 4 definitions and finite theorems for frames and bounded morphisms;
+- exact Python quotient audits;
+- exact small-n random-frame enumeration;
+- hand-proof drafts for the first-moment estimates;
+- an audit of proper bounded-morphic images and minimality.
+
+## Build and reproduce
+
+```bash
+lake exe cache get
+lake build
+python3 experiments/finite_quotient_audit.py
+python3 experiments/exact_random_frames.py
+```
+
+The CI workflow runs both Python audits and `lake build`.
 
 ## Research discipline
 
 - Distinguish proved results, conjectures, and open proof obligations.
 - Do not infer asymptotic results from finite computations.
-- Do not mark Lean declarations as verified until the project builds successfully.
-- Do not use `sorry` in completed formal proofs.
-- Record exact model definitions and cite primary sources.
+- Lean-checked finite theorems are distinct from hand-written asymptotic probability proofs.
+- No `sorry` is used in completed Lean declarations.
+- Bibliographic novelty remains to be checked against primary sources.
 
-## Current status
+## Project notes
 
-The repository is being initialized. The initial research branch will contain a conservative scaffold and an audit of the three-point central-frame claims. In particular, the proposed proof for the frame encoded as `1001` is not treated as established until its asymptotic estimates have been independently checked.
+- [Research status](docs/RESEARCH_STATUS.md)
+- [Proof audit](docs/PROOF_AUDIT.md)
+- [F0001 first-moment proof](proofs/F0001_first_moment.md)
+- [F1001 first-moment proof](proofs/F1001_first_moment.md)
+- [Proper images and minimality](proofs/proper_images_and_minimality.md)
+- [Exact small-n counts](experiments/results/exact_small_n.md)
