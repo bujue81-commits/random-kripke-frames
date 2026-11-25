@@ -201,8 +201,29 @@ For \(b=a\) or \(b=a+1\), the following estimates hold uniformly:
 \quad
 (1-2^{-b})^{n-a}=e^{-\lambda_b}(1+o(1)).
 \]
-For example, the logarithmic error in the third expression is
-\(O(b2^{-a}+n2^{-2a})=o(1)\), uniformly by (8). Consequently,
+Here is a uniform error estimate. Since \(a>m_n-L_n\), we have
+\[
+2^{-a}\leq 2^{L_n}2^{-m_n}
+\leq 2(\ln n)^4\frac{m_n}{n}
+=O((\ln n)^5/n),
+\]
+using \(n2^{-m_n}=m_nr_{m_n}\leq m_n\). Also \(a,b=O(\ln n)\) and
+\(c=n-O(\ln n)\). The multinomial approximation has relative error
+\(1+O((\ln n)^2/n)\). For the two self-hit factors, use
+\[
+|(n-b)\log(1-q)+nq|
+\leq bq+nq^2
+=O((\ln n)^{10}/n),
+\]
+and the analogous estimate with \(q'=2^{-b}\) and exponent \(n-a\).
+Finally \((1-2^{-c})^n=1+O(n2^{-c})\). Thus, uniformly for
+\(b\in\{a,a+1\}\) in the middle range,
+\[
+T_{n,a,b}
+=\left(1+O((\ln n)^{10}/n)\right)
+\pi_{\lambda_a}(b)\pi_{\lambda_b}(a).
+\]
+Consequently,
 \[
 T_{n,a,b}
 =(1+o(1))\pi_{\lambda_a}(b)\pi_{\lambda_b}(a),
@@ -310,7 +331,12 @@ Summing over \(b\geq a+2\) gives
 \frac{n^a}{a!}e^{-\lambda_a}
 e^x\frac{x^{a+2}}{(a+2)!}.
 \]
-Uniformly in the middle region, \(x=o(1)\) and \(q(a+2)=o(1)\), so this is
+Uniformly in the middle region, \(q=O((\ln n)^5/n)\), hence
+\[
+x=nq^2e^q=O((\ln n)^{10}/n),\qquad
+q(a+2)=O((\ln n)^6/n).
+\]
+Therefore \(e^{x+q(a+2)}=1+O((\ln n)^{10}/n)\), and this is
 \[
 (1+o(1))
 \frac{n^{-2}\lambda_a^{2a+4}e^{-\lambda_a}}
@@ -322,13 +348,20 @@ Put \(r=\lambda_a/a\) and
 \[
 g(r)=2+2\ln(r/2)-r.
 \]
-Stirling's lower bound, together with
-\(n=a r2^a\), transforms (13) into
+Using the explicit Stirling lower bounds
 \[
-\frac{C r^2}{a}e^{a g(r)}
+k!\geq \sqrt{2\pi k}(k/e)^k
+\]
+for \(k=a,a+2\), and substituting \(n=ar2^a\), gives
+\[
+\frac{n^{-2}\lambda_a^{2a+4}e^{-\lambda_a}}
+{a!(a+2)!}
+\leq
+\frac{e^2}{2\pi}\frac{r^2}{a}e^{a g(r)}.
 \tag{14}
 \]
-for an absolute constant \(C\).
+For this inequality, use \(\sqrt{a(a+2)}\geq a\) and
+\((a+2)^{a+2}\geq a^{a+2}\) in the denominator.
 
 Now \(g(r)\leq0\), with equality only at \(r=2\). We claim that \(r^2e^{ag(r)}\leq16\) for every \(r>0\) and integer \(a\geq1\). If \(r\leq1\), then \(g(r)\leq g(1)<0\) and \(r^2\leq1\). If \(1\leq r\leq4\), the claim follows from \(r^2\leq16\) and \(g(r)\leq0\). If \(r\geq4\), then
 \[
@@ -336,7 +369,9 @@ Now \(g(r)\leq0\), with equality only at \(r=2\). We claim that \(r^2e^{ag(r)}\l
 =\frac{2a+2}{r}-a
 \leq\frac{1-a}{2}\leq0,
 \]
-so the function is decreasing on \([4,\infty)\) and is at most its value at \(4\), which is at most \(16\). Thus every term in (14) is at most \(16C/a\). There are \(O(\ln\ln n)\) middle indices and each has \(a=\Theta(\ln n)\), so their total is \(O(\ln\ln n/\ln n)\to0.
+so the function is decreasing on \([4,\infty)\) and is at most its value at \(4\), which is at most \(16\). Thus every term in (14) is at most \(8e^2/(\pi a)\). There are
+\(O(\ln\ln n)\) middle indices and each has \(a=\Theta(\ln n)\), so
+their total is \(O(\ln\ln n/\ln n)\to0.
 
 ## 7. Conclusion
 
