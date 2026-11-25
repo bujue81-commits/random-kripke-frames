@@ -18,6 +18,8 @@ jobs:
         run: python3 experiments/exact_random_frames.py
       - name: Exhaustive chain edge cardinality audit
         run: python3 experiments/chain_edge_counting_audit.py
+      - name: Exhaustive balanced-map overlap audit
+        run: python3 experiments/chain_overlap_audit.py
       - name: Exact chain fixed-map probability audit
         run: python3 experiments/chain_full_map_audit.py
       - name: Goranko chain-frame first-moment numerical audit
