@@ -66,7 +66,7 @@ are proved. Then the corresponding characteristic formulas are almost-surely fra
 
 Every proper bounded-morphic image of F0 or F1 is E1 or T2. But E1 and T2 are themselves almost-sure bounded-morphic images of G_n, so their characteristic formulas are not almost-surely frame valid.
 
-Thus F0 and F1 are minimal, in the bounded-morphic image ordering, among finite frames whose characteristic formulas are almost-surely frame valid. This is not minimality among all central-point frames: E1 and T2 themselves have central points.
+Thus F0 and F1 are minimal in Goranko's candidate set \(\Xi^{as}=\{\chi_F:F\text{ has a central point and }\chi_F\in ML^{as}\}\): no proper bounded-morphic image remains in that set. This is not minimality among all central-point frames: E1 and T2 themselves have central points, but their characteristic formulas are not almost-surely valid.
 
 ## 5. Conditional independence over ML^r
 
