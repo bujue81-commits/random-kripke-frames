@@ -6,7 +6,7 @@ namespace RandomKripke
     Using Finset.any keeps the search computational, so exact counts
     can be checked by native_decide. -/
 def HasBoundedImageBool {α β : Type}
-    [Fintype α] [Fintype β] [DecidableEq β]
+    [Fintype α] [Fintype β] [DecidableEq α] [DecidableEq β]
     (G : Frame α) (F : Frame β) : Bool :=
   (Finset.univ : Finset (α → β)).any
     (fun f => decide (IsBoundedMorphism G F f))
