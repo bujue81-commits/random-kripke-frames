@@ -175,7 +175,7 @@ RandomKripke/F0001Witness.lean proves that every bounded morphism onto F0001 sat
 
 ## Potential issue in Goranko Proposition 4.7
 
-A finite counterexample has been added in RandomKripke/GorankoEtaCounterexample.lean to test the claimed preservation of eta = forall x exists y (Rxy and not Ryy) under bounded morphic images. The first CI attempt exposed a missing classical decidability instance; the file has been corrected with classical, and the new CI result is pending. See docs/RELATED_WORK.md for the mathematical construction and careful interpretation. Do not treat the counterexample as Lean-verified until the explicit module build passes.
+A finite counterexample has been added in RandomKripke/GorankoEtaCounterexample.lean to test the claimed preservation of eta = forall x exists y (Rxy and not Ryy) under bounded morphic images. The first CI attempts exposed a decidability issue; the proof was rewritten with explicit finite cases. CI run [45571076110](https://github.com/bujue81-commits/random-kripke-frames/actions/runs/45571076110) passed the explicit module build. The counterexample is now Lean-verified. It refutes the preservation step, not the final conclusion of Proposition 4.7. See docs/RELATED_WORK.md and proofs/GORANKO_2020_PROP_4_7_ETA_COUNTEREXAMPLE.md.
 
 
 ## Goranko Proposition 4.7: preservation counterexample
