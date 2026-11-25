@@ -36,3 +36,8 @@ The previous construction sketches rely on choosing a set A from one block of ed
 ## Current formalization boundary
 
 The Lean module currently formalizes only finite frame data and elementary structural properties. It does not formalize probability, characteristic formulas, almost-sure validity, or asymptotic limits.
+
+
+## Exhaustive finite check
+
+The script `experiments/finite_quotient_audit.py` enumerates all six surjections Fin 3 -> Fin 2 and all sixteen possible binary target relations. It checks forth and back directly from the adjacency matrices. Expected outcome: F0001 has no two-point quotient; F1001 has precisely the central-vs-periphery partition, with target relation T2.
