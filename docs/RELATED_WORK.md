@@ -57,7 +57,7 @@ The new log-stable script `experiments/expected_partition_sum.py` evaluates the 
 | 100 | 0.000014376 | 0.092169675 |
 | 200 | 0.000000119 | 0.069560675 |
 | 500 | 6.30e-11 | 0.050743682 |
-| 1,000 | 4.50e-14 | 0.040466990 |
+| 1,000 | 4.50e-14 | 0.040466991 |
 
 This is a numerical audit only. In particular, F1001's expectation decreases much more slowly than F0001's over this range. It does not establish a limit. It does make the provisional “Slow growth” label for mask 9 in Figure 4.1 worth checking against the original figure ordering and the old Java computation. The asymptotic proof draft, if correct, would show that this expectation nevertheless tends to zero.
 
@@ -74,3 +74,19 @@ The thesis also lists these related publications by Sliusarev:
 - “Modal logics of almost-sure validities in some classes of Euclidean and transitive frames,” *Combinatorics and Number Theory* 14(1) (2025), 49–64.
 
 The first two papers and the third paper should be checked for any lemmas that transfer to the unrestricted random relation model. Do not claim a complete literature survey on the basis of the thesis summary alone.
+
+
+## Extended numerical audit through n=30,000
+
+The optional vectorized script experiments/large_n_audit_numpy.py reproduces the exact first-moment sum in log space and cross-checks n=3,4 against exhaustive labelled-map enumeration.
+
+| n | E[X(F1001)] |
+|---:|---:|
+| 1,000 | 0.040466991 |
+| 2,000 | 0.032340597 |
+| 5,000 | 0.026380675 |
+| 10,000 | 0.021771903 |
+| 20,000 | 0.017459042 |
+| 30,000 | 0.016048503 |
+
+The script requires NumPy and SciPy and is intentionally not part of the standard CI workflow. The values are finite numerical evidence only. The first-moment proof, not this table, is what would establish convergence to zero.
