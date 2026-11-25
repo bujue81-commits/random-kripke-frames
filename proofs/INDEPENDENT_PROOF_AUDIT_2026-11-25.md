@@ -198,3 +198,12 @@ The finite Lean layer now consists of:
 - RandomKripke/F0001Witness.lean: implication from a bounded morphism onto F0001 to the weaker necessary event used in its first-moment upper bound.
 
 The latest head at the time of this audit, c1efeb9418e14505ee287e3093489aa0d5a18cfb, passed CI run [45569425119](https://github.com/bujue81-commits/random-kripke-frames/actions/runs/45569425119). The log explicitly records successful builds of all three Lean modules and successful Python finite/numerical audits. None of the asymptotic probability arguments is formalized in Lean.
+
+
+## 10. Quantitative F0001 bound
+
+The F0001 central Poisson range contains at most two indices, each at least \(A_n+1=\Theta(\ln n)\), and each point mass is \(O(A_n^{-1/2})\). The noncentral terms are bounded by a geometric Chernoff tail, while the small-fibre contribution is exponentially smaller. Thus the current first-moment draft yields
+\[
+\Pr(G_n\twoheadrightarrow F0001)=O(1/\sqrt{\ln n}).
+\]
+This is a hand-proof upper bound only, with no matching lower bound or asymptotic equivalent.
