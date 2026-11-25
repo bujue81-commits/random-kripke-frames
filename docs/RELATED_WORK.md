@@ -60,3 +60,17 @@ The new log-stable script `experiments/expected_partition_sum.py` evaluates the 
 | 1,000 | 4.50e-14 | 0.040466990 |
 
 This is a numerical audit only. In particular, F1001's expectation decreases much more slowly than F0001's over this range. It does not establish a limit. It does make the provisional “Slow growth” label for mask 9 in Figure 4.1 worth checking against the original figure ordering and the old Java computation. The asymptotic proof draft, if correct, would show that this expectation nevertheless tends to zero.
+
+
+## Sliusarev (2025/2026): broader random-frame framework
+
+Vladislav V. Sliusarev, *Modal Logic of Random Kripke Frames*, PhD thesis summary, National Research University Moscow Institute of Physics and Technology, Moscow, 2025; thesis defence at HSE University, 15 January 2026. [English summary](https://www.hse.ru/data/2025/10/24/1949835949/2resume_en.pdf).
+
+This is important recent adjacent work. It defines the uniformly distributed random L-frame for an arbitrary modal logic L and develops a transfer theorem relating all L-frames to connected L-frames (Theorem 83). Its stated main applications are KD5, KD45, K5B, S5, Grz.3, GL.3, SL, and certain Horn closures; the unrestricted K case and the specific three-point targets F0001/F1001 are not listed among the thesis's main results. It is therefore a required source for the broader novelty review, but the summary does not show that it resolves the present target-frame problem.
+
+The thesis also lists these related publications by Sliusarev:
+- “Almost sure modal logic of the Kripke frames with a functional relation,” *Proceedings of Moscow Institute of Physics and Technology* 16(3(63)) (2024), 57–71.
+- “Modal Logics of Almost Sure Validities and Zero-One Laws in Horn Classes,” *Doklady Mathematics* 110(2) (2024), 442–449.
+- “Modal logics of almost-sure validities in some classes of Euclidean and transitive frames,” *Combinatorics and Number Theory* 14(1) (2025), 49–64.
+
+The first two papers and the third paper should be checked for any lemmas that transfer to the unrestricted random relation model. Do not claim a complete literature survey on the basis of the thesis summary alone.
