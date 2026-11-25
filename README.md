@@ -37,6 +37,8 @@ F_{1001}=\begin{pmatrix}1&1&1\\1&1&0\\1&0&1\end{pmatrix}.
 The repository contains:
 - Lean 4 definitions and finite theorems for frames and bounded morphisms (`RandomKripke/FiniteFrames.lean`);
 - Lean equivalence between F1001 bounded morphisms and fibrewise partition conditions (`RandomKripke/F1001Characterization.lean`);
+- Lean necessary witness conditions for the F0001 first-moment bound (`RandomKripke/F0001Witness.lean`);
+- Lean counterexample to the eta-preservation claim discussed in Goranko (2020), Proposition 4.7 (`RandomKripke/GorankoEtaCounterexample.lean`, CI pending);
 - Lean implication from an F0001 bounded morphism to the weaker witness event used in its first-moment estimate (`RandomKripke/F0001Witness.lean`);
 - Lean exact n=3 labelled source-frame counts (`RandomKripke/ExactSmallN.lean`);
 - exact Python quotient audits;
