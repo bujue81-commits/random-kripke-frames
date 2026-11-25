@@ -358,3 +358,8 @@ then
 \]
 
 This is a hand-proof draft, not a Lean-verified theorem or a claim of bibliographic novelty.
+
+
+## Prior-work note and discrepancy to audit
+
+Schamm (2002), Section 3.3.6, already includes this frame in the experimental classification of all 16 three-point central-point frames. Under the bit order in his Java code, this target has mask 9. The natural reading of Figure 4.1 appears to place it in a “Slow growth” cell, while the present hand-proof draft claims that the exact first moment tends to zero. The log-stable computation in `experiments/expected_partition_sum.py` shows a decrease from approximately 0.128 at n=50 to 0.0405 at n=1000. This is not an asymptotic proof, and the figure's visual ordering has not yet been independently confirmed. Reconciling the old experimental label, the original Java calculation, and the present proof is a priority before treating this theorem as accepted.
