@@ -85,6 +85,18 @@ def main():
     )
     assert abs(term - direct) < 1e-12
 
+    # The same termwise check for F0001, whose only absent rectangles
+    # are A×A, A×B, and B×A.
+    term0 = log_fixed_partition_term(n, F0001, (c, a, b))
+    direct0 = (
+        lgamma(n + 1) - lgamma(a + 1) - lgamma(b + 1) - lgamma(c + 1)
+        - (a * a + 2 * a * b) * LOG2
+        + n * log1p(-(2.0 ** (-c)))
+        + c * log1p(-(2.0 ** (-a)))
+        + (n - a) * log1p(-(2.0 ** (-b)))
+    )
+    assert abs(term0 - direct0) < 1e-12
+
     # Cross-check the exact first moments against brute-force enumeration.
     exact_map_counts = {
         (3, "F0001"): (6, 512),
