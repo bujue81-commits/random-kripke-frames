@@ -65,7 +65,7 @@ The proper-image note now distinguishes minimality among frames whose characteri
 ## Lean status
 
 - `RandomKripke/FiniteFrames.lean` and `RandomKripke/ExactSmallN.lean` both pass `lake build` together. The exact-count search uses a finite filter of all maps and `native_decide`.
-- CI run [45555290042](https://github.com/bujue81-commits/random-kripke-frames/actions/runs/45555290042), on commit `48128fc80a2b3b877012dab0628a4b3e3c4ffba6`, passed all three Python audits and the Lean build.
+- CI run [45566445869](https://github.com/bujue81-commits/random-kripke-frames/actions/runs/45566445869), on commit `72603e73e696f8fb5934a2363cd6f14e0b90b889`, passed all three Python audits and the Lean build.
 - The finite Lean scope includes exact n=3 labelled counts: 6 source relations for F0001 and 3 for F1001. No asymptotic probability theorem is formalized in Lean.
 
 ## Next tasks
@@ -88,7 +88,7 @@ The 2025/2026 Sliusarev thesis is also relevant adjacent work: it develops a gen
 
 ## Current verification snapshot
 
-The latest complete code-and-proof CI run is [45555290042](https://github.com/bujue81-commits/random-kripke-frames/actions/runs/45555290042), commit `48128fc80a2b3b877012dab0628a4b3e3c4ffba6`. It passed: (1) the six-surjection/sixteen-target finite quotient audit; (2) exhaustive source-frame and surjective-map counts for n=3,4; (3) the log-stable first-moment numerical audit, including exact n=3,4 cross-checks; and (4) `lake build`. The subsequent change to the minimality note is documentation-only and has its own CI run pending. No asymptotic theorem is formalized in Lean.
+The latest complete code-and-proof CI run is [45566445869](https://github.com/bujue81-commits/random-kripke-frames/actions/runs/45566445869), commit `72603e73e696f8fb5934a2363cd6f14e0b90b889`. It passed: (1) the six-surjection/sixteen-target finite quotient audit; (2) exhaustive source-frame and surjective-map counts for n=3,4; (3) the log-stable first-moment numerical audit, including exact n=3,4 cross-checks; and (4) `lake build`. The subsequent updates to the independent audit, numerical documentation, and Sliusarev relevance note are documentation-only; the CI workflow is running on the newest documentation head. No asymptotic theorem is formalized in Lean.
 
 
 ## Independent proof audit (2026-11-25)
@@ -109,3 +109,6 @@ The generic numerical script had a matrix/fibre ordering mismatch: target matric
 The English thesis summary's Theorem 83 gives a transfer from all random L-frames to connected random L-frames, but only under the extra hypothesis that every formula outside the connected almost-sure logic has connected-validity limsup strictly below 1. For L=K, connected frames exist at every size, but that limsup hypothesis has not been proved here. The theorem therefore does not by itself classify K^as.
 
 The same summary states that the unrestricted random frame has Ext_m properties a.a.s., implying the frame conditions characterizing ML^r and hence ML^r ⊆ K^as. This is background already present in Goranko's programme, not a new result of this repository. See docs/RELATED_WORK.md for the precise theorem statement and source.
+
+
+The latest completed code-and-proof CI run is [45566445869](https://github.com/bujue81-commits/random-kripke-frames/actions/runs/45566445869), commit 72603e73e696f8fb5934a2363cd6f14e0b90b889. All three Python audits and lake build passed. Subsequent commits only update documentation and bibliography notes.
