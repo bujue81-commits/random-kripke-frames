@@ -223,16 +223,16 @@ and the noncentral contribution is
 
 ## 5. Conclusion
 
-The small-fibre contribution (4) is (o(1/\sqrt{\ln n})), and
+The small-fibre contribution (4) is \(o(1/\sqrt{\ln n})\), and
 (5), (7) show that the large-fibre contribution is
-(O(1/\sqrt{\ln n})). Hence
-[
-mathbb E Z_n=O(1/sqrt{ln n}).
-]
+\(O(1/\sqrt{\ln n})\). Hence
+\[
+\mathbb E Z_n=O(1/\sqrt{\ln n}).
+\]
 By Markov's inequality and the necessary-condition inclusion,
-[
-oxed{\Pr(G_n\twoheadrightarrow F_0)=O(1/\sqrt{\ln n}).}
-]
+\[
+\boxed{\Pr(G_n\twoheadrightarrow F_0)=O(1/\sqrt{\ln n}).}
+\]
 This proves the theorem. \(\square\)
 
 ## 6. Logical corollary
