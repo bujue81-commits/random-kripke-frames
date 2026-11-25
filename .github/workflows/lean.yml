@@ -15,6 +15,8 @@ jobs:
         run: python3 experiments/finite_quotient_audit.py
       - name: Exact random-frame counts for n=3,4
         run: python3 experiments/exact_random_frames.py
+      - name: First-moment numerical audit for F0001 and F1001
+        run: python3 experiments/expected_partition_sum.py
       - uses: leanprover/lean-action@v1
         with:
           build: true
