@@ -9,10 +9,11 @@ F_0=(\{c,a,b\},R_0),\qquad
 M_0=\begin{pmatrix}1&1&1\\1&0&0\\1&0&1\end{pmatrix}.
 \]
 
-Then
+Then the first-moment argument below gives the quantitative bound
 \[
-\Pr(G_n\twoheadrightarrow F_0)\longrightarrow0.
+\Pr(G_n\twoheadrightarrow F_0)=O(1/\sqrt{\ln n}),
 \]
+and hence convergence to zero.
 
 This proof is a probability statement about the specified labelled model. The logical consequence for the characteristic formula uses the Jankov--Fine correspondence separately.
 
@@ -208,21 +209,30 @@ Therefore
 \leq\sum_{a>A_n}e^{-\gamma a}
 \longrightarrow0.
 \]
-Together with the central-index estimate this proves (6).
+Together with the central-index estimate this proves (6). More quantitatively,
+the central contribution is at most
+\[
+\frac{2C}{\sqrt{A_n+1}}=O(1/\sqrt{\ln n}),
+\]
+and the noncentral contribution is
+\(O(e^{-\gamma A_n})\). Thus
+\[
+\sum_{a>A_n}\pi_{\lambda_a}(a)=O(1/\sqrt{\ln n}).
+\tag{7}
+\]
 
 ## 5. Conclusion
 
-Equations (3)--(6) imply
-\[
-\mathbb E Z_n\longrightarrow0.
-\]
+The small-fibre contribution (4) is (o(1/\sqrt{\ln n})), and
+(5), (7) show that the large-fibre contribution is
+(O(1/\sqrt{\ln n})). Hence
+[
+mathbb E Z_n=O(1/sqrt{ln n}).
+]
 By Markov's inequality and the necessary-condition inclusion,
-\[
-\Pr(G_n\twoheadrightarrow F_0)
-\leq\Pr(Z_n\geq1)
-\leq\mathbb E Z_n
-\longrightarrow0.
-\]
+[
+oxed{\Pr(G_n\twoheadrightarrow F_0)=O(1/\sqrt{\ln n}).}
+]
 This proves the theorem. \(\square\)
 
 ## 6. Logical corollary
