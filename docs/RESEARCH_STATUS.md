@@ -146,3 +146,16 @@ A new module RandomKripke/F1001Characterization.lean proves the exact equivalenc
 The module is imported by RandomKripke.lean and is explicitly built in CI. Run [45568777128](https://github.com/bujue81-commits/random-kripke-frames/actions/runs/45568777128), commit e868c7f1a7bf3bfe9fc3610a5a925c8e920fbfc1, passed the standard Lean build, the exact n=3 enumeration module, and the new F1001 characterization module, as well as all Python audits.
 
 The asymptotic probability proof remains outside Lean.
+
+
+## Quantitative F0001 result and Lean witness module (2026-11-25)
+
+The F0001 first-moment argument has been sharpened to
+\[
+\Pr(G_n\twoheadrightarrow F_{0001})=O(1/\sqrt{\ln n}).
+\]
+The proof splits at \(A_n=\lfloor\frac12\log_2 n\rfloor\): small fibres are exponentially suppressed by \(e^{-\sqrt n/4}\) up to a subexponential prefactor, while large fibres are bounded by Poisson point masses. The at-most-two central indices contribute \(O(1/\sqrt{\ln n})\), and the off-central Chernoff tails are exponentially small.
+
+RandomKripke/F0001Witness.lean formalizes the weaker necessary-condition event used in this argument and proves that every surjective bounded morphism onto F0001 satisfies it. The module is imported by RandomKripke.lean and explicitly compiled in CI.
+
+Latest verified head: c1efeb9418e14505ee287e3093489aa0d5a18cfb. CI run [45569425119](https://github.com/bujue81-commits/random-kripke-frames/actions/runs/45569425119) passed all three Python audits, the standard Lean build, and explicit builds of ExactSmallN, F1001Characterization, and F0001Witness. The F0001 and F1001 asymptotic probability estimates remain hand proofs, not Lean theorems.
