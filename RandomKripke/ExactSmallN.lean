@@ -8,8 +8,8 @@ namespace RandomKripke
 def HasBoundedImageBool {α β : Type}
     [Fintype α] [Fintype β] [DecidableEq α] [DecidableEq β]
     (G : Frame α) (F : Frame β) : Bool :=
-  (Finset.univ : Finset (α → β)).any
-    (fun f => decide (IsBoundedMorphism G F f))
+  decide (((Finset.univ : Finset (α → β)).filter
+    (fun f => IsBoundedMorphism G F f)).Nonempty)
 
 /-- All labelled three-point source relations admitting F0001 as an image. -/
 def SourcesOfF0001OnThreePoints : Finset (Frame (Fin 3)) :=
