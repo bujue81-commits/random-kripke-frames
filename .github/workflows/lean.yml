@@ -1,6 +1,7 @@
 name: Lean build and finite audit
 
 on:
+  workflow_dispatch:
   push:
     branches: ["main", "research/**"]
   pull_request:
@@ -30,6 +31,10 @@ jobs:
         run: lake build RandomKripke.F0001Witness
       - name: Explicitly build Goranko eta counterexample
         run: lake build RandomKripke.GorankoEtaCounterexample
+      - name: Explicitly build general chain modules
+        run: |
+          lake build RandomKripke.ChainFrames
+          lake build RandomKripke.ChainEdgeCounting
       - name: Audit Lean source and theorem axioms
         shell: bash
         run: |
