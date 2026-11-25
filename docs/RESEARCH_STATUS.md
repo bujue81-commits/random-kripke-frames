@@ -89,3 +89,16 @@ The 2025/2026 Sliusarev thesis is also relevant adjacent work: it develops a gen
 ## Current verification snapshot
 
 The latest complete code-and-proof CI run is [45555290042](https://github.com/bujue81-commits/random-kripke-frames/actions/runs/45555290042), commit `48128fc80a2b3b877012dab0628a4b3e3c4ffba6`. It passed: (1) the six-surjection/sixteen-target finite quotient audit; (2) exhaustive source-frame and surjective-map counts for n=3,4; (3) the log-stable first-moment numerical audit, including exact n=3,4 cross-checks; and (4) `lake build`. The subsequent change to the minimality note is documentation-only and has its own CI run pending. No asymptotic theorem is formalized in Lean.
+
+
+## Independent proof audit (2026-11-25)
+
+A new detailed audit is recorded in [INDEPENDENT_PROOF_AUDIT_2026-11-25.md](../proofs/INDEPENDENT_PROOF_AUDIT_2026-11-25.md).
+
+The current internal audit found no fatal gap in either first-moment argument:
+- F0001's weaker witness event, disjoint-rectangle probability, binomial reduction, and Poisson point-mass estimate are valid.
+- F1001's exact fibre-partition formula, small/large fibre bounds, Poisson cross-sum domination, and middle-tail Stirling estimate are valid. The proof now states a uniform relative error of 1 + O((ln n)^10/n) for the central Poisson approximation and an explicit Stirling constant for the remaining middle tail.
+
+This is an internal proof audit, not independent peer review. The asymptotic arguments remain hand proofs and are not Lean-formalized.
+
+The generic numerical script had a matrix/fibre ordering mismatch: target matrices are ordered (c,a,b), while the proof variables are (a,b,c). The total sum was unchanged by permutation invariance of the complete triple sum, but fixed-size terms were not aligned. This is corrected, with a new termwise F1001 formula assertion. An optional NumPy/SciPy large-n script now reproduces values through n=30,000 after checking exact n=3,4 counts.
