@@ -188,3 +188,16 @@ The Lean theorem is in RandomKripke/GorankoEtaCounterexample.lean. The initial C
 ## Latest full CI verification
 
 CI run [45571611756](https://github.com/bujue81-commits/random-kripke-frames/actions/runs/45571611756), commit 51ddeb975742cb52b9ba58a1ef463ffe77bd933d, passed all three Python audits and the standard Lean build plus all four explicit module builds: ExactSmallN, F1001Characterization, F0001Witness, and GorankoEtaCounterexample. This run includes the Python eta-preservation counterexample check.
+
+
+## Alternative first-moment repair for Goranko's F_r family
+
+A new hand proof draft, proofs/GORANKO_CHAIN_FRAMES_FIRST_MOMENT.md, gives for every fixed r >= 2
+\[
+\Pr(G_m\twoheadrightarrow F_r)\leq\exp(-\Omega_r((\ln m)^2)).
+\]
+It avoids the invalid eta-preservation step identified above. The argument splits on the total size S of the noncentral fibres. For S below (3r/4)log_2(m), some noncentral fibre is small and the central rows almost surely fail to hit it; for larger S, the chain structure forces at least 3S^2/4 forbidden ordered edges, which overwhelms the number of partitions.
+
+This appears to repair the asymptotic-validity part of Proposition 4.7 for r >= 2, assuming the paper's characteristic-formula correspondence. The r=1 case K2 is already known by Le Bars. The proof is a hand argument, not Lean-formalized, and should not be described as a novel result until prior-work checking is done.
+
+The new log-space audit script is experiments/goranko_chain_first_moment.py. Its small exact checks give E[Z_3]=6/32 for r=2 and E[Z_4]=24/1024 for r=3. At m=100 the selected-event expectations are approximately 4.5e-7 for r=2 and 2.1e-19 for r=3. The CI workflow has been updated to run this script; the latest run is pending.
