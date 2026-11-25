@@ -74,3 +74,19 @@ Read docs/RESEARCH_HANDOFF.md, inspect current PR #1 head, latest CI jobs and ra
 - eba43d5edcb3bdadaf0b179a92859f468f74d64b: imported ChainFrames in the root module, so the dynamic CI module build and theorem report should include it.
 - At the start of this checkpoint the connector reported no PR workflow runs or combined commit statuses for c226d57654d32afe6873cc5613c096594acca301. The prior verified baseline remains e4c0063. Neither the new CI guard nor the new seven theorem declarations is claimed compiled yet.
 - Next: inspect CI for this checkpoint's actual latest head; resolve any compiler or audit failure first. Reproduce with lake build RandomKripke.ChainFrames. Then bridge the list arithmetic to a Finset of actual forbidden noncentral ordered pairs and establish the finite fair-edge probability space. Do not count the new theorem declarations as verified until logs confirm compilation.
+
+## Incremental checkpoint: actual forbidden ordered pairs
+
+- d000817dd813750995d761874b855cccbf19a8b2: added RandomKripke/ChainEdgeCounting.lean, with seven theorem declarations. Defines actual finite sets of noncentral vertices, odd/even vertices, allowed and forbidden ordered pairs. The orientation map sends an allowed pair to its odd/even ordered endpoints, and is injective because two opposite directed chain arrows cannot both occur. Consequently the allowed cardinality is <= U*V, and the theorem chain_forbidden_pairs_card_lower gives 3*S^2 <= 4*Q. The theorem boundedMorphism_chain_forbidden_pairs_absent connects these actual pairs with absent source edges. This approach bypasses the need to identify the list expression with actual pair cardinality for the large-S bound; exact formula identification is still needed for the full selected-event first moment.
+- 5290d55b0e109c5f6609f5fba642894c0384c90a: imported the edge-counting module in the root.
+- af60e99c0856ee56f3548d85ed2805acfaa4ff12: explicit builds for both new chain modules and workflow_dispatch configuration. GitHub may require the workflow to exist on the default branch before manual dispatch; no dispatch was performed.
+- 8e8b8379049702e04ddd5ce698e087df08a7a888: added experiments/chain_edge_counting_audit.py. Independently ran the same exhaustive assertions in Python here: all 5694 fibre maps for 1<=r<=4, 1<=m<=5 passed. Includes non-surjective maps, permitted-pair count, orientation injectivity, exact forbidden-pair count and lower bound. This does not prove the Lean source compiles.
+- bf9f09a7401f8296701944dc8edd69ec55a33db9: integrated the finite audit into CI.
+- At checkpoint start, PR head 73c4389f40a56f214e7eaeaaf1f3d6bce9d7fb68 still had no workflow runs or combined statuses returned by the connector. No local Lean or lake executable is installed in the chat runtime. Last confirmed CI remains e4c0063. Both new Lean modules (14 theorem declarations total) are unverified source drafts. Do not accumulate further unverified Lean code until CI access is resolved. Current attempt to reopen the Goranko PDF returned HTTP 502, so no new primary-source verification is claimed this turn.
+- Next: obtain actual CI results for the latest head; fix any Lean elaboration or audit errors. Then define the finite uniform sample space of all Bool-valued edge relations, prove the fixed-absent-edge event has probability 2^(-Q) by counting functions on the complement, and establish the central-hit event and first-moment bound. Preserve all changes and log actual verification results here.
+
+Reproduction additions:
+
+    lake build RandomKripke.ChainFrames
+    lake build RandomKripke.ChainEdgeCounting
+    python3 experiments/chain_edge_counting_audit.py
