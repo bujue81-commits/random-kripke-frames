@@ -24,9 +24,9 @@ It uses successive binary bits to decide whether each arrow is present. Under th
 - F0001 has bit mask 8 (only \(y_2\to y_2\));
 - F1001 has bit mask 9 (both self-loops, no cross-arrows).
 
-The text extraction of Figure 4.1 gives the 4×4 category labels but not the diagrams' full visual ordering. Under the natural row-by-row arrangement of the two adjacency rows, F0001 appears in a “No growth” cell and F1001 appears in a “Slow growth” cell. Treat this cell assignment as provisional until the original figure is inspected visually.
+The text extraction of Figure 4.1 gives the 4×4 category labels but not the diagrams' full visual ordering. The appendix code iterates masks k=0,...,15 with the four bits in the order above, but the extracted figure does not expose the diagrams' precise arrangement. Under the natural row-by-row arrangement of the two adjacency rows, F0001 appears in a “No growth” cell and F1001 appears in a “Slow growth” cell; treat that cell assignment as provisional until the original figure is inspected visually.
 
-This creates a specific issue to resolve: our exact first-moment sum for F1001 is numerically decreasing over the tested range, and the current hand-proof draft claims that it tends to zero. If the old “Slow growth” label was intended to mean that the expectation grows rather than tends to zero, the new proof would correct an earlier experimental classification. The figure's encoding and the original numerical computation must be reconciled before claiming that correction.
+The included Java program in the appendix sets n=50 and evaluates the partition sum for each of the 16 frames; the genetic-algorithm programs mentioned in the text are not included. Thus the labels are explicitly experimental/heuristic, not proved asymptotic classifications. Our exact first-moment sum for F1001 decreases over the tested range, and the current hand-proof draft claims that it tends to zero. If the old “Slow growth” label was intended to mean non-vanishing growth, the new proof would refine or correct that heuristic. The figure's encoding and the original numerical computation must be reconciled before claiming a correction.
 
 ## What remains potentially new
 
