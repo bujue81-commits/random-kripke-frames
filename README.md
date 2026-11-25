@@ -1,6 +1,6 @@
 # Random Kripke Frames
 
-Research project on the almost-sure modal logic of random finite Kripke frames.
+Research project on rigorous first-moment proofs and Lean formalization for selected three-point central frames in random finite Kripke frames. The candidate search itself has a 2002 precursor; see the related-work audit.
 
 ## Probability model
 
