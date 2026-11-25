@@ -239,3 +239,8 @@ then
 \]
 
 This corollary is conditional only on the cited characteristic-formula theorem and its language conventions; it is not an additional probabilistic estimate.
+
+
+## Prior-work note
+
+Schamm (2002), Section 3.3.6, already includes this frame in the experimental classification of all 16 three-point central-point frames. Under the bit order in his Java code, this target has mask 8. The natural reading of Figure 4.1 places it in a “No growth” cell. The present document should therefore be treated as an attempt to make that candidate's first-moment argument rigorous, not as discovery of a new candidate.
