@@ -88,7 +88,8 @@ Consequently, \(\eta\) fails to be preserved even on the diameter-two class for 
 - Lean theorem: RandomKripke.goranko_eta_not_preserved_counterexample.
 - Lean module: RandomKripke/GorankoEtaCounterexample.lean.
 - Python check: audit_eta_preservation_counterexample() in experiments/finite_quotient_audit.py.
-- CI run [45571076110](https://github.com/bujue81-commits/random-kripke-frames/actions/runs/45571076110), commit ef5fe04e2d3021a9884ad51591614f6291d14951, passed all Python audits, including the dedicated eta counterexample check, and the Lean build. The CI log explicitly built RandomKripke.GorankoEtaCounterexample.
+- Lean module: CI run [45571076110](https://github.com/bujue81-commits/random-kripke-frames/actions/runs/45571076110), commit ef5fe04e2d3021a9884ad51591614f6291d14951, explicitly built RandomKripke.GorankoEtaCounterexample successfully.
+- Python cross-check: CI run [45571625306](https://github.com/bujue81-commits/random-kripke-frames/actions/runs/45571625306), commit 844dc5acdae4f4ded3a0530db9eba09f020cedbf, passed the updated finite_quotient_audit.py together with all other Python audits and all four explicit Lean module builds.
 
 ## What this does and does not establish
 
