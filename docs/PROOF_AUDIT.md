@@ -122,3 +122,14 @@ The latest CI run [45569425119](https://github.com/bujue81-commits/random-kripke
 The preservation assertion used in Proposition 4.7 for \(\eta=\forall x\exists y(Rxy\land\neg Ryy)\) is contradicted by the finite bounded morphism in RandomKripke/GorankoEtaCounterexample.lean. The source is the complete irreflexive three-point frame; the target has edges (0,0),(0,1),(1,0); the map sends 0,1 to 0 and 2 to 1. The source satisfies eta, the target does not, and the map satisfies forth, back, and surjectivity. Both frames have two-step reachability.
 
 This shows a gap in the cited preservation argument, not that Proposition 4.7's final conclusion is false. The Lean module passed CI run [45571076110](https://github.com/bujue81-commits/random-kripke-frames/actions/runs/45571076110). The Python cross-check subsequently passed in CI run [45571625306](https://github.com/bujue81-commits/random-kripke-frames/actions/runs/45571625306), commit 844dc5acdae4f4ded3a0530db9eba09f020cedbf, together with all Python audits and all four explicit Lean builds. Later changes are documentation-only and a fresh run for the current documentation head is pending.
+
+
+## Alternative first-moment proof for Goranko's chain family
+
+The new proof draft in proofs/GORANKO_CHAIN_FRAMES_FIRST_MOMENT.md appears internally sound on a line-by-line audit:
+- the forbidden noncentral rectangles and selected central-hit rectangles are disjoint, so their probabilities multiply;
+- the forbidden edge count is \(S^2-\sum_{i=1}^{r-1}a_i a_{i+1}\), and the odd/even split bounds the adjacent-product sum by \(S^2/4\);
+- for \(S<(3r/4)\log_2m\), at least one noncentral fibre is small, yielding the uniform factor \(\exp(-m^{1/4}/2)\);
+- for larger \(S\), the \(\exp(-3(\ln2)S^2/4)\) forbidden-edge penalty dominates \(\binom mS r^S\) when \(r\geq2\).
+
+Thus the hand proof gives \(\Pr(G_m\twoheadrightarrow F_r)\leq\exp(-\Omega_r((\ln m)^2))\) for each fixed \(r\geq2\). This is not Lean-formalized or externally refereed; the first-moment script has been added to CI and is pending.
