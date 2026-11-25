@@ -53,6 +53,47 @@ def is_bounded_morphism(source, target, f):
     return True
 
 
+K2 = (
+    (1, 1),
+    (1, 0),
+)
+
+COMPLETE_IRREFLEXIVE_3 = tuple(
+    tuple(int(x != y) for y in range(3)) for x in range(3)
+)
+
+COLLAPSE_TO_K2 = (0, 0, 1)
+
+
+def has_nonloop_successor_everywhere(frame):
+    return all(
+        any(frame[x][y] and not frame[y][y] for y in range(len(frame)))
+        for x in range(len(frame))
+    )
+
+
+def has_two_step_reachability(frame):
+    return all(
+        any(frame[x][y] and frame[y][z] for y in range(len(frame)))
+        for x in range(len(frame))
+        for z in range(len(frame))
+    )
+
+
+def audit_eta_preservation_counterexample():
+    assert is_bounded_morphism(
+        COMPLETE_IRREFLEXIVE_3, K2, COLLAPSE_TO_K2
+    )
+    assert has_nonloop_successor_everywhere(COMPLETE_IRREFLEXIVE_3)
+    assert not has_nonloop_successor_everywhere(K2)
+    assert has_two_step_reachability(COMPLETE_IRREFLEXIVE_3)
+    assert has_two_step_reachability(K2)
+    print(
+        "Goranko eta counterexample: verified p-morphism, eta source=true, "
+        "eta target=false; both frames have two-step reachability."
+    )
+
+
 def audit(name, source):
     witnesses = []
     for f in surjections_3_to_2():
@@ -92,4 +133,5 @@ if __name__ == "__main__":
         for f, _ in w1
     }) == 1
 
+    audit_eta_preservation_counterexample()
     print("All finite quotient checks passed.")
