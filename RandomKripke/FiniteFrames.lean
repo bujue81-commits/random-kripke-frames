@@ -20,6 +20,14 @@ instance instDecidableSurjective {α β : Type}
   unfold Function.Surjective
   infer_instance
 
+/-- Bounded morphism conditions are decidable on finite frames. -/
+instance instDecidableBoundedMorphism {α β : Type}
+    [Fintype α] [Fintype β] [DecidableEq β]
+    (R : Frame α) (S : Frame β) (f : α → β) :
+    Decidable (IsBoundedMorphism R S f) := by
+  unfold IsBoundedMorphism
+  infer_instance
+
 /-- The frame coded 0001, in the order (c,a,b). -/
 def F0001 : Frame (Fin 3) := fun i j =>
   if i.val = 0 then true
