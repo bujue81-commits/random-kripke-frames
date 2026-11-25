@@ -7,10 +7,11 @@ Let \(G_n=([n],R_n)\) be the labelled random directed frame in which all \(n^2\)
 F_1=(\{c,a,b\},R_1),\qquad
 M_1=\begin{pmatrix}1&1&1\\1&1&0\\1&0&1\end{pmatrix}.
 \]
-Then
+Then the proof below establishes the quantitative bound
 \[
-\Pr(G_n\twoheadrightarrow F_1)\longrightarrow0.
+\Pr(G_n\twoheadrightarrow F_1)=O(1/\ln n),
 \]
+and hence the probability tends to zero.
 
 The proof below is a hand-proof draft. The estimates are made explicit so that they can be independently checked and later formalized. This document does not claim Lean verification.
 
