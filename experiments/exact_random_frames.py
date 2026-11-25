@@ -50,14 +50,15 @@ def exact_count(n, target):
         ]
         prepared.append((f, fibres, allowed, required))
 
-    count = 0
+    source_count = 0
+    morphism_count = 0
     for graph in range(total):
         successors = [
             (graph >> (x * n)) & full
             for x in range(n)
         ]
 
-        has_morphism = False
+        valid_maps = 0
         for f, fibres, allowed, required in prepared:
             valid = True
             for x in range(n):
@@ -79,28 +80,29 @@ def exact_count(n, target):
                     break
 
             if valid:
-                has_morphism = True
-                break
+                valid_maps += 1
 
-        if has_morphism:
-            count += 1
+        if valid_maps:
+            source_count += 1
+            morphism_count += valid_maps
 
-    return count, total
+    return source_count, total, morphism_count
 
 
 if __name__ == "__main__":
     expected = {
-        (3, "F0001"): (6, 512),
-        (3, "F1001"): (3, 512),
-        (4, "F0001"): (1332, 65536),
-        (4, "F1001"): (787, 65536),
+        (3, "F0001"): (6, 512, 6),
+        (3, "F1001"): (3, 512, 6),
+        (4, "F0001"): (1332, 65536, 1332),
+        (4, "F1001"): (787, 65536, 1620),
     }
 
     for n in (3, 4):
         for name, target in (("F0001", F0001), ("F1001", F1001)):
             result = exact_count(n, target)
-            print(f"n={n} {name}: {result[0]}/{result[1]} "
-                  f"= {result[0] / result[1]:.9f}")
+            print(f"n={n} {name}: source_frames={result[0]}/{result[1]} "
+                  f"({result[0] / result[1]:.9f}), "
+                  f"surjective_maps={result[2]}")
             assert result == expected[(n, name)]
 
     print("All exact small-n counts verified.")
