@@ -1,4 +1,4 @@
-name: Lean build
+name: Lean build and finite audit
 
 on:
   push:
@@ -11,6 +11,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Exhaustive finite quotient audit
+        run: python3 experiments/finite_quotient_audit.py
       - uses: leanprover/lean-action@v1
         with:
           build: true
