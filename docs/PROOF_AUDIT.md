@@ -82,3 +82,8 @@ See [the detailed audit](../proofs/INDEPENDENT_PROOF_AUDIT_2026-11-25.md). No fa
 ## Lean build coverage correction
 
 The previous green CI run compiled RandomKripke.FiniteFrames only; its log did not include RandomKripke.ExactSmallN. The exact-count module therefore was not covered by the default lake build. A further source audit found the F1001 count theorem referenced the F0001 source set (claiming that same finite set had both cardinalities 6 and 3). This has been corrected, and the workflow now explicitly invokes lake build RandomKripke.ExactSmallN. The explicit build has now passed: CI run [45567277661](https://github.com/bujue81-commits/random-kripke-frames/actions/runs/45567277661) logs the command lake build RandomKripke.ExactSmallN followed by “Build completed successfully”. The corrected exact n=3 count declarations are now Lean-checked.
+
+
+## Quantitative F1001 conclusion
+
+The F1001 proof now establishes the stronger upper bound (\Pr(G_n\twoheadrightarrow F1001)=O(1/\ln n)), not merely convergence to zero. The refinement sharpens both the Poisson cross-sum to (O(1/m_n)) and the remaining middle tail to (O(1/\ln n)). It remains a hand proof and is not formalized in Lean or externally refereed.
