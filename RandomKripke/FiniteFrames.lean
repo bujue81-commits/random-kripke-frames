@@ -71,7 +71,10 @@ theorem F1001_two_point_maps_are_canonical :
       IsBoundedMorphism F1001 T2 f →
         f = collapse1001 ∨ f = swap2 ∘ collapse1001 := by
   intro f hf
-  fin_cases h0 : f 0 <;> fin_cases h1 : f 1 <;> fin_cases h2 : f 2 <;>
+  let h0 := f 0
+  let h1 := f 1
+  let h2 := f 2
+  fin_cases h0 <;> fin_cases h1 <;> fin_cases h2 <;>
     simp_all [IsBoundedMorphism, Function.Surjective, F1001, T2,
       collapse1001, swap2]
 
@@ -123,10 +126,16 @@ theorem F0001_no_two_point_quotient :
       IsBoundedMorphism F0001 S f := by
   rintro ⟨S, f, hf⟩
   rcases hf with ⟨hsurj, hforth, hback⟩
-  fin_cases h00 : S 0 0 <;> fin_cases h01 : S 0 1 <;>
-    fin_cases h10 : S 1 0 <;> fin_cases h11 : S 1 1 <;>
-    fin_cases h0 : f 0 <;> fin_cases h1 : f 1 <;>
-    fin_cases h2 : f 2 <;>
+  let h00 := S 0 0
+  let h01 := S 0 1
+  let h10 := S 1 0
+  let h11 := S 1 1
+  let h0 := f 0
+  let h1 := f 1
+  let h2 := f 2
+  fin_cases h00 <;> fin_cases h01 <;> fin_cases h10 <;>
+    fin_cases h11 <;> fin_cases h0 <;> fin_cases h1 <;>
+    fin_cases h2 <;>
     simp_all [Function.Surjective, F0001]
 
 /-- Every two-point bounded-morphic image of F1001 is T2. -/
@@ -135,10 +144,16 @@ theorem F1001_two_point_quotient_target :
       IsBoundedMorphism F1001 S f → S = T2 := by
   intro S f hf
   rcases hf with ⟨hsurj, hforth, hback⟩
-  fin_cases h00 : S 0 0 <;> fin_cases h01 : S 0 1 <;>
-    fin_cases h10 : S 1 0 <;> fin_cases h11 : S 1 1 <;>
-    fin_cases h0 : f 0 <;> fin_cases h1 : f 1 <;>
-    fin_cases h2 : f 2 <;>
+  let h00 := S 0 0
+  let h01 := S 0 1
+  let h10 := S 1 0
+  let h11 := S 1 1
+  let h0 := f 0
+  let h1 := f 1
+  let h2 := f 2
+  fin_cases h00 <;> fin_cases h01 <;> fin_cases h10 <;>
+    fin_cases h11 <;> fin_cases h0 <;> fin_cases h1 <;>
+    fin_cases h2 <;>
     try simp_all [Function.Surjective, F1001]
   all_goals
     apply funext
