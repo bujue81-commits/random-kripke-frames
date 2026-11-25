@@ -85,6 +85,7 @@ These are hand proofs, not Lean-verified probability theorems or externally refe
 - [Research status](docs/RESEARCH_STATUS.md)
 - [Proof audit](docs/PROOF_AUDIT.md)
 - [Independent F0001/F1001 proof audit](proofs/INDEPENDENT_PROOF_AUDIT_2026-11-25.md)
+- [Goranko Proposition 4.7 eta-preservation counterexample](proofs/GORANKO_2020_PROP_4_7_ETA_COUNTEREXAMPLE.md)
 - [F0001 first-moment proof](proofs/F0001_first_moment.md)
 - [F1001 first-moment proof](proofs/F1001_first_moment.md)
 - [Proper images and minimality](proofs/proper_images_and_minimality.md)
