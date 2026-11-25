@@ -133,3 +133,16 @@ The F1001 first-moment draft has been strengthened beyond mere convergence: a qu
 \Pr(G_n\twoheadrightarrow F1001)=O(1/\ln n).
 ]
 This is an internal hand proof, not Lean-formalized or externally refereed. It is an upper bound only; no matching lower bound or asymptotic equivalent is claimed. The full argument is in proofs/F1001_first_moment.md and the independent audit note.
+
+
+## Lean characterization of F1001 (2026-11-25)
+
+A new module RandomKripke/F1001Characterization.lean proves the exact equivalence between a surjective bounded morphism onto F1001 and the fibrewise conditions used in the probability proof:
+- no edges from A to B or B to A;
+- every source row hits C;
+- rows in C∪A hit A;
+- rows in C∪B hit B.
+
+The module is imported by RandomKripke.lean and is explicitly built in CI. Run [45568777128](https://github.com/bujue81-commits/random-kripke-frames/actions/runs/45568777128), commit e868c7f1a7bf3bfe9fc3610a5a925c8e920fbfc1, passed the standard Lean build, the exact n=3 enumeration module, and the new F1001 characterization module, as well as all Python audits.
+
+The asymptotic probability proof remains outside Lean.
