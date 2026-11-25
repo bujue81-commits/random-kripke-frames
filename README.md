@@ -7,7 +7,7 @@ Research project on the almost-sure modal logic of random finite Kripke frames.
 For each n, let
 
 \[
-G_n=([n],R_n),\\qquad \\Pr(xR_ny)=1/2
+G_n=([n],R_n),\qquad \Pr(xR_ny)=1/2
 \]
 
 independently for every ordered pair (x,y), including loops. The sample space is labelled.
@@ -15,13 +15,13 @@ independently for every ordered pair (x,y), including loops. The sample space is
 For a fixed finite frame F, write
 
 \[
-p_n(F)=\\Pr(G_n\\twoheadrightarrow F),
+p_n(F)=\Pr(G_n\twoheadrightarrow F),
 \]
 
 where the arrow denotes a surjective bounded morphism. Under the Jankov–Fine characteristic-formula correspondence,
 
 \[
-\\mu_n(\\chi_F)=1-p_n(F).
+\mu_n(\chi_F)=1-p_n(F).
 \]
 
 ## Current research target
@@ -29,9 +29,9 @@ where the arrow denotes a surjective bounded morphism. Under the Jankov–Fine c
 Three-point central frames with vertex order (c,a,b):
 
 \[
-F_{0001}=\\begin{pmatrix}1&1&1\\\\1&0&0\\\\1&0&1\\end{pmatrix},
-\\qquad
-F_{1001}=\\begin{pmatrix}1&1&1\\\\1&1&0\\\\1&0&1\\end{pmatrix}.
+F_{0001}=\begin{pmatrix}1&1&1\\1&0&0\\1&0&1\end{pmatrix},
+\qquad
+F_{1001}=\begin{pmatrix}1&1&1\\1&1&0\\1&0&1\end{pmatrix}.
 \]
 
 The repository contains:
