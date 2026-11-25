@@ -22,3 +22,5 @@ jobs:
           build: true
       - name: Explicitly build exact finite enumeration module
         run: lake build RandomKripke.ExactSmallN
+      - name: Explicitly build F1001 fibre characterization
+        run: lake build RandomKripke.F1001Characterization
