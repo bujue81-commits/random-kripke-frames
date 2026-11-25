@@ -44,3 +44,19 @@ Schamm's appendix proves K4 analytically, but the thesis does not provide analyt
 Goranko's 2020 paper explicitly cites Schamm's empirical study and says that identifying which central-point frames have almost-surely valid characteristic formulas may require difficult combinatorial-probabilistic calculations. It then defines the minimality criterion used in this project: no proper bounded-morphic image F' may itself be a central-point frame with \(\chi_{F'}\in ML^{as}\).
 
 See [THEORY_BACKGROUND.md](THEORY_BACKGROUND.md) for the theorem/page guide.
+
+
+## Reproducible numerical cross-check
+
+The new log-stable script `experiments/expected_partition_sum.py` evaluates the exact first-moment sum from the general formula in Schamm's Section 3.3.6. It counts all labelled surjective maps, not merely source frames that admit at least one map. Representative values are:
+
+| n | E[X(F0001)] | E[X(F1001)] |
+|---:|---:|---:|
+| 3 | 0.01171875 | 0.01171875 |
+| 50 | 0.000650884 | 0.127916528 |
+| 100 | 0.000014376 | 0.092169675 |
+| 200 | 0.000000119 | 0.069560675 |
+| 500 | 6.30e-11 | 0.050743682 |
+| 1,000 | 4.50e-14 | 0.040466990 |
+
+This is a numerical audit only. In particular, F1001's expectation decreases much more slowly than F0001's over this range. It does not establish a limit. It does make the provisional “Slow growth” label for mask 9 in Figure 4.1 worth checking against the original figure ordering and the old Java computation. The asymptotic proof draft, if correct, would show that this expectation nevertheless tends to zero.
