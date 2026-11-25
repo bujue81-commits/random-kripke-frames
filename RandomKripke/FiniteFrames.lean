@@ -60,6 +60,41 @@ def collapse1001 (i : Fin 3) : Fin 2 :=
 
 def toE1 (i : Fin 3) : Fin 1 := 0
 
+def swap2 (i : Fin 2) : Fin 2 :=
+  if i.val = 0 then 1 else 0
+
+/-- Up to swapping the two target labels, the only
+    surjective bounded morphism from F1001 onto a two-point
+    frame has fibre partition {c} | {a,b}. -/
+theorem F1001_two_point_maps_are_canonical :
+    ∀ (f : Fin 3 → Fin 2),
+      IsBoundedMorphism F1001 T2 f →
+        f = collapse1001 ∨ f = swap2 ∘ collapse1001 := by
+  decide
+
+/-- Bounded morphisms compose. -/
+theorem boundedMorphism_comp
+    {α β γ : Type}
+    {R : Frame α} {S : Frame β} {T : Frame γ}
+    {f : α → β} {g : β → γ}
+    (hf : IsBoundedMorphism R S f)
+    (hg : IsBoundedMorphism S T g) :
+    IsBoundedMorphism R T (g ∘ f) := by
+  rcases hf with ⟨hfs, hff, hfb⟩
+  rcases hg with ⟨hgs, hgf, hgb⟩
+  refine ⟨?_, ?_, ?_⟩
+  · intro z
+    obtain ⟨y, hy⟩ := hgs z
+    obtain ⟨x, hx⟩ := hfs y
+    exact ⟨x, by simpa [Function.comp, hx] using hy⟩
+  · intro x y hxy
+    exact hgf (hff x y hxy)
+  · intro x z hxz
+    obtain ⟨z', hz', hzcomp⟩ := hgb (f x) z hxz
+    obtain ⟨y, hxy, hycomp⟩ := hfb x z' hz'
+    exact ⟨y, hxy, by
+      simpa [Function.comp, hycomp] using hzcomp⟩
+
 theorem F1001_to_T2 :
     IsBoundedMorphism F1001 T2 collapse1001 := by
   decide
