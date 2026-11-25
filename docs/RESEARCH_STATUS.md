@@ -29,11 +29,12 @@ The claim that F1001 has a unique two-point quotient partition is not correct: a
 
 ## Asymptotic claims: NOT YET VERIFIED
 
-The conversation contains proposed proofs that p_n(F0001) -> 0 and p_n(F1001) -> 0. These are not promoted to established project theorems yet.
+Detailed hand-proof drafts are now present in `proofs/F0001_first_moment.md` and `proofs/F1001_first_moment.md`.
 
-In particular, the F1001 draft contains a Poisson cross-sum estimate and several uniform asymptotic expansions whose stated domination bounds require a line-by-line independent proof. A proof sketch that asserts a summable majorant without verifying the exact constants and all index ranges is insufficient.
+- F0001: the first-moment count uses a deliberately weaker necessary-condition event; its exact expectation and one-dimensional reduction are written out, including uniform Poisson tail control.
+- F1001: the exact fibre-partition expectation is written out. The proof uses a small/middle/large fibre decomposition, a Poisson cross-sum lemma with an explicit summable majorant, and a remaining middle-tail estimate.
 
-The F0001 first-moment reduction is promising, but the summation ranges and endpoint handling must be checked against the exact necessary-condition random variable before acceptance.
+These are now complete hand-proof drafts, but they have not yet been independently referee-checked or formalized in Lean. They should not be labelled machine-verified.
 
 ## Other three-point types
 
