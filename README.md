@@ -49,6 +49,7 @@ lake exe cache get
 lake build
 python3 experiments/finite_quotient_audit.py
 python3 experiments/exact_random_frames.py
+python3 experiments/expected_partition_sum.py
 ```
 
 The CI workflow runs both Python audits and `lake build`.
@@ -64,6 +65,7 @@ The CI workflow runs both Python audits and `lake build`.
 ## Project notes
 
 - [Theory background: Goranko's framework and minimality](docs/THEORY_BACKGROUND.md)
+- [Related work and novelty audit](docs/RELATED_WORK.md)
 - [Research status](docs/RESEARCH_STATUS.md)
 - [Proof audit](docs/PROOF_AUDIT.md)
 - [F0001 first-moment proof](proofs/F0001_first_moment.md)
