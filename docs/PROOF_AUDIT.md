@@ -1,43 +1,74 @@
 # Proof audit: three-point central frames
 
-## Important correction
+## Finite quotient classification
 
-The earlier conversation described the F1001 two-point quotient as arising from a unique partition. That is false. For the frame
+Use vertex order (c,a,b).
 
+For
 ```text
+F0001:
+c -> {c,a,b}
+a -> {c}
+b -> {c,b}
+```
+there is no surjective bounded morphism onto any two-point frame.
+
+For
+```text
+F1001:
 c -> {c,a,b}
 a -> {c,a}
 b -> {c,b}
 ```
+there is exactly one two-block fibre partition, up to swapping target labels, that defines a bounded morphism:
+```text
+{c} | {a,b}
+```
+The quotient is T2, the complete reflexive two-point frame. The other two partitions fail the back condition. For example, under {a}|{c,b}, the quotient relation from the second fibre to {a} is forced by c->a, but b has no edge to a. The third partition fails symmetrically.
 
-all three nontrivial two-block partitions of the three-element carrier induce a quotient isomorphic to the complete reflexive two-point frame. The correct structural statement is that every two-point bounded-morphic image is isomorphic to T2, not that there is a unique quotient partition.
+The earlier statement in this file that all three partitions work was wrong. The corrected classification is also checked by `experiments/finite_quotient_audit.py` and by the finite Lean theorems once the current CI run passes.
 
-## F0001 necessary conditions
+## F0001 first moment
 
-For fibres A, B, C corresponding to a, b, c in F0001, the forbidden blocks are A->A, A->B, B->A. The forth/back conditions additionally require every A-vertex to reach C and every C-vertex to reach A. These conditions are necessary but not sufficient: the omitted back requirements for B and C must be included for an exact count. A first-moment upper bound may count only necessary conditions, but its event and expectation must be stated accordingly.
+For fibres A, B, C corresponding to a, b, c in F0001, forth forbids A->A, A->B, and B->A. The selected necessary-condition event additionally requires every A-vertex to reach C and every C-vertex to reach A.
 
-The previously displayed exact expectation formula for Z_n is the expectation for the selected necessary-condition event, not the expectation of all p-morphisms. This distinction must remain explicit.
+These are only necessary conditions, not the complete back condition. The random variable Z_n counts partitions satisfying precisely this weaker event, so
+`{G_n admits F0001 as an image} subseteq {Z_n >= 1}`.
+The displayed expectation in `proofs/F0001_first_moment.md` is therefore the expectation of Z_n, not the expected number of all bounded morphisms.
+
+I checked the edge rectangles in this expectation: the forbidden rectangles A×A, A×B, B×A and required rectangles A×C, C×A are pairwise disjoint. The binomial reduction and the small/large Poisson point-mass split are consistent with the stated labelled G(n,1/2) directed-frame model. The argument is a hand proof, not a Lean theorem.
 
 ## F1001 first moment
 
-For fibres A, B, C corresponding to a, b, c in F1001:
+For fibres A, B, C corresponding to a, b, c in F1001, forth forbids A->B and B->A. The back condition is equivalent to:
+- each row in A∪C hits A;
+- each row in B∪C hits B;
+- every row hits C.
 
-- A->B and B->A are forbidden;
-- every vertex in each fibre must reach every target fibre allowed by its row in the target frame.
+The three destination rectangles are disjoint, so the product in the exact first-moment formula is justified by independence. I rechecked the small-fibre binomial reduction, large-fibre tail bound, Poisson cross-sum maximum, and remaining middle-tail Stirling estimate. The displayed majorant M_{i,d} is summable over i,d; the diagonal Poisson point-mass estimate is also summable off its at-most-two central indices.
 
-The formula in the previous chat is a candidate exact first moment for the number of labelled fibre partitions. It must be independently re-derived from the complete event table before use.
-
-The claimed Poisson cross-sum lemma is not accepted in this repository until each bound is proved with a summable majorant uniform in both indices. In particular, an asserted bound on M_{i,d} and the diagonal estimate require independent checking.
+This supports the proposed hand proof under the exact model stated in the document. It remains a hand proof: constants and uniformity should be written out in a referee-ready version, and no asymptotic theorem is formalized in Lean.
 
 ## 0101 and 1011
 
-The previous construction sketches rely on choosing a set A from one block of edge variables and then claiming independence of edges used to construct B and C. The precise sigma-algebras must be written down. The 1011 second-moment calculation must include all overlap classes and verify the constants in the exponent. Neither asymptotic claim is currently accepted.
+The earlier construction sketches rely on choosing a set A from one block of edge variables and then claiming independence of edges used to construct B and C. The precise sigma-algebras must be written down. The 1011 second-moment calculation must include all overlap classes and verify the constants in the exponent. Neither asymptotic claim is currently accepted.
 
-## Current formalization boundary
+## Logic and minimality claims
 
-The Lean module currently formalizes only finite frame data and elementary structural properties. It does not formalize probability, characteristic formulas, almost-sure validity, or asymptotic limits.
+The characteristic-formula argument requires:
+1. the Jankov–Fine theorem for the exact modal language and frame-validity convention;
+2. the precise characterization of finite frames validating ML^r;
+3. proof that the two target frames validate ML^r;
+4. the correct bounded-morphism direction.
 
+Do not infer independence merely from non-isomorphism. The proposed independence argument uses F0001 and F1001 as countermodels in opposite directions, subject to the cited characterization and characteristic-formula theorem.
 
-## Exhaustive finite check
+## Formalization boundary
 
-The script `experiments/finite_quotient_audit.py` enumerates all six surjections Fin 3 -> Fin 2 and all sixteen possible binary target relations. It checks forth and back directly from the adjacency matrices. Expected outcome: F0001 has no two-point quotient; F1001 has precisely the central-vs-periphery partition, with target relation T2.
+Lean currently formalizes finite frame data, bounded-morphism facts, and finite enumeration only. It does not formalize probability, characteristic formulas, almost-sure validity, or asymptotic limits.
+
+## Reproducible checks
+
+- `experiments/finite_quotient_audit.py`: all six surjections Fin 3 -> Fin 2 and all sixteen possible target relations.
+- `experiments/exact_random_frames.py`: exhaustive labelled random source-frame counts for n=3,4.
+- `RandomKripke/ExactSmallN.lean`: exact n=3 counts, currently being checked by CI after replacing a noncomputable existential filter with a finite Boolean search.
