@@ -64,9 +64,9 @@ The proper-image note now distinguishes minimality among frames whose characteri
 
 ## Lean status
 
-- `RandomKripke/FiniteFrames.lean` passed `lake build` in CI before the exact-count module was imported.
-- The exact-count module originally failed because the existential image predicate had no computable finite search instance. It has now been rewritten using `Finset.any` and `native_decide`; the new CI run is pending.
-- No asymptotic probability theorem is formalized in Lean.
+- `RandomKripke/FiniteFrames.lean` and `RandomKripke/ExactSmallN.lean` both pass `lake build` together. The exact-count search uses a finite filter of all maps and `native_decide`.
+- CI run [45552607072](https://github.com/bujue81-commits/random-kripke-frames/actions/runs/45552607072), on commit `12314a1839ee6aa91d50c784c7dba45a763e4337`, passed both Python audits and the Lean build.
+- The finite Lean scope includes exact n=3 labelled counts: 6 source relations for F0001 and 3 for F1001. No asymptotic probability theorem is formalized in Lean.
 
 ## Next tasks
 
