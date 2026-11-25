@@ -53,6 +53,7 @@ lake build
 python3 experiments/finite_quotient_audit.py
 python3 experiments/exact_random_frames.py
 python3 experiments/expected_partition_sum.py
+python3 experiments/goranko_chain_first_moment.py
 # Optional larger-n audit (requires: pip install numpy scipy)
 python3 experiments/large_n_audit_numpy.py
 ```
