@@ -183,3 +183,8 @@ A finite counterexample has been added in RandomKripke/GorankoEtaCounterexample.
 A separate finite counterexample has been identified to the preservation step used in the proof of Proposition 4.7. The paper asserts that \(\eta=\forall x\exists y(Rxy\land\neg Ryy)\) is preserved under surjective bounded morphic images. Let G be the complete irreflexive directed frame on three points, let F1 have edges (0,0),(0,1),(1,0), and map 0,1 to 0 and 2 to 1. Then G satisfies eta, G maps onto F1 by a surjective bounded morphism, but F1 fails eta at 1. Both frames have two-step reachability. Thus the stated preservation step is false under Definition 2.1 as printed.
 
 The Lean theorem is in RandomKripke/GorankoEtaCounterexample.lean. The initial CI attempts failed because native_decide did not synthesize an executable Decidable instance for the whole proposition. The final proof now uses explicit finite cases and has passed the Lean build in run 45571076110. The Python cross-check was added after that run; the complete workflow for head 844dc5acdae4f4ded3a0530db9eba09f020cedbf is pending. The result invalidates the proof shortcut, not necessarily Proposition 4.7's final conclusion: those characteristic formulas may still be almost-surely valid by another argument. See docs/RELATED_WORK.md for the construction and caveats.
+
+
+## Latest full CI verification
+
+CI run [45571611756](https://github.com/bujue81-commits/random-kripke-frames/actions/runs/45571611756), commit 51ddeb975742cb52b9ba58a1ef463ffe77bd933d, passed all three Python audits and the standard Lean build plus all four explicit module builds: ExactSmallN, F1001Characterization, F0001Witness, and GorankoEtaCounterexample. This run includes the Python eta-preservation counterexample check.
