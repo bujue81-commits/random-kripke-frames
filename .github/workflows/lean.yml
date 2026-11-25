@@ -30,3 +30,34 @@ jobs:
         run: lake build RandomKripke.F0001Witness
       - name: Explicitly build Goranko eta counterexample
         run: lake build RandomKripke.GorankoEtaCounterexample
+      - name: Audit Lean source and theorem axioms
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import pathlib, re
+          paths = [pathlib.Path("RandomKripke.lean"), *sorted(pathlib.Path("RandomKripke").rglob("*.lean"))]
+          names = []
+          for path in paths:
+              src = path.read_text(encoding="utf-8")
+              # Conservative token guard: comments mentioning these tokens also fail.
+              if re.search(r"\b(sorry|admit|sorryAx|axiom)\b", src):
+                  raise SystemExit(f"Forbidden proof-placeholder or explicit axiom token in {path}")
+              if path.name != "RandomKripke.lean":
+                  names.extend(re.findall(r"(?m)^theorem\s+([A-Za-z_][A-Za-z_0-9']*)\b", src))
+          if not names:
+              raise SystemExit("No theorem declarations found")
+          pathlib.Path("AuditAxioms.lean").write_text("import RandomKripke\n" + "".join(f"#print axioms RandomKripke.{name}\n" for name in names), encoding="utf-8")
+          print(f"Auditing {len(names)} theorem declarations")
+          PY
+          # Explicitly build all project module files, including newly added ones.
+          while IFS= read -r path; do
+            module="${path%.lean}"
+            lake build "${module//\//.}"
+          done < <(find RandomKripke -name '*.lean' -type f | sort)
+          set -o pipefail
+          lake env lean AuditAxioms.lean | tee axiom-audit.txt
+          if grep -w sorryAx axiom-audit.txt; then
+            echo "A theorem depends on sorryAx"
+            exit 1
+          fi
+          rm AuditAxioms.lean
