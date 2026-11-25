@@ -63,10 +63,10 @@ The CI workflow runs all three Python audits, the standard `lake build`, and exp
 
 The current asymptotic proof drafts claim
 
-\\[
-\\Pr(G_n\\twoheadrightarrow F_{0001})=O(1/\\sqrt{\\ln n}),\\qquad
-\\Pr(G_n\\twoheadrightarrow F_{1001})=O(1/\\ln n).
-\\]
+\[
+\Pr(G_n\twoheadrightarrow F_{0001})=O(1/\sqrt{\ln n}),\qquad
+\Pr(G_n\twoheadrightarrow F_{1001})=O(1/\ln n).
+\]
 
 These are hand proofs, not Lean-verified probability theorems or externally refereed results.
 
