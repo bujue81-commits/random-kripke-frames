@@ -52,7 +52,7 @@ python3 experiments/exact_random_frames.py
 python3 experiments/expected_partition_sum.py
 ```
 
-The CI workflow runs both Python audits and `lake build`.
+The CI workflow runs all three Python audits and `lake build`.
 
 ## Research discipline
 
