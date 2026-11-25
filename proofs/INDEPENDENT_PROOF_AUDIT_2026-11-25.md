@@ -161,3 +161,22 @@ The mapping of mask 8/9 to the “No growth”/“Slow growth” cells in Figure
 ## 8. Formalization boundary
 
 Lean currently checks finite frame definitions, bounded-morphism facts, finite quotient statements, and exact n=3 labelled counts. It does not formalize the probability spaces, real-valued estimates, dominated-convergence argument, Stirling bounds, or the asymptotic limits in either proof.
+
+
+## 9. Quantitative strengthening of F1001
+
+The Poisson cross-sum lemma can be sharpened from \(S_n=o(1)\) to
+\[
+S_n=O(1/m_n)=O(1/\ln n).
+\]
+For the off-diagonal sum, split \(i\geq m_n/2\) and \(i<m_n/2\). On the first range, the summable maximum bounds from (11)–(12) have exponentially small tails in \(m_n\). On the second, \(t_i=n2^{-i}\geq(m_n/3)2^{m_n/2}\); split \(d\leq t_i/2\), where a Poisson lower-tail bound applies, from \(d>t_i/2\), where the second Poisson mean \(t_i2^{-d}\) is tiny. This gives an off-diagonal contribution \(o(1/m_n)\).
+
+For the diagonal, at most two indices have \(r_i\in[1/2,2]\), and each contributes \(O(1/m_n)\). The \(i\geq m_n/2\) noncentral tail is exponentially small; the \(i<m_n/2\) tail has \(r_i\geq 2^{m_n/2}/3\) and is super-exponentially small by a Poisson lower-tail bound.
+
+The remaining middle-tail sum can also be improved from the crude \(O(\ln\ln n/\ln n)\) to \(O(1/\ln n)\): the ratio \(r_{a+1}/r_a<1/2\) permits at most two indices with \(r_a\in[1,4]\), while the factor \(r_a^2e^{ag(r_a)}\) decays exponentially for \(r_a<1\) or \(r_a>4\). The strengthened hand proof now concludes
+\[
+\mathbb E X_n=O(1/\ln n),\qquad
+\Pr(G_n\twoheadrightarrow F_1)=O(1/\ln n).
+\]
+
+This is a quantitative upper bound, not an asymptotic equivalent or a lower bound. It is an internal hand proof and remains unformalized in Lean and not externally refereed.
