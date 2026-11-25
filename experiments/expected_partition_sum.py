@@ -66,14 +66,19 @@ def main():
         e1 = exp(l1) if l1 > -745 else 0.0
         print(f"{n},{l0:.12f},{e0:.12g},{l1:.12f},{e1:.12g}")
 
-    # At n=3, every surjective map is a bijection. Each target has
-    # exactly six labelled isomorphic copies, so the expected map count
-    # is 6/2^9 for both frames.
-    expected_log = log(6.0 / 512.0)
-    assert abs(log_expected_morphisms(3, F0001) - expected_log) < 1e-12
-    assert abs(log_expected_morphisms(3, F1001) - expected_log) < 1e-12
+    # Cross-check the exact first moments against brute-force enumeration.
+    exact_map_counts = {
+        (3, "F0001"): (6, 512),
+        (3, "F1001"): (6, 512),
+        (4, "F0001"): (1332, 65536),
+        (4, "F1001"): (1620, 65536),
+    }
+    for (n, name), (maps, total) in exact_map_counts.items():
+        target = F0001 if name == "F0001" else F1001
+        expected_log = log(maps / total)
+        assert abs(log_expected_morphisms(n, target) - expected_log) < 1e-12
 
-    print("n=3 first moments agree with the exact labelled count.")
+    print("n=3,4 first moments agree with exact labelled map counts.")
 
 
 if __name__ == "__main__":
