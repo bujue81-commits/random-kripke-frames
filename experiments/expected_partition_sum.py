@@ -26,9 +26,10 @@ LOG2 = log(2.0)
 
 
 def log_fixed_partition_term(n, target, sizes):
-    """Log probability that one fixed map is a bounded morphism.
+    """Log contribution of all labelled maps with these fibre sizes.
 
     The sizes must follow the target matrix's vertex order (c, a, b).
+    This includes the multinomial number of labelled fibre assignments.
     """
     value = lgamma(n + 1) - sum(lgamma(k + 1) for k in sizes)
     for i, ki in enumerate(sizes):
