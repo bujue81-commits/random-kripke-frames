@@ -102,3 +102,10 @@ The current internal audit found no fatal gap in either first-moment argument:
 This is an internal proof audit, not independent peer review. The asymptotic arguments remain hand proofs and are not Lean-formalized.
 
 The generic numerical script had a matrix/fibre ordering mismatch: target matrices are ordered (c,a,b), while the proof variables are (a,b,c). The total sum was unchanged by permutation invariance of the complete triple sum, but fixed-size terms were not aligned. This is corrected, with a new termwise F1001 formula assertion. An optional NumPy/SciPy large-n script now reproduces values through n=30,000 after checking exact n=3,4 counts.
+
+
+## Sliusarev 2025/2026 theorem audit
+
+The English thesis summary's Theorem 83 gives a transfer from all random L-frames to connected random L-frames, but only under the extra hypothesis that every formula outside the connected almost-sure logic has connected-validity limsup strictly below 1. For L=K, connected frames exist at every size, but that limsup hypothesis has not been proved here. The theorem therefore does not by itself classify K^as.
+
+The same summary states that the unrestricted random frame has Ext_m properties a.a.s., implying the frame conditions characterizing ML^r and hence ML^r ⊆ K^as. This is background already present in Goranko's programme, not a new result of this repository. See docs/RELATED_WORK.md for the precise theorem statement and source.
