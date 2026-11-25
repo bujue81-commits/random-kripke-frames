@@ -35,7 +35,8 @@ F_{1001}=\begin{pmatrix}1&1&1\\1&1&0\\1&0&1\end{pmatrix}.
 \]
 
 The repository contains:
-- Lean 4 definitions and finite theorems for frames and bounded morphisms (`RandomKripke/FiniteFrames.lean`);\n- Lean exact n=3 labelled source-frame counts (`RandomKripke/ExactSmallN.lean`);
+- Lean 4 definitions and finite theorems for frames and bounded morphisms (`RandomKripke/FiniteFrames.lean`);
+- Lean exact n=3 labelled source-frame counts (`RandomKripke/ExactSmallN.lean`);
 - exact Python quotient audits;
 - exact small-n random-frame enumeration;
 - hand-proof drafts for the first-moment estimates;
@@ -67,4 +68,5 @@ The CI workflow runs both Python audits and `lake build`.
 - [F0001 first-moment proof](proofs/F0001_first_moment.md)
 - [F1001 first-moment proof](proofs/F1001_first_moment.md)
 - [Proper images and minimality](proofs/proper_images_and_minimality.md)
-- [Exact small-n counts](experiments/results/exact_small_n.md)\n- [Bibliography](references.bib)
+- [Exact small-n counts](experiments/results/exact_small_n.md)
+- [Bibliography](references.bib)
