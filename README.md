@@ -39,6 +39,7 @@ The repository contains:
 - Lean equivalence between F1001 bounded morphisms and fibrewise partition conditions (`RandomKripke/F1001Characterization.lean`);
 - Lean implication from an F0001 bounded morphism to the weaker witness event used in its first-moment estimate (`RandomKripke/F0001Witness.lean`);
 - a finite Lean counterexample to the eta-preservation step in Goranko (2020), Proposition 4.7 (`RandomKripke/GorankoEtaCounterexample.lean`);
+- a hand first-moment proof for the chain frames F_r, r≥2 (`proofs/GORANKO_CHAIN_FRAMES_FIRST_MOMENT.md`);
 - Lean exact n=3 labelled source-frame counts (`RandomKripke/ExactSmallN.lean`);
 - exact Python quotient audits;
 - exact small-n random-frame enumeration;
@@ -69,7 +70,7 @@ The current asymptotic proof drafts claim
 \Pr(G_n\twoheadrightarrow F_{1001})=O(1/\ln n).
 \]
 
-These are hand proofs, not Lean-verified probability theorems or externally refereed results.
+These are hand proofs, not Lean-verified probability theorems or externally refereed results. The Goranko chain-family estimate is also a hand proof: for each fixed r≥2 it claims exp(-Ω_r((ln m)^2)).
 
 ## Research discipline
 
