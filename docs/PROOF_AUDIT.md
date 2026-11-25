@@ -92,3 +92,21 @@ The F1001 proof now establishes the stronger upper bound (\Pr(G_n\twoheadrightar
 ## Lean fibre characterization
 
 RandomKripke/F1001Characterization.lean now proves boundedMorphism_F1001_iff_partitionConditions, translating the F1001 p-morphism definition exactly into the five fibrewise conditions used in the probability calculation. CI run [45568777128](https://github.com/bujue81-commits/random-kripke-frames/actions/runs/45568777128) explicitly built this module and RandomKripke.ExactSmallN successfully. This formalizes the finite combinatorial event, not its random probability or asymptotics.
+
+
+## Quantitative first-moment bounds and current Lean modules
+
+The two current hand-proof bounds are
+\[
+\Pr(G_n\twoheadrightarrow F_{0001})=O(1/\sqrt{\ln n}),
+\qquad
+\Pr(G_n\twoheadrightarrow F_{1001})=O(1/\ln n).
+\]
+For F0001, the large-fibre sum is reduced to Poisson point masses; at most two indices have \(r_a\in[1/2,2]\), each contributing \(O(1/\sqrt{\ln n})\). For F1001, the Poisson cross-sum is \(O(1/m_n)\), and the remaining middle tail is sharpened to \(O(1/\ln n)\) by isolating the at-most-two indices with \(r_a\in[1,4]\). These are hand estimates, not Lean formalizations.
+
+The Lean modules now cover three distinct finite statements:
+- ExactSmallN: exact labelled source-frame counts for n=3;
+- F1001Characterization: exact equivalence between F1001 bounded morphisms and the fibrewise conditions;
+- F0001Witness: implication from a bounded morphism onto F0001 to the weaker event counted in the F0001 first moment.
+
+CI run [45569425119](https://github.com/bujue81-commits/random-kripke-frames/actions/runs/45569425119), head c1efeb9418e14505ee287e3093489aa0d5a18cfb, passed the Python audits and explicitly built all three Lean modules. The probability estimates themselves remain unformalized.
