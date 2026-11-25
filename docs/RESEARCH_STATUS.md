@@ -75,3 +75,12 @@ The proper-image note now distinguishes minimality among frames whose characteri
 3. Refine the two hand proofs into a referee-ready version with every uniform bound explicit.
 4. Investigate 0101 and 1011 using carefully separated random edge blocks.
 5. Complete the primary-source and novelty audit.
+
+
+## Novelty update (2026-11-25)
+
+A direct precursor has been identified: Rainer Franz Schamm, *Zero-One Laws and Almost Sure Validities on Finite Structures* (M.Sc. dissertation, Rand Afrikaans University, January 2002; supervisor Valentin Goranko). Sections 3.3.5–3.3.6 already introduce the same F-partition first-moment formula and experimentally examine all 16 three-point frames with a central point. Figure 4.1 classifies their expected-partition behaviour; the appendix proves K4 analytically. Consequently, the 16-frame search and candidate selection are not new contributions of this repository.
+
+The plausible new contribution is a rigorous asymptotic proof for particular cases that Schamm treated experimentally, plus Lean formalization of finite structural facts and reproducible computation. Under the thesis Java-code bit convention, F0001 has mask 8 and F1001 mask 9. The natural reading of Figure 4.1 appears to label mask 8 “No growth” and mask 9 “Slow growth”, but the visual ordering has not yet been independently confirmed. Our log-stable exact first-moment script gives a decreasing expectation for F1001 from about 0.128 at n=50 to 0.0405 at n=1000. The hand proof claims the limit is zero. This potential conflict with the old empirical label is an explicit audit task, not a settled correction.
+
+The 2025/2026 Sliusarev thesis is also relevant adjacent work: it develops a general random-L-frame framework and a connected-frame transfer theorem, with main applications to KD5, KD45, K5B, S5, Grz.3, GL.3, SL and Horn closures. The unrestricted K case and our two target frames are not among its listed main results, but its publications still need checking.
