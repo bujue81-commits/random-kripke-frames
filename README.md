@@ -37,9 +37,8 @@ F_{1001}=\begin{pmatrix}1&1&1\\1&1&0\\1&0&1\end{pmatrix}.
 The repository contains:
 - Lean 4 definitions and finite theorems for frames and bounded morphisms (`RandomKripke/FiniteFrames.lean`);
 - Lean equivalence between F1001 bounded morphisms and fibrewise partition conditions (`RandomKripke/F1001Characterization.lean`);
-- Lean necessary witness conditions for the F0001 first-moment bound (`RandomKripke/F0001Witness.lean`);
-- Lean counterexample to the eta-preservation claim discussed in Goranko (2020), Proposition 4.7 (`RandomKripke/GorankoEtaCounterexample.lean`, CI pending);
 - Lean implication from an F0001 bounded morphism to the weaker witness event used in its first-moment estimate (`RandomKripke/F0001Witness.lean`);
+- a finite Lean counterexample to the eta-preservation step in Goranko (2020), Proposition 4.7 (`RandomKripke/GorankoEtaCounterexample.lean`);
 - Lean exact n=3 labelled source-frame counts (`RandomKripke/ExactSmallN.lean`);
 - exact Python quotient audits;
 - exact small-n random-frame enumeration;
@@ -58,7 +57,18 @@ python3 experiments/expected_partition_sum.py
 python3 experiments/large_n_audit_numpy.py
 ```
 
-The CI workflow runs all three Python audits, the standard `lake build`, and explicit builds of `RandomKripke.ExactSmallN`, `RandomKripke.F1001Characterization`, and `RandomKripke.F0001Witness`.
+The CI workflow runs all three Python audits, the standard `lake build`, and explicit builds of `RandomKripke.ExactSmallN`, `RandomKripke.F1001Characterization`, `RandomKripke.F0001Witness`, and `RandomKripke.GorankoEtaCounterexample`.
+
+## Current hand-proof bounds
+
+The current asymptotic proof drafts claim
+
+\\[
+\\Pr(G_n\\twoheadrightarrow F_{0001})=O(1/\\sqrt{\\ln n}),\\qquad
+\\Pr(G_n\\twoheadrightarrow F_{1001})=O(1/\\ln n).
+\\]
+
+These are hand proofs, not Lean-verified probability theorems or externally refereed results.
 
 ## Research discipline
 
