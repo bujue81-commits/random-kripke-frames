@@ -308,7 +308,56 @@ e^{-i/4},&r_i>2,
 \]
 Thus the squares are dominated by the summable sequence \(e^{-2\gamma i}\). For each fixed \(i\), \(r_i\to\infty\) and \(\pi_{n2^{-i}}(i)\to0\). Dominated convergence proves that the diagonal sum tends to zero. This proves the lemma. \(\square\)
 
-By (9), the contribution of \(b=a\) and \(b=a+1\) in the middle region is bounded by \((1+o(1))S_n\), hence tends to zero.
+
+
+### Quantitative refinement of Lemma 5.1
+
+In fact, the same argument gives
+\[
+S_n=O(1/m_n).
+\tag{12}
+\]
+Here are the rate details. Write \(m=m_n\). For the off-diagonal part, first take \(i\geq m/2\). Summing the bounds (11)–(12) over this tail gives
+\[
+\sum_{i\geq m/2,d\geq1}M_{i,d}
+=O\!\left((8/9)^{m/2}+(16/25)^{m/2}+2^{-m/2}\right)
+=o(1/m).
+\]
+For \(i<m/2\), put \(t_i=n2^{-i}\). By (4),
+\[
+t_i\geq n2^{-m/2}
+=(n2^{-m})2^{m/2}
+> (m/3)2^{m/2}=:T_m.
+\]
+For large \(m\), \(i\leq t_i/4\) and \(t_i2^{-t_i/2}\leq1\). Split the sum over \(d\) at \(t_i/2\). If \(d\leq t_i/2\), then
+\(i+d\leq3t_i/4\), so the Poisson lower-tail Chernoff bound gives
+\[
+P_{i,d}(t_i)\leq
+\Pr(\operatorname{Pois}(t_i)\leq3t_i/4)
+\leq e^{-t_i/32}.
+\]
+There are at most \(t_i\) such values of \(d\). If \(d>t_i/2\), then
+\(\mu=t_i2^{-d}\leq t_i2^{-t_i/2}\leq1\), and
+\[
+P_{i,d}(t_i)\leq\pi_\mu(i)\leq\mu.
+\]
+Consequently
+\[
+\sum_{d\geq1}P_{i,d}(t_i)
+\leq t_i e^{-t_i/32}+2t_i2^{-t_i/2}.
+\]
+Summing this over \(i<m/2\), and using \(t_i\geq T_m\), gives \(o(1/m)\). Thus the whole off-diagonal part is \(o(1/m)\).
+
+For the diagonal, recall \(r_i=n/(i2^i)\). There are at most two indices with \(r_i\in[1/2,2]\), and each is at least \(m/2\) for large \(m\); Stirling therefore bounds their squared point masses by \(O(1/m)\). For \(i\geq m/2\) outside this interval, the Chernoff estimates in the lemma sum to \(O(e^{-\gamma m})\). Finally, if \(i<m/2\), then
+\[
+r_i=r_m\frac{m}{i}2^{m-i}
+\geq \frac13\,2^{m/2},
+\]
+so the lower-tail Chernoff bound makes the sum of these diagonal terms \(o(1/m)\). This proves (12).
+
+By the uniform approximation (9), the contribution of \(b=a\) and \(b=a+1\) in the middle range is therefore \(O(1/m_n)\).
+
+
 
 ## 6. The remaining middle tail \(b\geq a+2\)
 
@@ -369,20 +418,31 @@ Now \(g(r)\leq0\), with equality only at \(r=2\). We claim that \(r^2e^{ag(r)}\l
 =\frac{2a+2}{r}-a
 \leq\frac{1-a}{2}\leq0,
 \]
-so the function is decreasing on \([4,\infty)\) and is at most its value at \(4\), which is at most \(16\). Thus every term in (14) is at most \(8e^2/(\pi a)\). There are
-\(O(\ln\ln n)\) middle indices and each has \(a=\Theta(\ln n)\), so
-their total is \(O(\ln\ln n/\ln n)\to0.
+so the function is decreasing on \([4,\infty)\) and is at most its value at \(4\), which is at most \(16\). Thus every term in (14) is at most \(8e^2/(\pi a)\). The crude estimate above can be sharpened by summing the factor
+\(r_a^2e^{ag(r_a)}\) before taking a uniform bound. The ratio
+\(r_{a+1}/r_a<1/2\) implies that at most two indices have
+\(r_a\in[1,4]\). For these indices the factor is at most 16. If \(r_a<1\),
+then \(r_a^2e^{ag(r_a)}\leq e^{ag(1)}\), where \(g(1)<0\). If \(r_a>4\),
+the function \(r\mapsto r^2e^{ag(r)}\) is decreasing on \([4,\infty)\),
+so it is at most \(16e^{ag(4)}\), where \(g(4)<0\). Since every middle
+index has \(a=\Theta(\ln n)\) and there are \(O(\ln\ln n)\) of them, the
+sum of the terms with \(r_a\notin[1,4]\) is exponentially small in
+\(\ln n\). The at most two remaining terms contribute \(O(1/\ln n)\).
+Thus the entire remaining middle tail is \(O(1/\ln n)\).
 
 ## 7. Conclusion
 
-The small-fibre, large-fibre, central Poisson, and remaining middle-tail contributions all tend to zero. Hence
-\[
-\mathbb E X_n\longrightarrow0.
-\]
-By (2) and Markov's inequality,
-\[
-\boxed{\Pr(G_n\twoheadrightarrow F_1)\longrightarrow0.}
-\]
+The small- and large-fibre contributions are (o(1/m_n)); the central
+Poisson contribution is (O(1/m_n)) by (12); and the remaining middle
+tail is (O(1/ln n)=O(1/m_n)). Therefore
+[
+mathbb E X_n=O(1/m_n)=O(1/ln n).
+]
+By (2) and Markov's inequality, we obtain the quantitative bound
+[
+oxed{Pr(G_n	woheadrightarrow F_1)=O(1/ln n).}
+]
+In particular, the probability tends to zero.
 \(\square\)
 
 ## 8. Logical consequence
