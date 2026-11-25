@@ -121,4 +121,4 @@ The latest CI run [45569425119](https://github.com/bujue81-commits/random-kripke
 
 The preservation assertion used in Proposition 4.7 for \(\eta=\forall x\exists y(Rxy\land\neg Ryy)\) is contradicted by the finite bounded morphism in RandomKripke/GorankoEtaCounterexample.lean. The source is the complete irreflexive three-point frame; the target has edges (0,0),(0,1),(1,0); the map sends 0,1 to 0 and 2 to 1. The source satisfies eta, the target does not, and the map satisfies forth, back, and surjectivity. Both frames have two-step reachability.
 
-This shows a gap in the cited preservation argument, not that Proposition 4.7's final conclusion is false. The current CI build of the new module is pending after replacing the non-executable classical tactic with decide.
+This shows a gap in the cited preservation argument, not that Proposition 4.7's final conclusion is false. The Lean module passed CI run [45571076110](https://github.com/bujue81-commits/random-kripke-frames/actions/runs/45571076110). A separate Python cross-check has since been added to the finite quotient audit; the full workflow for head 844dc5acdae4f4ded3a0530db9eba09f020cedbf is pending.
