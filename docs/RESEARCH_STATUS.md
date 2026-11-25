@@ -124,3 +124,12 @@ More importantly, the previous CI log for run 45566445869 showed that the defaul
 ## Exact-count Lean verification confirmed
 
 CI run [45567277661](https://github.com/bujue81-commits/random-kripke-frames/actions/runs/45567277661) completed successfully. Its log explicitly shows the command lake build RandomKripke.ExactSmallN and “Build completed successfully”. Thus the corrected exact_count_F0001_n3 and exact_count_F1001_n3 declarations are now genuinely checked by Lean. The preceding default build alone did not cover this module; the workflow now has the explicit target.
+
+
+## Quantitative F1001 result (internal hand proof)
+
+The F1001 first-moment draft has been strengthened beyond mere convergence: a quantitative refinement gives the Poisson cross-sum S_n=O(1/m_n), and the remaining middle-tail sum is O(1/ln n). Since the small- and large-fibre tails are o(1/m_n), the resulting bound is
+[
+\Pr(G_n\twoheadrightarrow F1001)=O(1/\ln n).
+]
+This is an internal hand proof, not Lean-formalized or externally refereed. It is an upper bound only; no matching lower bound or asymptotic equivalent is claimed. The full argument is in proofs/F1001_first_moment.md and the independent audit note.
