@@ -115,3 +115,10 @@ CI run [45569425119](https://github.com/bujue81-commits/random-kripke-frames/act
 
 
 The latest CI run [45569425119](https://github.com/bujue81-commits/random-kripke-frames/actions/runs/45569425119), head c1efeb9418e14505ee287e3093489aa0d5a18cfb, passed all Python audits and explicitly built all three Lean modules. The asymptotic probability bounds remain hand proofs.
+
+
+## Side finding: Goranko Proposition 4.7
+
+The preservation assertion used in Proposition 4.7 for \(\eta=\forall x\exists y(Rxy\land\neg Ryy)\) is contradicted by the finite bounded morphism in RandomKripke/GorankoEtaCounterexample.lean. The source is the complete irreflexive three-point frame; the target has edges (0,0),(0,1),(1,0); the map sends 0,1 to 0 and 2 to 1. The source satisfies eta, the target does not, and the map satisfies forth, back, and surjectivity. Both frames have two-step reachability.
+
+This shows a gap in the cited preservation argument, not that Proposition 4.7's final conclusion is false. The current CI build of the new module is pending after replacing the non-executable classical tactic with decide.
