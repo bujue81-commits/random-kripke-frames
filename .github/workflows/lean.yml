@@ -24,3 +24,5 @@ jobs:
         run: lake build RandomKripke.ExactSmallN
       - name: Explicitly build F1001 fibre characterization
         run: lake build RandomKripke.F1001Characterization
+      - name: Explicitly build F0001 witness module
+        run: lake build RandomKripke.F0001Witness
