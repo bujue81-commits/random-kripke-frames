@@ -317,7 +317,18 @@ In fact, the same argument gives
 S_n=O(1/m_n).
 \tag{12}
 \]
-Here are the rate details. Write \(m=m_n\). For the off-diagonal part, first take \(i\geq m/2\). Summing the bounds (11)–(12) over this tail gives
+Here are the rate details. Write \(m=m_n\). For the off-diagonal part, first take \(i\geq m/2\). The bounds (11)–(12) give
+\[
+M_{i,1}\leq\tfrac43(8/9)^i,\qquad
+M_{i,2}\leq\tfrac{64}{25}(16/25)^i.
+\]
+For \(d\geq3\), summing the last bound in (12) over \(d\), for each fixed \(i\geq2\), gives
+\[
+\sum_{d\geq3}M_{i,d}
+\leq\sum_{d\geq3}2^{d-i(d-2)}
+=\frac{2^{3-i}}{1-2^{-(i-1)}}\leq2^{4-i}.
+\]
+Consequently
 \[
 \sum_{i\geq m/2,d\geq1}M_{i,d}
 =O\!\left((8/9)^{m/2}+(16/25)^{m/2}+2^{-m/2}\right)
