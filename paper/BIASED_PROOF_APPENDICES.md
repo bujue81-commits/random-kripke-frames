@@ -13,9 +13,9 @@ For a successful surjective bounded morphism, A is independent, and the set of r
     M0={y outside A union Z: no row in Z has an edge to y},
     C0=[m] minus (A union Z union M0).
 
-Then The actual M-fibre is a nonempty subset of M0, and every row outside Z must hit M0. In particular M0 nonempty is necessary. These conditions give a necessary witness depending on the pair A,Z, with Z uniquely determined by A.
+Then the actual M-fibre is a nonempty subset of M0, and every row outside Z must hit M0. In particular M0 nonempty is necessary. These conditions give a necessary witness depending on the pair A,Z, with Z uniquely determined by A.
 
-A sufficient witness is obtained by using M=M0 and C=C0: additionally require C0 nonempty and every row to hit C0. Then all four labels have exactly the successor images dictated by the missing arrows. Any row in Z misses A and M0, every other row except A hits A, and A misses A by independence. Every non-Z row hits M, and all rows hit Z,C0. This is exactly a surjective bounded morphism.
+A sufficient witness is obtained by using M=M0 and C=C0: additionally require C0 nonempty and every row to hit C0. Then all four labels have exactly the successor images dictated by the missing arrows. Any row in Z misses A and M0, every other row except A hits A, and A misses A by independence. Every non-Z row hits M0, and all rows hit Z,C0. This is exactly a surjective bounded morphism.
 
 The necessary witness does not automatically give the sufficient witness: enlarging the actual M-fibre to M0 might remove some of the original C successors. We therefore keep distinct counts Y_necess and Y_suff, for which
 
@@ -25,14 +25,14 @@ The necessary witness does not automatically give the sufficient witness: enlarg
 
 Let a=|A|, z=|Z|, n=m-a-z. For each fixed disjoint A,Z with a,z>=1, n>=1, the probability of independence of A, the exact definition of Z, and every row hitting Z is
 
-    H(a,z)=rho^(a^2+a*z)*(1-rho^a)^n*(1-rho^z)^m.
+    H0(a,z)=rho^(a^2+a*z)*(1-rho^a)^n*(1-rho^z)^m.
 
-These events use only columns ending in A or Z. The remaining coordinates Z x ([m] minus (A union Z)) are independent and make |M0| distributed as Bin(n,rho^z). Conditional on M0 and the Z-row column tests, the edges from rows outside Z to M0 are fresh; the probability all these rows hit M is (1-rho^k)^(m-z) when k=|M0|.
+These events use only columns ending in A or Z. The remaining coordinates Z x ([m] minus (A union Z)) are independent and make |M0| distributed as Bin(n,rho^z). Conditional on M0 and the Z-row column tests, the edges from rows outside Z to M0 are fresh; the probability all these rows hit M0 is (1-rho^k)^(m-z) when k=|M0|.
 
 Thus the necessary witness expectation is exactly
 
     E[Y_necess] =
-      sum_{a,z>=1,a+z<m} binom(m,a)*binom(m-a,z)*H(a,z)
+      sum_{a,z>=1,a+z<m} binom(m,a)*binom(m-a,z)*H0(a,z)
         * sum_{k=1}^n binom(n,k)*rho^(z*k)*(1-rho^z)^(n-k)
                        *(1-rho^k)^(m-z).
 
@@ -45,7 +45,7 @@ where
     J(z,c)=sum_{j=0}^z (-1)^j binom(z,j)
                *((rho^j-rho^z)/(1-rho^z))^c.
 
-Indeed, all rows outside Z must hit C0, using fresh disjoint row/fibre blocks. For Z rows, conditional on M0, each C0 column has a nonempty vector of edges from Z, independent across those columns. For a specified j rows of Z the probability all j rows miss one such column is (rho^j-rho^z)/(1-rho^z), because the column is required nonempty. Inclusion-exclusion over Z rows failing to hit C0 gives J. Alternatively 1-z*rho^c<=J<=1 by the union bound, since the conditional miss probability for any one row is <=rho^c per column.
+Indeed, all rows outside Z must hit C0, using fresh disjoint row/fibre blocks. For Z rows, conditional on M0, each C0 column has a nonempty vector of edges from Z, independent across those columns. For a specified j rows of Z the probability all j rows miss one such column is (rho^j-rho^z)/(1-rho^z), because the column is required nonempty. Inclusion-exclusion over Z rows failing to hit C0 gives J. Alternatively 1-z*rho^c<=J<=1 by the union bound, since the conditional miss probability for any one specified row in one column is <=rho, and the c columns are independent, so missing all c columns has probability <=rho^c.
 
 There are binom(m,a)binom(m-a,z) pairs. Linearity of expectation suffices; no assumption of independence between pairs is made. These exact formulas are counts of pair witnesses, not counts of arbitrary full maps.
 
@@ -189,7 +189,7 @@ For each fixed v>0, on the integer subsequence m_j=round(v j B^j), j->infinity,
 
 The equality case is included, but only for the stated fixed-v subsequences. For arbitrary sequences of m with normalized lattice phase converging to a strictly positive P_rho(v), the probability tends to 1. A corresponding strict negative phase gives probability tending to 0. No claim about arbitrary approach rates to a zero phase is needed for the following exact full-sequence criterion:
 
-- rho<=rho_*=(3sqrt(3)-5)/4: p_m->0 by the earlier threshold theorem.
+- rho<=rho_*=(3sqrt(3)-5)/4: p_m->0 by Appendices A.1–A.4.
 - rho>rho_* and P_rho(v)>0 for all v in [1,B]: p_m->1.
 - rho>rho_* and P_rho(v)<=0 for some v in [1,B]: liminf p_m=0 and limsup p_m=1.
 
@@ -287,7 +287,7 @@ Combining Appendices B.4 and B.5 proves the positive phase assertion, even for v
 
 ### B.6. Full-sequence convergence and interval coverage
 
-For arbitrary m use j=floor(L-log_B L), v_m=m rho^j/L in [1,B). If P_rho(v)>0 for every v in [1,B], any subsequence of m has a further subsequence on which v_m->v in that interval. Fix a positive pair of offsets for v and use Appendices B.4 or B.5 with a=j+i,z=j+l. Their size and mean assumptions hold. Thus p_m->1 on the further subsequence. The subsequence criterion for convergence gives p_m->1 on the whole sequence. Conversely a phase v with P_rho(v)<=0 supplies the exact zero subsequence by Appendix B.3. If rho>rho_* the earlier threshold theorem guarantees a positive subsequence. This proves the full-sequence criterion in Appendix B.1.
+For arbitrary m use j=floor(L-log_B L), v_m=m rho^j/L in [1,B). If P_rho(v)>0 for every v in [1,B], any subsequence of m has a further subsequence on which v_m->v in that interval. Fix a positive pair of offsets for v and use Appendices B.4 or B.5 with a=j+i,z=j+l. Their size and mean assumptions hold. Thus p_m->1 on the further subsequence. The subsequence criterion for convergence gives p_m->1 on the whole sequence. Conversely a phase v with P_rho(v)<=0 supplies the exact zero subsequence by Appendix B.3. If rho>rho_* Appendix A.5 guarantees a positive subsequence. This proves the full-sequence criterion in Appendix B.1.
 
 For explicit evaluation only d=l-i>0 with r=rho^d>rho_* can give positive H. Indeed the maximization in the threshold theorem yields a nonpositive maximum for d<=0 or rho^d<=rho_*. For each remaining d, the function H(t,rt) is strictly concave on t>0: the two pieces have negative second derivatives and matching first derivatives at rt=1. It has a unique positive maximum and tends to minus infinity at both ends, hence a unique open positivity interval (alpha_d,beta_d), whose endpoints are the two roots H(t,rt)=0. Define the logarithmic intervals
 
@@ -301,7 +301,7 @@ At rho=1/10 (theta=0.9) only d=1 can yield a positive value since rho^2=0.01<rho
 
 For rho>=1/3 (theta<=2/3), d=1 alone covers the phase circle. Indeed H(1,rho)=2-2rho+ln rho>0 for 1/3<=rho<1 by concavity and its endpoint values (at 1/3, 4/3-ln 3>0, at 1, zero). Also H(B,1)=1+2ln B-B>0 for 1<B<=3 by concavity and endpoint values (at 1, zero, at 3, 2ln 3-2>0). Strict concavity implies H(t,rho*t)>0 throughout [1,B]. Hence p_m->1 for every 0<theta<=2/3. These explicit ranges are not asserted sharp; the interval criterion above is exact. The fair-model theorem is consistent with this result.
 
-The phase-circle test does not classify arbitrary transition sequences approaching a zero endpoint at shrinking distance. Such scaling windows, remain natural subsequent questions. Appendices C and D give the exact fixed-bias transitions for both exceptional targets. The previous finite-model threshold and counts are unchanged.
+The phase-circle test does not classify arbitrary transition sequences approaching a zero endpoint at shrinking distance. Such scaling windows remain natural subsequent questions. Appendices C and D give the exact fixed-bias transitions for both exceptional targets. The previous finite-model threshold and counts are unchanged.
 
 ## Appendix C. Sharp convergence threshold for 011010111
 
