@@ -282,4 +282,45 @@ theorem census4_representative_witness :
             central4Frame n (p i) (p j)) := by
   native_decide
 
+/-- Also check relabellings that move the distinguished center, provided
+    its new image is still a central vertex. -/
+theorem census4_unmarked_invariant :
+    ∀ n : Fin 512, ∀ p : Fin 4 → Fin 4,
+      (∀ i j : Fin 4, p i = p j → i = j) →
+      (∀ i : Fin 4,
+        central4Frame n (p 0) (p i) = true ∧
+          central4Frame n (p i) (p 0) = true) →
+      canonicalCentral4 (recodedCentral4 n p) = canonicalCentral4 n := by
+  native_decide
+
+/-- Any isomorphism between two of the encoded frames preserves the
+    canonical code, even if it does not fix the distinguished center. -/
+theorem census4_isomorphism_invariant
+    (n m : Fin 512) (p : Fin 4 → Fin 4)
+    (hinj : ∀ i j : Fin 4, p i = p j → i = j)
+    (hrel : ∀ i j : Fin 4,
+      central4Frame m i j = central4Frame n (p i) (p j)) :
+    canonicalCentral4 m = canonicalCentral4 n := by
+  have hcenter : ∀ i : Fin 4,
+      central4Frame n (p 0) (p i) = true ∧
+        central4Frame n (p i) (p 0) = true := by
+    intro i
+    rw [← hrel 0 i, ← hrel i 0]
+    exact census4_central m i
+  have heq : central4Frame m = (fun i j => central4Frame n (p i) (p j)) := by
+    funext i j
+    exact hrel i j
+  have hcode : relabelCentral4 n p = m.val := by
+    unfold relabelCentral4
+    rw [← heq]
+    exact census4_encoding_roundtrip m
+  have hrec : recodedCentral4 n p = m := by
+    apply Fin.ext
+    change relabelCentral4 n p % 512 = m.val
+    rw [hcode, Nat.mod_eq_of_lt m.isLt]
+  calc
+    canonicalCentral4 m = canonicalCentral4 (recodedCentral4 n p) :=
+      congrArg canonicalCentral4 hrec.symm
+    _ = canonicalCentral4 n := census4_unmarked_invariant n p hinj hcenter
+
 end RandomKripke
