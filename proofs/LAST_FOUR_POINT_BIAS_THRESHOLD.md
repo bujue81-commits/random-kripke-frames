@@ -28,7 +28,7 @@ Fix K=1000 and u=L+K log_B L. If a>u, the conditional mean of z is <=L^(-K). Thu
 
     b0<=a,z<=u,   k>=b0.                 (1)
 
-In particular a,z=L+O(log L), and t=m rho^a/L, s=m rho^z/L are between L^(-K) and L^2 (a harmless rounding adjustment to these polynomial bounds is allowed). Both |ln t| and |ln s| are O(ln L).
+In particular a,z=L+O(log L), and t=m rho^a/L, s=m rho^z/L are between L^(-K-1) and L^2. Both |ln t| and |ln s| are O(ln L).
 
 ## 2. Uniform first-moment upper bound on the main range
 
@@ -141,7 +141,8 @@ The criterion H models ML^as_theta iff limsup p_m(H)>0 for finite central target
 - For every fixed 0<theta<theta_*, the four-point central finite models of ML^as_theta are exactly the 12 fair-model positive types.
 - For every fixed theta_*<=theta<1, they are exactly the 11 types obtained by deleting 011010111 from those 12.
 - The other 92 central types vanish at all fixed biases; hence the counts of excluded four-point central types are 92 and 93, respectively.
-- The 1-, 2-, and 3-point finite-model counts remain 1, 1, 3 for all fixed biases.
+- The 1-, 2-, and 3-point central finite-model counts remain 1, 1, 3 for all fixed biases.
+- The finite quotient census shows that 011010111 has no smaller vanishing central quotient (equivalently no quotient onto one of 0, 0001, 1001). Consequently it becomes a 23rd minimal vanishing four-point type at theta>=theta_*; the existing 22 stay minimal since the smaller classification does not change. The independent characteristic-formula family on at most four points then has 26 types rather than 25. These statements concern minimal vanishing targets, not arbitrary axiom bases.
 
 In particular the finite-model theory at this size is NOT independent of the edge bias. Since chi_F^d is invalid in F, it is almost surely valid precisely for theta>=theta_* and not for theta<theta_*. The latter assertion uses a positive limsup, not a full probability limit. This also witnesses that ML^as_theta differs from the fair logic at theta>=theta_*. Nothing here claims equality of the full logics within either interval, or a full existence-limit census for all biases. The previous fair-model paper is unchanged.
 
