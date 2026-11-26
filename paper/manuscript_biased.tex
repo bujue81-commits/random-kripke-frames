@@ -1,0 +1,1058 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{booktabs,tabularx}
+\usepackage{fvextra}
+\usepackage[hidelinks]{hyperref}
+\usepackage{microtype}
+\setlength{\emergencystretch}{3em}
+\setcounter{secnumdepth}{3}
+\title{Bounded-Morphic Images of Random Kripke Frames: Complete Small-Frame Classification and Phase Transitions}
+\author{Author and affiliation to be confirmed}
+\date{Working manuscript v0.5 --- 26 November 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+
+Let each ordered edge, including loops, of a labelled random finite Kripke frame occur independently with fixed probability $\theta$ in (0,1). We classify the existence probability of surjective bounded morphisms onto every central frame on at most four vertices. Of the 104 four-vertex central isomorphism types, 92 have probability tending to zero and ten have probability tending to one for every fixed bias. Two remaining types exhibit lattice-phase transitions: one changes from convergence to one to oscillation between zero and one, then to convergence to zero; the other changes from convergence to one to oscillation. Three explicitly characterized transition constants, approximately 0.74850236, 0.93132342 and 0.95096189, determine the complete classification, including critical endpoints. The proof combines forbidden-degree bounds, complete-core signatures, forced-fibre witness counts and overlap second moments. The resulting ordinary almost-sure modal logics have 12 four-point finite models below the largest transition and 11 at or above it. Their characteristic-formula independence counts on at most four vertices are respectively 25 and 26. In particular the high-bias almost-sure logic differs from the fair one. These are bounded-size classifications, not a general zero-one law or a complete axiomatization.
+
+Keywords: modal logic; random directed graphs; bounded morphisms; characteristic formulas; lattice phases; first and second moments.
+
+\end{abstract}
+\section{Introduction}
+
+Almost-sure frame validity differs substantially from almost-sure model validity. The latter is amenable to first-order zero-one laws, whereas validity under all valuations quantifies over subsets of the frame. Le Bars [3] disproved the general modal frame zero-one law. Goranko and Kapron [1] identified the logic $\mathrm{ML}^r$ of the countable random frame and its relation to almost-sure frame validity. Goranko [2, Sections 3--4] shows that finite models of $\mathrm{ML}^r$ are precisely finite frames with a central point and relates additional almost-sure validities to characteristic formulas of finite targets.
+
+Schamm [4, Sections 3.3.5--3.3.6] considered the first moment of F-partitions and examined the 16 possible three-point central relations computationally. The present project uses this framework, distinguishes expectations from actual existence, and develops hand proofs for the three- and four-point classification. We do not claim that the partition method or the small-target enumeration originated here. Sliusarev [5--7] develops related classifications for restricted classes of random frames; their scope is not identical to unrestricted random relations. Priority of the particular asymptotic conclusions in this manuscript remains under investigation.
+
+Le Bars's *A Sharp Threshold for a Non-monotone Digraph Property* [8, Section 2] studies fixed-bias kernel sizes on a logarithmic scale, using first and second moments and integer-size restrictions. Such methods and the possibility of nonconvergence are established precedents. Our candidate contribution is the specific complete small central-target classification and the precise transitions for the two forced-fibre targets, rather than the general method of lattice optimization or the discovery of frame-validity zero-one failure. Priority for these particular results is not yet established. The Japanese survey [9, Definitions 23--25, Propositions 27--28 and Theorem 29] explicitly identifies the three-point central target \texttt{0000} with double kernels (under universal two-step reachability) and recalls its fair-model vanishing as a result of Goranko and Kapron. We treat this case as established prior work; the enumeration here only recovers it.
+
+\section{Setting and main theorem}
+
+Let F=(V,R) be a nonempty finite directed frame. A point c is central if cRv and vRc for every v in V (including c). For a source G=(W,S), a surjective function f:W\ensuremath{\to}V is a bounded morphism if for each x in W,
+
+\[
+\{f(y):xSy\}=\{v:f(x)Rv\}.
+\]
+
+This is equivalent to the usual forth and back conditions. Denote the existence probability by $p_{m}$(F). Throughout fix 0<$\theta$<1, $\rho$=1-$\theta$, B=1/$\rho$, L=$log_{B}$ m and b=L-$log_{B}$ L.
+
+Represent a central target with r peripheral labels (all labels other than the chosen center; some may themselves be central) by the r-by-r peripheral adjacency matrix written in row-major bit order. All arrows incident with the distinguished central label 0 are present. Take the lexicographically least encoding under simultaneous peripheral row/column permutation as canonical. This counts unpointed isomorphism classes: any isomorphism sends a central vertex to a central vertex, and any two central vertices can be exchanged by an automorphism, since both their rows and columns are universal.
+
+\textbf{Theorem 1 (complete fixed-bias small central-frame classification).} Define the three constants
+
+\[
+\begin{aligned}\theta_c&=1-r_c\approx0.7485023647443824,\\
+\theta_0&=1-\frac1{eT}\approx0.9313234165433595,\\
+\theta_*&=\frac{9-3\sqrt3}{4}\approx0.950961894323342.\end{aligned}
+\]
+
+where T>2 uniquely solves 2+2 ln T-T=0, and $r_{c}$ is the unique root in (0.251,0.252) of
+
+\[
+\begin{aligned}3+3\ln u(r)+2\ln r-(1+2r^2)u(r)&=0,\\u(r)&=\frac{2\ln(1/r)}{1-r}.\end{aligned}
+\]
+
+For one, two and three vertices, the numbers of central isomorphism types with $p_{m}$\ensuremath{\to}0 and $p_{m}$\ensuremath{\to}1 are respectively (0,1), (1,1), (7,3), for every fixed $\theta$. Of the 104 four-point central types, 92 have $p_{m}$\ensuremath{\to}0 and ten have $p_{m}$\ensuremath{\to}1 at every fixed bias. The two exceptions have the following behavior:
+
+\begin{center}\small
+\begin{tabularx}{\linewidth}{XXXX}
+\toprule
+target & $p_{m}$\ensuremath{\to}1 & liminf 0, limsup 1 & $p_{m}$\ensuremath{\to}0\\
+\midrule
+\texttt{011010111} & 0<$\theta$<$\theta_{c}$ & $\theta_{c}$\ensuremath{\leq}$\theta$<$\theta_{*}$ & $\theta_{*}$\ensuremath{\leq}$\theta$<1\\
+\texttt{011011101} & 0<$\theta$<$\theta_{0}$ & $\theta_{0}$\ensuremath{\leq}$\theta$<1 & never\\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+In particular the four-point counts are:
+
+\begin{center}\small
+\begin{tabularx}{\linewidth}{XXXX}
+\toprule
+edge probability & zero limit & one limit & oscillatory\\
+\midrule
+0<$\theta$<$\theta_{c}$ & 92 & 12 & 0\\
+$\theta_{c}$\ensuremath{\leq}$\theta$<$\theta_{0}$ & 92 & 11 & 1\\
+$\theta_{0}$\ensuremath{\leq}$\theta$<$\theta_{*}$ & 92 & 10 & 2\\
+$\theta_{*}$\ensuremath{\leq}$\theta$<1 & 93 & 10 & 1\\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+All intervals refer to fixed bias as m tends to infinity. The term oscillatory here means exactly liminf zero and limsup one, not periodic convergence at all finite sizes. The constants are specified by their exact definitions, not their decimal approximations.
+
+\textbf{Proof strategy.} Composition propagates vanishing probability from a smaller quotient to a target: F \ensuremath{\twoheadrightarrow} H implies $p_{m}$(F)\ensuremath{\leq}$p_{m}$(H). Theorems 2 and 3 and Section 5.1--5.2 settle all other types except the two forced-fibre targets. Section 5.3 states their fixed-phase theorems; the numbered \texttt{technical appendices A--D} contain the detailed proofs. Section 6 gives the finite orbit and quotient enumeration and identifies all types. Section 7 derives the logical consequences. No probability label is inferred solely from numerical experiments.
+
+\section{Vanishing criterion}
+
+For a central F with r peripherals put $A_{ij}$=1 if the peripheral arrow i\ensuremath{\to}j is missing, 0 otherwise. Write q=sum $A_{ij}$ and $g_{i}$=$sum_{j}$($A_{ij}$+$A_{ji}$). A missing loop contributes twice to $g_{i}$.
+
+\textbf{Theorem 2 (no singleton miss and degree).} Assume r\ensuremath{\geq}1, every $g_{i}$\ensuremath{\geq}2, and no label with a universal incoming column has exactly one missing outgoing arrow. Then d=q-r\ensuremath{\geq}0 and
+
+\[
+\log_B p_m(F)=-db^2+O_{F,\theta}(L).
+\]
+
+When d=0, moreover $p_{m}$(F)=O(L\textasciicircum{}(-r/2)). In particular every such target vanishes. This holds at every fixed bias.
+
+\textbf{Proof.} Fix a sufficiently large C depending only on r, and put h=ceil(C L), b0=L-3 $log_{B}$ L. The probability of an empty ordered h-by-h rectangle is at most B\textasciicircum{}(2hL-h\textasciicircum{}2). Outside that event, the labels whose fibres have size \ensuremath{\geq}h form a complete reflexive core U. Fix all the other small fibres, whose union has O(L) vertices. If fibre i has size <b0, a row outside the union which misses precisely i among the small fibres and receives an arrow from each small fibre would have a universally incoming target label missing precisely i, contrary to the hypothesis. These independent outside-row tests each succeed with probability \ensuremath{\geq}$\rho$\textasciicircum{}$a_{i}$ $\theta$\textasciicircum{}(2|S|-1), where S is the set of small labels. Their absence has probability exp(-$\Omega$(L\textasciicircum{}3)); union over B\textasciicircum{}O(L\textasciicircum{}2) choices of small fibres leaves a negligible event. The empty-rectangle term is negligible at the stated scale by increasing C.
+
+For remaining peripheral sizes $a_{i}$\ensuremath{\geq}b0 and T=sum $a_{i}$, the forbidden-coordinate count Q=sum $A_{ij}$ $a_{i}$ $a_{j}$ is at least q b0\textasciicircum{}2+2b0(T-r b0). Since the multinomial factor is \ensuremath{\leq}m\textasciicircum{}T, T>CL contributes B\textasciicircum{}(-d L\textasciicircum{}2-$\Omega$(L\textasciicircum{}2)) after summing at most m\textasciicircum{}r vectors. For T\ensuremath{\leq}CL, the central fibre has size \ensuremath{\geq}m/2 and factorial bounds give $log_{B}$ multinomial \ensuremath{\leq}bT+O(L). The derivatives of Q-bT are positive on all $a_{i}$\ensuremath{\geq}b0. Clip sizes below b upward to b: with $\delta_{i}$=(b-$a_{i}$)\_+ this gives Q-bT\ensuremath{\geq}d b\textasciicircum{}2-O(L)sum $\delta_{i}$. Central rows must hit each peripheral fibre; the logarithm of this hit factor is at most -L sum\_\{$\delta_{i}$>0\} B\textasciicircum{}$\delta_{i}$/(2 ln B). This absorbs each positive linear deficit since K t-B\textasciicircum{}t/(2 ln B) is bounded above. Sum O(L\textasciicircum{}r) vectors for the upper logarithmic rate.
+
+For the lower rate use balanced peripheral fibres of size a=ceil b. Their number N has $log_{B}$ N=r b\textasciicircum{}2+O(L). For any fixed map the full success probability is at least $c_{m}$ $\rho$\textasciicircum{}(q a\textasciicircum{}2), $c_{m}$=exp(-2(r+1)L), by independence of forbidden rectangles and required-hit row blocks. If $k_{i}$ vertices of first peripheral fibre i lie outside a second map's peripheral support, the forbidden rectangle ij loses at least a($k_{i}$+$k_{j}$)/2 coordinates. Hence the union of forbidden sets has size \ensuremath{\geq}q a\textasciicircum{}2+a k with k=sum $k_{i}$. Count at most binom(ra,k)binom(m-ra,k)r\textasciicircum{}(ra) second maps per k. The sum of their joint probabilities is at most $\rho$\textasciicircum{}(q a\textasciicircum{}2)(2r)\textasciicircum{}(ra) exp(m $\rho^{a}$), and m $\rho^{a}$\ensuremath{\leq}L. Cauchy-Schwarz gives a lower bound with $log_{B}$ at least -d b\textasciicircum{}2-O(L).
+
+In the critical case q=r all incidence degrees are two. Orient the degree-two undirected multigraph of missing arrows cyclically component by component; loops and double edges are allowed. This produces a permutation $\sigma$ with Q=sum $a_{i}$ $a_{sigma}$(i). With $\lambda_{i}$=m $\rho$\textasciicircum{}$a_{i}$, the main-range selected expectation is at most (1+o(1)) times the sum of $prod_{i}$ pi\_\{$\lambda_{sigma}$(i)\}($a_{i}$), where $\pi_{lambda}$(k)=e\textasciicircum{}(-$\lambda$)$\lambda^{k}$/k!. By Stirling, if any normalized mean lies outside [1/2,2], that term is exponentially small in L. Otherwise every $a_{i}$=b+O(1), leaving O(1) integer vectors, each O(L\textasciicircum{}(-r/2)). The discarded tails remain negligible. This proves the critical bound. QED.
+
+For r=1 the missing peripheral loop satisfies both hypotheses; its image probability is O(L\textasciicircum{}(-1/2)). The loopless and reciprocal-gap cases are also covered at the level of existence probability, since the only universal incoming column is the center and every peripheral incidence degree is at least two. Their unrestricted first-moment and resonance results are not needed here.
+
+\section{Positive criterion}
+
+\textbf{Theorem 3 (complete-core signatures).} Suppose the target admits a partition U,S with U nonempty and complete reflexive, such that every subset J of S is the outgoing S-neighborhood of some $u_{J}$ in U that receives all S arrows. Then at every fixed bias $p_{m}$(F)\ensuremath{\geq}1-exp(-c m) for some c>0 and sufficiently large m.
+
+\textbf{Proof.} If S is empty a balanced deterministic partition suffices by union bound. Otherwise choose singleton S-fibres in a fixed reserve W of half the source vertices: examine disjoint ordered tuples until one realizes the induced S-relation. This succeeds with exponentially high probability. For every nonselected vertex x record its outgoing and incoming signatures relative to the selected tuple, J(x) and I(x). Outside W all 4\textasciicircum{}|S| exact signature pairs occur linearly many times, except with exponentially small probability. Allocate a disjoint linear-size group of exact signatures ($J_{u}$,$I_{u}$) to each u in U, splitting groups as needed. Assign all leftover vertices of signature J to $u_{J}$, which accepts every incoming signature. The exact groups guarantee each required S-to-U hit and exclude every forbidden one.
+
+Conditional on the tuple tests (inside W) and signature exposures (incident to the selected tuple), all edges from nonselected rows to vertices outside W are fresh: none of these coordinates was tested. Every U-fibre has a linear-size part outside W, so all U-to-U hits hold with exponentially high probability by union bound. Tuple tests handle S-to-S; signatures handle U-to-S and S-to-U. This produces a full surjective bounded morphism. QED.
+
+\section{Exceptional targets}
+
+Five four-point canonical targets have neither a smaller vanishing quotient nor a classification by Theorems 2--3. The first three are settled below; the remaining two require the phase analysis in Section 5.3 and Appendices A--D. In the first two cases the displayed bounds need not be sharp.
+
+\subsection{Forced independent fibres: \texttt{001011101} and \texttt{001101011}}
+
+Relabel the two negative targets as c,A,B,Z with c universal, both c and Z universal incoming, and Z missing only its outgoing arrow to A. For \texttt{001011101} use A=old peripheral 2, B=old peripheral 1, Z=old peripheral 3; for \texttt{001101011} use A=old 1, B=old 2, Z=old 3. The missing outgoing destinations are:
+
+\[
+\begin{array}{c|ccc}\text{Canonical code}&A&B&Z\\\hline
+\texttt{001011101}&B&A,B&A\\
+\texttt{001101011}&A,B&B&A\end{array}
+\]
+
+The labels c and Z both hit B; A and B both miss B. Thus for any full successful map, the B-fibre is independent (all internal ordered edges absent), and the A-fibre is exactly the set of vertices outside B that have no outgoing edge into B. In particular after fixing B there is no arbitrary choice of A. Other necessary constraints differ between the two targets.
+
+Write a=|A|, b=|B|, z=|Z|. The same rectangle and witness argument as the tiny-fibre argument in Theorem 2 applies to any particular label i for which no universal-incoming label misses exactly i. It does not require the global degree hypothesis for this restricted conclusion. Here i=B has that property. Taking h=ceil(128 L), the probability of existence with b<b0=L-3 $log_{B}$ L is bounded by
+
+\[
+B^{2hL-h^2}+\exp(-\Omega(L^3)).
+\]
+
+Indeed on the no-empty-h-rectangle event, large labels form a complete relation. Enumerate all small fibres, and test an outside vertex missing exactly B among small fibres and receiving a hit from each of them. It would require a universal-incoming label missing exactly B, impossible. For fixed small fibres the independent tests over outside vertices succeed with probability \ensuremath{\geq}$\rho^{b}$*$\theta^{7}$ (or a larger constant), yielding the bound after union over B\textasciicircum{}O(L\textasciicircum{}2) choices. The argument uses unconditional tests and an event implication, not independence conditional on the rectangle event.
+
+Also b<h on the no-empty-rectangle event since B is independent. In the second target A is independent too, so a<h there. All rectangle and tiny-b errors are negligible relative to the claimed bounds.
+
+For a fixed B of size b, let $q_{b}$=$\rho^{b}$, $\lambda$=m $q_{b}$. Its internal forbidden coordinates have probability $\rho$\textasciicircum{}(b\textasciicircum{}2). The A-fibre forced by B is formed by independent tests on rows outside B with probability $q_{b}$; these tests are independent of internal B coordinates. Thus its size has distribution Bin(m-b,$q_{b}$) conditional on B independence.
+
+\subsubsection{Target \texttt{001011101}}
+
+The B-to-A rectangle must be entirely absent as well. Conditional on the tests defining A, these ordered coordinates are fresh, so the additional probability is $\rho$\textasciicircum{}(ab)=$q_{b}$\textasciicircum{}a. Dropping all other conditions, including nonemptiness of A, the expected number of candidate B-sets of size b is at most
+
+\[
+\binom mb\rho^{b^2}(1-q_b+q_b^2)^{m-b}.
+\]
+
+This is the binomial theorem after weighting the forced A-set by $q_{b}$\textasciicircum{}a. For b0\ensuremath{\leq}b<h, $q_{b}$\ensuremath{\leq}L\textasciicircum{}3/m. The expression is bounded by
+
+\[
+\frac{\lambda^b}{b!}\exp(-(m-b)q_b(1-q_b))
+\leq\exp(O(L^6/m))\pi_\lambda(b),
+\]
+
+where $\pi_{l}$(k)=exp(-l)l\textasciicircum{}k/k!, using b=O(L). For the normalized means $t_{b}$=$\lambda$/b, the successive ratio is $\rho$*b/(b+1)<$\rho$. Thus $O_{theta}$(1) indices have $t_{b}$ in [1/2,2], and Stirling bounds each mass by O(L\textasciicircum{}(-1/2)) there. All other O(L) indices contribute exp(-$\Omega$(L)) since t-1-ln t has positive lower bound outside that interval and b\ensuremath{\geq}L/2. Summing and adding negligible exceptions proves $p_{m}$=O(L\textasciicircum{}(-1/2)).
+
+\subsubsection{Target \texttt{001101011}}
+
+Here A is independent, and every B-row must hit A. For given B and the forced A-set, these two conditions use disjoint fresh blocks A x A and B x A, also disjoint from the previous B x B and outside-B-to-B tests. For a,b\ensuremath{\geq}1 the expected candidate count is bounded by
+
+\[
+\begin{aligned}&\binom mb\rho^{b^2}\binom{m-b}{a}q_b^a\\
+&\quad{}\times(1-q_b)^{m-b-a}\rho^{a^2}(1-\rho^a)^b.\end{aligned}
+\]
+
+No separate choice of Z or c is counted. Any successful map provides at least one such candidate B. On b0\ensuremath{\leq}b<h, a<h the displayed expression is at most
+
+\[
+\exp(O(L^4/m))\pi_\lambda(b)\frac{(\lambda\rho^a)^a}{a!}\exp(-b\rho^a).
+\]
+
+Write t=$\lambda$/b. The last two factors equal t\textasciicircum{}a*pi\_\{b*$\rho^{a}$\}(a). The prefactor tends uniformly to 1.
+
+First discard a>K $log_{B}$ L for fixed K=8. Since $\lambda$\ensuremath{\leq}L\textasciicircum{}3, $\lambda^{a}$*$\rho$\textasciicircum{}(a\textasciicircum{}2)/a! \ensuremath{\leq} B\textasciicircum{}(3a $log_{B}$ L-a\textasciicircum{}2)\ensuremath{\leq}B\textasciicircum{}(-a\textasciicircum{}2/2) for these a, and the other factors are \ensuremath{\leq}1 apart from the uniform prefactor. Summing over O(L\textasciicircum{}2) pairs yields o((L log L)\textasciicircum{}(-1/2)).
+
+For remaining a\ensuremath{\leq}K $log_{B}$ L, the last factors are at most exp(O((ln L)\textasciicircum{}2)) uniformly (use $\lambda$\ensuremath{\leq}L\textasciicircum{}3 and drop exp(-b*$\rho^{a}$)). If |t-1|>L\textasciicircum{}(-1/4), the rate function I(t)=t-1-ln t is \ensuremath{\geq}c L\textasciicircum{}(-1/2) for a fixed c>0 and sufficiently large L. This follows from its second derivative 1/t\textasciicircum{}2 on [1/2,2] and positive minima outside that interval. Thus $\pi_{lambda}$(b)\ensuremath{\leq}O(exp(-c' sqrt(L))) by Stirling since b\ensuremath{\geq}L/2. Even after O(L log L) pairs these terms are negligible.
+
+In the remaining range |t-1|\ensuremath{\leq}L\textasciicircum{}(-1/4), the decreasing geometric ratio of $t_{b}$ implies at most one integer b for large L. Also t\textasciicircum{}a\ensuremath{\leq}exp(O(log L/L\textasciicircum{}(1/4)))\ensuremath{\leq}2, and $\pi_{lambda}$(b)=O(L\textasciicircum{}(-1/2)). Finally, uniformly as b\ensuremath{\to}infinity,
+
+\[
+\sum_{a\geq1}\pi_{b\rho^a}(a)=O((\log b)^{-1/2}).
+\]
+
+To see this, put H=$log_{B}$ b. For a\ensuremath{\leq}H/2, the mean is \ensuremath{\geq}sqrt(b), so the Poisson lower-tail Chernoff bound gives exp(-$\Omega$(sqrt(b))) per term for sufficiently large b. For a>H/2, the normalized means b*$\rho^{a}$/a decrease by factor <$\rho$, so O(1) indices in [1/2,2] contribute O(H\textasciicircum{}(-1/2)) by Stirling. All others are bounded by O(exp(-c a)) via the same rate function, whose geometric sum is negligible. Since b is of order L, this proves the claimed O((L log L)\textasciicircum{}(-1/2)) bound after summing and adding the exceptional events.
+
+\subsection{A dominating reserve for a one-row forbidden star: \texttt{100111111}}
+
+For any fixed k\ensuremath{\geq}1 let $F_{k}$ have labels c,Z,$A_{1}$,...,$A_{k}$. All arrows are present except the k arrows Z\ensuremath{\to}$A_{i}$. (All loops are present.) We show $p_{m}$($F_{k}$)\ensuremath{\to}1, which covers \texttt{100111111} at k=2.
+
+Theorem 3 does not apply for k\ensuremath{\geq}2: among the universal incoming labels only c and Z realize signatures, and these give only the all-hit and all-miss patterns on the k exceptional destinations. Instead choose a moderately small universally hit fibre Z, and make the other k fibres sufficiently large that accidental misses outside Z are rare.
+
+\subsubsection{A small out-dominating destination set}
+
+Take a deterministic reserve W of floor(m/2) vertices and t=ceil(L-(3/2)$log_{B}$ L). We claim that with probability 1-o(1) there is a t-subset D of W hit by every source row (including rows in D). This choice is measurable using only edges ending in W.
+
+Let X count such t-subsets, q=$\rho^{t}$, N=|W|, and P0=(1-q)\textasciicircum{}m the success probability of each fixed D. Then E[X]=binom(N,t)P0>0. For two t-subsets with intersection size j, the probability of both hits in each row is 1-2q+$\rho$\textasciicircum{}(2t-j), so the ratio of their joint success probability to P0\textasciicircum{}2 is
+
+\[
+\left[1+\frac{\rho^{2t-j}-q^2}{(1-q)^2}\right]^m\leq\exp(4m\rho^{2t-j})
+\]
+
+for large m. The formula follows from independence of rows and inclusion-exclusion for the two misses; it includes loops. For j\ensuremath{\leq}t/2, the right side is 1+o(1) uniformly, since m*$\rho$\textasciicircum{}(3t/2)\ensuremath{\leq}m\textasciicircum{}(-1/2)*L\textasciicircum{}(9/4)\ensuremath{\to}0. For j>t/2, the ratio is \ensuremath{\leq}exp(4m q)\ensuremath{\leq}exp(4L\textasciicircum{}(3/2)). For two independently uniform t-subsets of W, the probability of intersection >t/2 is bounded by
+
+\[
+2^t\left(\frac{t}{N-t}\right)^{\lceil t/2\rceil}=\exp(-\Omega(L^2)).
+\]
+
+Indeed fix the first set and union bound over subsets of ceil(t/2) of it; the probability any such subset lies in the second is (t)\_ell/(N)\_ell \ensuremath{\leq}(t/(N-t))\textasciicircum{}$\ell$. Therefore E[X\textasciicircum{}2]/E[X]\textasciicircum{}2\ensuremath{\leq}1+o(1), with the high-overlap contribution negligible. Cauchy-Schwarz gives P(X>0)\ensuremath{\geq}E[X]\textasciicircum{}2/E[X\textasciicircum{}2]=1-o(1). The event and a deterministic selected successful D depend only on edges ending in W.
+
+\subsubsection{Construct all fibres using fresh edges}
+
+Set Z-fibre=D. Conditional on the edge information ending in W with successful D, expose the coordinates D x ([m] minus W), fresh under this history. Let M be the outside-W vertices receiving no outgoing edge from any row in D. Then |M| is Bin(m-N,q), because the column tests are independent. Its mean is of order L\textasciicircum{}(3/2), since $\rho$*L\textasciicircum{}(3/2)\ensuremath{\leq}m*q\ensuremath{\leq}L\textasciicircum{}(3/2). Chernoff gives |M|\ensuremath{\geq}k*ceil(2L) with probability tending to one. Choose disjoint $A_{i}$-fibres of size ceil(2L) deterministically from M. Assign all remaining vertices to c, except D. Thus all required forbidden blocks D x $A_{i}$ are absent.
+
+Every row hits D by the initial selection. Conditional on all history so far, the edges from rows outside D ending outside W are independent original Bernoulli bits: first-stage tests ended inside W; second-stage tests began in D; the chosen $A_{i}$ and c-fibre depend only on those tests. Thus every row outside D hits every $A_{i}$ except with probability at most mk*$\rho^{ceil}$(2L)\ensuremath{\leq}k/m. The outside-W portion of c has size m-N-k*ceil(2L)\ensuremath{\geq}m/3 eventually. All rows outside D hit it except with probability at most m*$\rho$\textasciicircum{}(m/3).
+
+For rows in D, any outgoing edge to outside W must end in the c-fibre, because every $A_{i}$ lies in M. The probability some D-row has no outgoing edge to outside W, conditional on the first-stage selection, is \ensuremath{\leq}t*$\rho$\textasciicircum{}(m-N), irrespective of the later choices. Hence all D-rows hit c with probability 1-o(1). All fibres are nonempty. Together with the hit to D and the forbidden-block condition, the exact successor-image equalities hold. This proves a.a.s. surjective bounded morphism onto $F_{k}$ for every fixed k.
+
+This argument uses a dominating destination set of size L-(3/2)$log_{B}$ L, not an assertion that a deterministic such set already dominates. The second moment is essential. No exponential failure rate for $F_{k}$ is claimed.
+
+\subsection{Fixed phases of the two remaining targets}
+
+Here a phase v>0 refers to the integer sequence $m_{j}$=round(v j B\textasciicircum{}j), j tending to infinity. Multiplication of v by a power of B leaves the limiting phase classification unchanged. For arbitrary m, set j=floor(L-$log_{B}$ L) and $v_{m}$=m $\rho^{j}$/L in [1,B). This compact phase parametrization lets us pass from strict positive phase estimates to a full-sequence limit by the subsequence criterion.
+
+\textbf{Theorem 4 (three forced small fibres).} For F=\texttt{011010111} use labels C,A,Z,M with C universal and exactly A\ensuremath{\to}A, Z\ensuremath{\to}A, Z\ensuremath{\to}M absent. Define
+
+\[
+\begin{aligned}
+H(t,s)&=\begin{cases}2+2\ln t-t-s,&s\geq1,\\3+2\ln t+\ln s-t-2s,&s\leq1,\end{cases}\\
+P_\rho(v)&=\max_{i,l\in\mathbb Z}H(v\rho^i,v\rho^l).
+\end{aligned}
+\]
+
+Along the fixed phase $m_{j}$ the image probability tends to one if $P_{rho}$(v)>0 and to zero otherwise. The maximum is attained, continuous in v and invariant under v\ensuremath{\to}vB. For arbitrary sequences with normalized phase approaching a strictly positive phase the image probability also tends to one. If $\rho$\ensuremath{\leq}$\rho_{*}$=(3 sqrt(3)-5)/4 then $p_{m}$\ensuremath{\to}0 on the full sequence. If $\rho$>$\rho_{*}$ there is a one-limit subsequence; the full sequence tends to one exactly when $\rho$>$r_{c}$, with $r_{c}$ as in Theorem 1.
+
+The proof exploits the fact that the independent A-fibre determines Z uniquely as the outside rows missing A. The common nonneighbor set M0 of Z outside A union Z contains the actual M-fibre and may serve as that fibre if the remaining center is hit by all rows. The exact necessary and sufficient witness counts appear in Appendix A. The uniform first-moment estimate reduces relevant sizes to a,z=L+O(log L). Optimizing the resulting exponent over t with s=r t gives, for 0<r<1, the maximum ln(27r/(1+2r)\textasciicircum{}3); r=$\rho$\textasciicircum{}(z-a) is restricted to integer powers. The factorization (1+2r)\textasciicircum{}3-27r=(r-1)(8r\textasciicircum{}2+20r-1) yields $\rho_{*}$. At equality a polynomial prefactor estimate is essential to full-sequence vanishing. For positive phases with s\ensuremath{\leq}1 we count exact triples and use a full overlap second moment. For s>1 we count pairs, then complete the typical larger M0 using fresh edges; see Appendices A.5 and B. The phase-circle coverage problem reduces to two adjacent lattice switches in Appendix C, giving the exact $r_{c}$ and an integer-arithmetic certificate for the root bracket.
+
+\textbf{Theorem 5 (two-stage forced fibres).} For F=\texttt{011011101} use labels C,A,V,Z with missing arrows A\ensuremath{\to}V, V\ensuremath{\to}V, Z\ensuremath{\to}A. Along $m_{j}$=round(v j B\textasciicircum{}j), the image probability tends to one precisely when some t=v $\rho^{i}$, i in Z, belongs to the open interval (1/e,T); otherwise it tends to zero. Strict positive phases extend to varying normalized phases. The full sequence tends to one if $\rho$>1/(e T), and otherwise has liminf zero and limsup one.
+
+Here V is independent, A is forced by missing V, and Z is forced by missing A. The first-moment exponent for necessary witnesses is bounded by 1+ln t when t\ensuremath{\leq}1 and 2+2ln t-t when t\ensuremath{\geq}1. Positive phases permit a forced A-size $\alpha$ L with $\alpha$<1, even when this size is atypical. The pair second moment proves existence of these rare witnesses, followed by completion using fresh columns. The critical endpoints have vanishing fixed-phase expected counts by fixed-offset Stirling estimates. The open interval covers the logarithmic phase circle exactly when B<eT. Appendix D gives all details.
+
+These theorems concern fixed bias, not critical windows with bias depending on m. They establish both exceptional classifications in Theorem 1.
+
+\section{Exhaustive classification}
+
+\subsection{One, two and three vertices}
+
+The singleton is reflexive and the source is serial with probability at least 1-m*$\rho^{m}$. The two-point target with peripheral loop is complete and satisfies Theorem 3. The other two-point target (encoding 0, denoted K2) satisfies Theorem 2 with r=1,d=0. Its only proper quotient is the reflexive singleton, so K2 is minimal.
+
+For three vertices the ten canonical peripheral encodings and their proper two-point images are as follows. T2 denotes the complete two-point target. The singleton is always a quotient by seriality.
+
+\begin{center}\small
+\begin{tabularx}{\linewidth}{XXXX}
+\toprule
+encoding & two-point images & limit & proof\\
+\midrule
+\texttt{0000} & K2 & 0 & quotient\\
+\texttt{0001} & none & 0 & Theorem 2\\
+\texttt{0010} & K2 & 0 & quotient\\
+\texttt{0011} & K2 & 0 & quotient\\
+\texttt{0101} & T2 & 1 & Theorem 3\\
+\texttt{0110} & K2,T2 & 0 & quotient\\
+\texttt{0111} & K2,T2 & 0 & quotient\\
+\texttt{1001} & T2 & 0 & Theorem 2\\
+\texttt{1011} & T2 & 1 & Theorem 3\\
+\texttt{1111} & T2 & 1 & Theorem 3\\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Each image is found by the three nontrivial bipartitions of the vertex set. The only two minimal vanishing types are \texttt{0001} and \texttt{1001}. The five labelled positive matrices are \texttt{0101},\texttt{1010},\texttt{1011},\texttt{1101},\texttt{1111}; all other eleven labelled matrices vanish.
+
+\subsection{Four vertices and reproducible enumeration}
+
+Burnside's lemma gives the isomorphism counts directly. On the four ordered pairs of two peripherals the transposition has two orbits, so the three-point count is (16+4)/2=10. On nine ordered pairs of three peripherals each transposition has five orbits and each 3-cycle three orbits. The four-point count is therefore (512+3*32+2*8)/6=104. The equivalence between marked and unmarked classes was proved in Section 2.
+
+For four points the following 12 canonical encodings have positive limsup at the fair bias (the two exceptional types are identified in Section 5.3):
+
+\begin{Verbatim}[fontsize=\small]
+001011011 001111011 011010111 011011011
+011011101 011011111 100111111 101011011
+101110111 101111101 101111111 111111111
+\end{Verbatim}
+
+Of the other 92, which vanish at all fixed biases, exactly the following 22 are minimal (20 are covered by Theorem 2; two starred encodings by Section 5.1):
+
+\begin{Verbatim}[fontsize=\small]
+000010100 000010101 000011100 000011101
+001001001 001010010 001010011 001011001
+001011101* 001100010 001100011 001101001
+001101011* 001110001 001110011 001111001
+011010011 011010110 100011101 100110101
+100110111 101110011
+\end{Verbatim}
+
+The remaining 70 all map onto a smaller vanishing target. Here is a complete finite enumeration procedure; a canonical encoding is taken with the distinguished central point omitted. A quotient of a central frame remains central: surjectivity and forth imply all arrows to and from the image of the center.
+
+\begin{Verbatim}[fontsize=\footnotesize,breaklines=true]
+Z3 = {0000,0001,0010,0011,0100,0110,0111,
+      1000,1001,1100,1110}
+F = empty dictionary
+for bits in {0,1}^9:
+    R = 4 by 4 matrix with row 0 and column 0 all 1
+    fill remaining entries with bits, in row-major order
+    key = minimum peripheral encoding over all 6 permutations
+    inherited = false
+    for k in {2,3}:
+        for each surjection f: {0,1,2,3} -> {0,...,k-1}:
+            Q = zero k by k matrix
+            for each i,j with R[i,j]=1: Q[f(i),f(j)]=1
+            if exists i,v with Q[f(i),v]=1
+               but no j with R[i,j]=1 and f(j)=v: continue
+            code = peripheral encoding of Q omitting f(0)
+            if (k=2 and code=0) or (k=3 and code in Z3):
+                inherited = true
+    degree = every peripheral missing incidence degree >=2
+             and no label with universal incoming column has one missing outgoing arrow
+    core = false
+    for S subset of {1,2,3}:
+        U = {0,1,2,3} minus S
+        if U induces a complete relation:
+            J = {outgoing S-neighborhood of u:
+                 u in U and every j in S has j->u}
+            core = core or (|J|=2^|S|)
+    if inherited: category = inherited-zero
+    else if degree: category = Theorem 2
+    else if core: category = Theorem 3
+    else if key in {001011101,001101011}: category = Section 5.1
+    else if key in {100111111,011011101,011010111}:
+         category = Sections 5.2-5.4
+    else: fail (unclassified)
+    assert existing category of key, if any, equals category
+    increment multiplicity of key and store category
+\end{Verbatim}
+
+The explicit construction of Q is forced by surjectivity and the two bounded-morphism conditions: every source arrow gives a target arrow, and each target arrow has a source witness at every vertex of its preimage. Thus the displayed back test is exact. All surjections are included; equivalently one could enumerate the 13 partitions into two or three blocks and test equality of successor-block sets. The table of counts by proof method is
+
+\begin{center}\small
+\begin{tabularx}{\linewidth}{XXX}
+\toprule
+method & isomorphism classes & labelled matrices (central label fixed)\\
+\midrule
+smaller vanishing quotient & 70 & 339\\
+Theorem 2 & 20 & 103\\
+forced negative cases & 2 & 12\\
+Theorem 3 & 9 & 43\\
+remaining exceptional cases & 3 & 15\\
+total & 104 & 512\\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+The ten uniformly positive types account for 46 labelled matrices, and the two bias-dependent types each have six. The uniformly vanishing types account for 454. The fixed-central-label counts (zero, one, oscillatory) across the four successive bias intervals of Theorem 1 are (454,58,0), (454,52,6), (454,46,12), and (460,46,6). For $\theta$\ensuremath{\geq}$\theta_{*}$ the code \texttt{011010111} is an additional minimal vanishing type because it has no smaller vanishing quotient; hence there are 23 minimal four-point vanishing types rather than 22. These are not counts of all labelled central frames with the center unspecified. The Python reproducibility script \texttt{four\_point\_census.py} uses a finer partition of proof methods. For each of the 104 canonical encodings the accompanying \texttt{classification certificate} records its orbit size, fair-model limit, fair-model minimality status and proof method. Each of the 70 inherited-zero classes includes an explicit surjection onto one of the smaller minimal vanishing targets (0, \texttt{0001}, or \texttt{1001}); all 70 such certificates have been checked by direct successor-image equality. The separate checker \texttt{verify\_paper\_certificate.py} verifies the finite certificates and exhaustively excludes smaller minimal images for the other classes. The asymptotic limits are supplied by the proofs above, not by the finite checker. The independent audit checked all 24 permutations (not just the six peripheral permutations) and all 25,600 labelled surjections to 2- or 3-point sets for the 512 matrices. The two algorithms agree.
+
+\section{Modal consequences and independence}
+
+Let $p_{i}$ be distinct propositional variables indexed by the vertices i of F. In the modal language with universal modality [U] and its dual <U>, define
+
+\[
+\begin{aligned}\Delta_F={}&\bigwedge_i\langle U\rangle p_i\land\bigvee_i p_i\\
+&{}\land\bigwedge_{i<j}\neg(p_i\land p_j)\\
+&{}\land\bigwedge_{iRj}(p_i\to\Diamond p_j)\\
+&{}\land\bigwedge_{\neg iRj}(p_i\to\Box\neg p_j).
+\end{aligned}
+\]
+
+\[
+\chi_F=\neg[U]\Delta_F.
+\]
+
+The global existence and partition clauses define a surjective label map. The required diamond clauses are back and the forbidden box clauses are forth. Hence a valuation falsifying $\chi_{F}$ exists exactly when the full source frame admits a surjective bounded morphism onto F; the converse follows by pulling each label back to its fibre. This definition is equivalent to the characteristic-formula convention in [2, Definition 2.2 and Lemmas 2.3--2.4]. No generated-subframe restriction is needed.
+
+Write $\chi_{F}^{d}$ for the ordinary-modal translation [U]=box box and <U\ensuremath{\geq}diamond diamond. On frames with universal R\textasciicircum{}2 this translation is exact by induction on formula complexity. For random $G_{m}$,
+
+\[
+\Pr(R^2\text{ not universal})\leq m^2(1-\theta^2)^{m-2}.
+\]
+
+For a fixed ordered pair (x,y), the two edges through each intermediate vertex outside \{x,y\} are distinct, independent, and disjoint across intermediates, including when x=y. Each path succeeds with probability $\theta^{2}$. Union over the m\textasciicircum{}2 ordered pairs proves the bound. Thus Pr($G_{m}$ validates $\chi_{F}^{d}$) differs from 1-$p_{m}$(F) by at most the displayed error.
+
+Write $\mathrm{ML}^{as}_\theta$ for ordinary modal formulas with frame-validity probability tending to one in the fixed-bias model. By [2, Proposition 3.2(ii)], each formula of $\mathrm{ML}^r$ follows at the frame level from a finite extension axiom. Every fixed extension axiom holds asymptotically almost surely at every fixed bias: for a prescribed pattern of edges to and from a fixed finite tuple of distinct vertices, and a prescribed loop, each candidate outside the tuple realizes that pattern with a fixed positive probability, bounded below by min($\theta$,$\rho$)\textasciicircum{}(2k+1) for tuple length k. Distinct candidates use disjoint coordinates. Union over O(m\textasciicircum{}k) tuples and finitely many patterns gives failure probability tending to zero. Thus $\mathrm{ML}^r$ is contained in $\mathrm{ML}^{as}_\theta$ for every fixed $\theta$. By [2, Proposition 3.5] the finite $\mathrm{ML}^r$ models are exactly the central frames.
+
+\textbf{Theorem 6 (finite models at fixed bias).} For every finite central target F,
+
+\[
+F\models\mathrm{ML}^{as}_\theta\iff\limsup_{m\to\infty}p_m(F)>0.
+\]
+
+Indeed if the upper limit is positive and phi fails in F, preservation of validity under surjective bounded morphisms gives Pr($G_{m}$ invalidates phi)\ensuremath{\geq}$p_{m}$(F). Thus phi cannot be almost surely valid. If the upper limit is zero then $p_{m}$(F)\ensuremath{\to}0, so $\chi_{F}^{d}$ is almost surely valid by the R\textasciicircum{}2 estimate, but F falsifies its own characteristic formula (centrality makes R\textasciicircum{}2 universal). This is the direct fixed-bias ordinary-language version of [2, Proposition 4.2(ii)], not a new characterization in principle.
+
+By Theorem 1, the finite-model counts on one through four points are 1,1,3,12 when $\theta$<$\theta_{*}$ and 1,1,3,11 when $\theta$\ensuremath{\geq}$\theta_{*}$. Noncentral finite frames are excluded by the inclusion of $\mathrm{ML}^r$. Thus the characteristic formula of \texttt{011010111} belongs to $\mathrm{ML}^{as}_\theta$ exactly when $\theta$\ensuremath{\geq}$\theta_{*}$; in particular the high-bias logic differs from the fair logic. The earlier two convergence transitions do not by themselves imply changes to the full almost-sure logic.
+
+At $\theta$<$\theta_{*}$ there are 25 minimal vanishing types on at most four points; at $\theta$\ensuremath{\geq}$\theta_{*}$ there are 26. For two distinct such types F,H, no surjective bounded morphism F\ensuremath{\to}H exists by minimality if H is smaller, cardinality if larger, and bijective bounded morphism implying isomorphism if equal size. Thus each F validates $\mathrm{ML}^r$ and all the other corresponding translated characteristic formulas, but falsifies its own. Normal modal soundness proves mutual independence of these 25 or 26 axiom schemes over $\mathrm{ML}^r$, at the specified bias. This does not show that they axiomatize all $\mathrm{ML}^{as}_\theta$.
+
+\subsection{A prime-cycle family}
+
+For r\ensuremath{\geq}2 let $C_{r}$ consist of a universal reflexive central vertex c and r peripheral vertices i in Z/rZ, each with exactly two successors c and i+1. Let T2=$C_{1}$ be the complete reflexive two-point frame, E1 the reflexive singleton, and K2 the two-point target with absent peripheral loop.
+
+\subsubsection{Quotient classification for central cycles}
+
+The surjective bounded-morphic images of $C_{r}$, up to isomorphism, are exactly $E_{1}$, $C_{d}$ for positive divisors d of r, and $K_{2}$ if r is even.
+
+Proof. Given a surjective bounded morphism f, write z=f(c). It is central, since c has all incoming and outgoing arrows. For each peripheral i, the set of successors of f(i) is exactly \{z,f(i+1)\}, by forth and back. If f(i)=z for some i, the target has at most two vertices, since the successor set of z is the whole target. In the singleton case the target is $E_{1}$. In the two-point case write w for the other point. The central row is universal, so only the loop of w is optional. If w has a loop, all source peripheral rows must hit w, implying f(i+1)=w for every i. Thus every peripheral maps to w and none maps to z, contradicting this case. If w has no loop, then every peripheral i must satisfy f(i+1)=w exactly when f(i)=z, and f(i+1)=z exactly when f(i)=w. This is an alternating colouring, possible precisely when r is even. Conversely the alternating colouring and f(c)=z give a bounded morphism onto $K_{2}$ for even r, as the successor sets directly verify.
+
+Now suppose no peripheral maps to z. Every other target vertex u has successor set \{z,s(u)\} for a uniquely determined noncentral vertex s(u), because it is f(i) for some i, and f(i+1) is noncentral. The map s is well-defined by successor-image equality, and f(i+1)=s(f(i)). Its orbit from f(0) covers every noncentral target vertex by surjectivity, and s\textasciicircum{}r(f(0))=f(0). Hence this orbit is a cycle of length d dividing r, and the target is $C_{d}$. Conversely reduction of peripheral indices modulo any divisor d gives a surjective bounded morphism $C_{r}$\ensuremath{\to}$C_{d}$, sending center to center. The map to $E_{1}$ exists by seriality. This proves the theorem.
+
+For $C_{r}$, q=r\textasciicircum{}2-r, d=r(r-2), and both hypotheses of Theorem 2 hold. Hence $p_{m}$($C_{r}$)\ensuremath{\to}0 for all r\ensuremath{\geq}2, with the critical bound O(L\textasciicircum{}(-1)) when r=2. An even r has the vanishing proper image K2, and an odd composite r has a smaller vanishing $C_{d}$. An odd prime r has only E1,T2 as proper images. Thus precisely the odd prime lengths yield minimal vanishing cycles, and their characteristic formulas are mutually independent by the same finite-countermodel argument.
+
+Goranko [2, Proposition 4.7] already considers an infinite independent path family; infinitude is not claimed as novel here. Independence of characteristic formulas alone does not imply non-finite axiomatizability by arbitrary modal formulas.
+
+\section{Limitations, reproducibility and further work}
+
+This classification concerns independent ordered edges including loops, at every fixed $\theta$ strictly between zero and one, and finite central targets of size at most four. It does not determine arbitrary shrinking critical-phase windows, the model theory of larger frames, or the full axiomatic theory of $\mathrm{ML}^{as}_\theta$. The three transition constants are transitions in fixed-bias limiting behavior, not claims about the width of a varying-bias sharp threshold window. All asymptotic arguments are internal hand proofs; no independent refereeing or machine verification is claimed. Finite numerical checks support the enumeration and root signs only. The previously verified Lean modules address smaller finite structural facts; newer modules await actual compilation. The present Markdown main text and technical appendices have not been compiled as a unified LaTeX PDF. Before release, complete independent mathematical review, primary-source priority checking, notation and typesetting, and authorship/AI-use disclosure. No submission or merge is made.
+
+
+\appendix
+\section{The target \texttt{011010111}: witness formulas, vanishing and a second moment}
+
+Let F have labels C,A,Z,M and only missing arrows A\ensuremath{\to}A, Z\ensuremath{\to}A, Z\ensuremath{\to}M. Write $\rho_{*}$=(3 sqrt(3)-5)/4. We prove $p_{m}$\ensuremath{\to}0 at $\rho$\ensuremath{\leq}$\rho_{*}$ and limsup $p_{m}$=1 at $\rho$>$\rho_{*}$. The latter direction will also serve as the basis for the stronger phase theorem.
+
+\subsection*{A.0. Deterministic reduction}
+
+For a successful surjective bounded morphism, A is independent, and the set of rows outside A missing A is exactly Z. Every row hits Z. For fixed disjoint nonempty A,Z, put
+
+\[
+\begin{aligned}
+M_0&=\{y\notin A\cup Z:\forall x\in Z,\ \neg xSy\},\\
+C_0&=[m]\setminus(A\cup Z\cup M_0).
+\end{aligned}
+\]
+
+Then the actual M-fibre is a nonempty subset of M0, and every row outside Z must hit M0. In particular M0 nonempty is necessary. These conditions give a necessary witness depending on the pair A,Z, with Z uniquely determined by A.
+
+A sufficient witness is obtained by using M=M0 and C=C0: additionally require C0 nonempty and every row to hit C0. Then all four labels have exactly the successor images dictated by the missing arrows. Any row in Z misses A and M0, every other row except A hits A, and A misses A by independence. Every non-Z row hits M0, and all rows hit Z,C0. This is exactly a surjective bounded morphism.
+
+The necessary witness does not automatically give the sufficient witness: enlarging the actual M-fibre to M0 might remove some of the original C successors. We therefore keep distinct counts $Y_{necess}$ and $Y_{suff}$, for which
+
+\[
+\Pr(Y_{\mathrm{suff}}>0)\leq p_m\leq\Pr(Y_{\mathrm{necess}}>0)\leq\mathbb E[Y_{\mathrm{necess}}].
+\]
+
+\subsubsection{Exact expectations}
+
+Let a=|A|, z=|Z|, n=m-a-z. For each fixed disjoint A,Z with a,z\ensuremath{\geq}1, n\ensuremath{\geq}1, the probability of independence of A, the exact definition of Z, and every row hitting Z is
+
+\[
+H_0(a,z)=\rho^{a^2+az}(1-\rho^a)^n(1-\rho^z)^m.
+\]
+
+These events use only columns ending in A or Z. The remaining coordinates Z x ([m] minus (A union Z)) are independent and make |M0| distributed as Bin(n,$\rho^{z}$). Conditional on M0 and the Z-row column tests, the edges from rows outside Z to M0 are fresh; the probability all these rows hit M0 is (1-$\rho^{k}$)\textasciicircum{}(m-z) when k=|M0|.
+
+Thus the necessary witness expectation is exactly
+
+\[
+\begin{aligned}\mathbb E[Y_{\mathrm{necess}}]
+={}&\sum_{\substack{a,z\geq1\\a+z<m}}\binom ma\binom{m-a}{z}H_0(a,z)\\
+&{}\times\sum_{k=1}^n\binom nk\rho^{zk}(1-\rho^z)^{n-k}(1-\rho^k)^{m-z}.
+\end{aligned}
+\]
+
+For sufficient witnesses, restrict 1\ensuremath{\leq}k\ensuremath{\leq}n-1 and let c=n-k. In addition to the previous factors multiply by
+
+\[
+(1-\rho^c)^{m-z}J(z,c),
+\]
+
+where
+
+\[
+J(z,c)=\sum_{j=0}^z(-1)^j\binom zj\left(\frac{\rho^j-\rho^z}{1-\rho^z}\right)^c.
+\]
+
+Indeed, all rows outside Z must hit C0, using fresh disjoint row/fibre blocks. For Z rows, conditional on M0, each C0 column has a nonempty vector of edges from Z, independent across those columns. For a specified j rows of Z the probability all j rows miss one such column is ($\rho^{j}$-$\rho^{z}$)/(1-$\rho^{z}$), because the column is required nonempty. Inclusion-exclusion over Z rows failing to hit C0 gives J. Alternatively 1-z*$\rho^{c}$\ensuremath{\leq}J\ensuremath{\leq}1 by the union bound, since the conditional miss probability for any one specified row in one column is \ensuremath{\leq}$\rho$, and the c columns are independent, so missing all c columns has probability \ensuremath{\leq}$\rho^{c}$.
+
+There are binom(m,a)binom(m-a,z) pairs. Linearity of expectation suffices; no assumption of independence between pairs is made. These exact formulas are counts of pair witnesses, not counts of arbitrary full maps.
+
+\subsection{Forced sets and reduction to logarithmic sizes}
+
+Use Appendix A.0. A is independent including absent loops; Z consists of all rows outside A missing A. Let M0 be all vertices outside A union Z receiving no edge from Z, and C0 its remaining complement outside A union Z. The actual M-fibre is contained in M0. A necessary witness requires all rows to hit Z and all non-Z rows to hit M0. A sufficient witness assigns M=M0 and C=C0 if C0 is nonempty and every row hits C0.
+
+Let a=|A|, z=|Z|, k=|M0|. Set b0=L-3 $log_{B}$ L and h=ceil(128 L). The tiny-fibre argument in the proof of Theorem 2 of the main text applies to every label of F: the only universally incoming columns are C and Z, whose outgoing missing sets are respectively empty and \{A,M\}; neither misses exactly one label. This lemma does not use the degree hypothesis when it is used only for tiny-fibre exclusion. Except on an event of probability o(1), every successful map has all fibres \ensuremath{\geq}b0. The absent h-by-h rectangle probability is \ensuremath{\leq}B\textasciicircum{}(2hL-h\textasciicircum{}2), and outside it a<h by independence. Hence every successful map, apart from o(1) probability, has b0\ensuremath{\leq}a<h, z\ensuremath{\geq}b0 and k\ensuremath{\geq}b0 (because the actual M-fibre is contained in M0).
+
+For a fixed independent a-set A, revealing A columns makes Z forced, with z\textasciitilde{}Bin(m-a,$\rho^{a}$). Conditional on this column history, the coordinates Z x ([m] minus (A union Z)) are fresh; hence k\textasciitilde{}Bin(m-a-z,$\rho^{z}$). These two binomial laws do not condition on the Z-hit or M-hit events. The expected count of independent a-sets is $N_{a}$=binom(m,a)$\rho$\textasciicircum{}(a\textasciicircum{}2)\ensuremath{\leq}(e m $\rho^{a}$/a)\textasciicircum{}a. On b0\ensuremath{\leq}a<h we have m $\rho^{a}$\ensuremath{\leq}L\textasciicircum{}3, a\ensuremath{\geq}L/2 and a\ensuremath{\leq}129 L eventually, so $N_{a}$\ensuremath{\leq}exp(400 L ln L) uniformly for sufficiently large m.
+
+Fix K=\texttt{1000} and u=L+K $log_{B}$ L. If a>u, the conditional mean of z is \ensuremath{\leq}L\textasciicircum{}(-K). Thus the probability z\ensuremath{\geq}b0 conditional on independence is \ensuremath{\leq}(e L\textasciicircum{}(-K)/ceil(b0))\textasciicircum{}ceil(b0)=exp(-(K+1+o(1))L ln L), by the union bound over ceil(b0) binomial successes. Multiply by $N_{a}$ and sum O(L) sizes: the probability of any successful map with a>u is o(1). If z>u, conditional on the A-column history the mean of k is \ensuremath{\leq}L\textasciicircum{}(-K); the same upper tail bound holds for k\ensuremath{\geq}b0, uniformly over these histories. Multiply again by $N_{a}$ and sum a in the main range. This also gives o(1). No separate enumeration of large Z is necessary because it is uniquely forced by A. Consequently it suffices for an upper existence bound to count necessary witnesses with
+
+\[
+b_0\leq a,z\leq u,\qquad k\geq b_0.\tag{1}
+\]
+
+In particular a,z=L+O(log L), and t=m $\rho^{a}$/L, s=m $\rho^{z}$/L are between L\textasciicircum{}(-K-1) and L\textasciicircum{}2. Both |ln t| and |ln s| are O(ln L).
+
+\subsection{Uniform first-moment upper bound on the main range}
+
+For fixed a,z let n=m-a-z and $\lambda_{a}$=m $\rho^{a}$, $\lambda_{z}$=m $\rho^{z}$. By the exact necessary-witness formula, the expected count at these sizes with k\ensuremath{\geq}b0 is
+
+\[
+\begin{aligned}&\binom ma\binom{m-a}{z}\rho^{a^2+az}(1-\rho^a)^n(1-\rho^z)^m\\
+&\quad{}\times\mathbb E[\mathbf1_{\{K_0\geq b_0\}}(1-\rho^{K_0})^{m-z}],
+\end{aligned}
+\]
+
+where K0\textasciitilde{}Bin(n,$\rho^{z}$). (Here K0 is a random integer, not the fixed constant K.) Bound the first two lines by
+
+\[
+\frac{\lambda_a^a}{a!}\frac{\lambda_a^z}{z!}
+\exp(-\lambda_a-\lambda_z+O(L^4/m)).\tag{2}
+\]
+
+This follows from the multinomial upper bound m\textasciicircum{}(a+z)/(a!z!), and n $\rho^{a}$=$\lambda_{a}$-O(L\textasciicircum{}4/m). All errors uniform on (1). Stirling, a,z=L+O(log L), |ln t|=O(log L), give the logarithm of (2) at most
+
+\[
+L(2+2\ln t-t-s)+O((\ln L)^2).
+\]
+
+If s\ensuremath{\geq}1, bound the expectation in the third line by 1. If s<1, use Chernoff with nonnegative parameter v=ln(1/s), since the binomial mean is \ensuremath{\leq}sL:
+
+\[
+\begin{aligned}\Pr(K_0\geq b_0)&\leq\exp(sL(e^v-1)-vb_0)\\&\leq\exp(L(1-s+\ln s)+O((\ln L)^2)).\end{aligned}
+\]
+
+This argument works even when the mean is slightly above b0; the exponential upper bound need not be below 1 in that case. Thus the main-size expected count is at most exp(L H(t,s)+O((ln L)\textasciicircum{}2)), uniformly, with
+
+\[
+H(t,s)=\begin{cases}2+2\ln t-t-s,&s\geq1,\\3+2\ln t+\ln s-t-2s,&s\leq1.\end{cases}
+\]
+
+The integer difference d=z-a implies s/t=r=$\rho^{d}$ exactly. Define
+
+\[
+g(r)=\ln\frac{27r}{(1+2r)^3}.
+\]
+
+For 0<r<1, the maximum of H(t,rt) over t>0 is g(r), attained uniquely at t=3/(1+2r), with rt<1. Indeed on rt\ensuremath{\leq}1 the expression is 3+3ln t+ln r-(1+2r)t, strictly concave in t, maximized at the stated point. On rt\ensuremath{\geq}1 the expression is 2+2ln t-(1+r)t, decreasing on t\ensuremath{\geq}1/r because 2r<1+r. Its boundary value equals the preceding expression at t=1/r. For r>1, the region rt\ensuremath{\leq}1 is maximized at its boundary (or can be bounded by g(r)); on rt\ensuremath{\geq}1 the unconstrained maximum is 2ln(2/(1+r))<0, attained at t=2/(1+r). For r=1 both maxima are zero. In particular for r>1 the global maximum is 2ln(2/(1+r)), since on rt\ensuremath{\leq}1 the derivative 3/t-(1+2r) is positive when t\ensuremath{\leq}1/r.
+
+The algebraic identity
+
+\[
+(1+2r)^3-27r=(r-1)(8r^2+20r-1)
+\]
+
+implies g(r)>0 iff $\rho_{*}$<r<1 for 0<r<1, with equality at $\rho_{*}$ and 1. Moreover g'(r)=(1-4r)/(r(1+2r)), so g is increasing for r<1/4. For $\rho$<$\rho_{*}$, d\ensuremath{\geq}1 implies r\ensuremath{\leq}$\rho$ and H\ensuremath{\leq}g($\rho$)<0. For d\ensuremath{\leq}-1, r\ensuremath{\geq}1/$\rho$>1 gives H\ensuremath{\leq}2ln(2/(1+1/$\rho$))<0. All nonzero differences are therefore uniformly exponentially suppressed in L. For $\rho$=$\rho_{*}$, the same suppression holds for d\ensuremath{\geq}2 and d\ensuremath{\leq}-1; for d=1 the maximum is exactly zero and is treated in Appendix A.4. There are only O((ln L)\textasciicircum{}2) pairs in (1), so all uniformly negative cases contribute o(1).
+
+\subsection{Equal-size contribution, all fixed biases}
+
+If z=a, formula (2) equals (1+o(1))*$\pi_{lambda}$(a)\textasciicircum{}2, with $\lambda$=m $\rho^{a}$ and $\pi_{lambda}$(a)=exp(-$\lambda$)$\lambda^{a}$/a!. Dropping all conditions on K0 can only increase this bound. The normalized mean $\lambda$/a decreases by a factor strictly less than $\rho$ with each increment in a. Thus only $O_{rho}$(1) integers have $\lambda$/a in [1/2,2]; their squared Poisson masses are O(1/L) by Stirling. Outside that interval each squared mass is exp(-$\Omega$(L)), since a\ensuremath{\geq}L/2 and the rate x-1-ln x is bounded below by a positive constant. Sum over O(log L) choices of a. This proves that the total diagonal contribution is O(1/L).
+
+Combining Appendices A.1--A.3 proves $p_{m}$(F)\ensuremath{\to}0 for every $\rho$<$\rho_{*}$.
+
+\subsection{Critical boundary $\rho$=$\rho_{*}$}
+
+It remains to handle d=1, z=a+1. Let t\_*=3/(1+2rho\_*) and s\_*=$\rho_{*}$ t\_*=0.1339745962...<1. Appendix A.2 shows that H(t,rho\_*t) is uniquely maximized at t\_* with value 0; it tends to minus infinity at both endpoints t\ensuremath{\to}0 and t\ensuremath{\to}infinity. Thus outside a fixed closed interval [t\_*-$\eta$,t\_*+$\eta$] chosen inside (0,1/$\rho_{*}$), H is bounded above by a strictly negative constant. Those pairs contribute o(1) by the uniform estimate. Choose $\eta$ small enough that the normalized means below stay away from 0 and 1.
+
+Inside this interval put v=$\lambda_{a}$/a and w=$\lambda_{z}$/a=rho\_*v. Since a/L\ensuremath{\to}1 uniformly, v is bounded above and below by positive constants and w lies in a compact subinterval of (0,1). Crucially, now keep the M-hit probability, even for k below a. Let $p_{j}$=P(K0=j) for K0\textasciitilde{}Bin(n,$\rho^{z}$), with n=m-a-z. Uniformly in this interval, $p_{a}$=(1+o(1))*pi\_lambda\_z(a), by the falling factorial estimate n\textasciicircum{}a/m\textasciicircum{}a=1+o(1) and binomial-to-Poisson approximation at size a=O(L).
+
+For j\ensuremath{\geq}a, successive ratios p\_(j+1)/$p_{j}$=((n-j)/(j+1))*$\rho^{z}$/(1-$\rho^{z}$) are bounded by a fixed q<1 for large m, because $\lambda_{z}$/a=w is bounded strictly below 1. Hence sum\_(j\ensuremath{\geq}a) $p_{j}$ \ensuremath{\leq}$p_{a}$/(1-q). For j=a-l<a with l\ensuremath{\geq}1, each backward ratio p\_(j-1)/$p_{j}$=j(1-$\rho^{z}$)/((n-j+1)$\rho^{z}$) for j\ensuremath{\leq}a is bounded by a fixed Q, since $\lambda_{z}$/a is bounded away from zero. Thus p\_(a-l)\ensuremath{\leq}$p_{a}$ Q\textasciicircum{}l. Also
+
+\[
+\begin{aligned}(1-\rho^{a-l})^{m-z}&\leq\exp(-(m-z)\rho^a B^l)\\&\leq\exp(-ca B^l)\end{aligned}
+\]
+
+for some fixed c>0, because $\lambda_{a}$/a=v is bounded below and z=O(L). The sum over l\ensuremath{\geq}1 of Q\textasciicircum{}l exp(-c a B\textasciicircum{}l) tends to zero: B>1, B\textasciicircum{}l\ensuremath{\geq}1+(B-1)l, giving an exponentially small geometric bound. Therefore even after dropping the restriction K0\ensuremath{\geq}b0 the entire third-line expectation of Appendix A.2 is O(pi\_lambda\_z(a)), uniformly.
+
+Multiply by (2) and use z=a+1. The resulting count is at most a constant times
+
+\[
+\begin{aligned}&\frac{\lambda_a}{a+1}\left(\frac{\lambda_a^a}{a!}\right)^2
+\frac{\lambda_z^a}{a!}\exp(-\lambda_a-2\lambda_z)\\
+&\quad{}\leq Ca^{-3/2}\exp(a[3+2\ln v+\ln w-v-2w]).
+\end{aligned}
+\]
+
+The inequality is Stirling with uniform constants on the compact normalized means. Since w=rho\_*v, the exponent in square brackets is \ensuremath{\leq}g($\rho_{*}$)=0 for every v>0. Thus each critical size pair contributes O(L\textasciicircum{}(-3/2)), with at most O(log L) pairs, yielding o(1). Together with Appendices A.1--A.3 this proves $p_{m}$(F)\ensuremath{\to}0 at the boundary. Merely observing a zero leading exponent would not have sufficed.
+
+\subsection{Positive subsequences for every $\rho$>$\rho_{*}$}
+
+Choose t=3/(1+2rho), s=$\rho$*t and let integer j tend to infinity along
+
+\[
+\begin{aligned}m_j&=\operatorname{round}(tjB^j),& a&=j,&z&=j+1,\\
+k&=\lceil L+2\log_B L\rceil,&c&=m-a-z-k.
+\end{aligned}
+\]
+
+Then L=j+$log_{B}$ j+O(1), $t_{m}$=m $\rho^{a}$/L\ensuremath{\to}t, $s_{m}$=m $\rho^{z}$/L\ensuremath{\to}s. All a,z,k=L+O(log L), $\rho^{a}$,$\rho^{z}$=$\Theta$(L/m), and m $\rho^{k}$\ensuremath{\leq}L\textasciicircum{}(-2). Let Y0 count exact-M necessary triples with these sizes and Y count the sufficient ones (C-hit condition added).
+
+The exact forced-pair formula gives
+
+\[
+\mathbb E[Y_0]=(1+o(1))\frac{\lambda_a^a}{a!}\frac{\lambda_a^z}{z!}
+\exp(-\lambda_a-\lambda_z)\pi_{\lambda_z}(k),
+\]
+
+uniformly along the chosen subsequence. Here the M-hit factor tends to one because m $\rho^{k}$\ensuremath{\leq}L\textasciicircum{}(-2). The binomial approximation is relative 1+o(1) since all sizes are O(L) and probabilities O(L/m); the C-hit factors tend to one by the exact formula and 1-z $\rho^{c}$\ensuremath{\leq}J(z,c)\ensuremath{\leq}1. Thus E[Y]/E[Y0]\ensuremath{\to}1. Stirling gives
+
+\[
+\frac{\ln\mathbb E[Y_0]}{L}\longrightarrow3+2\ln t+\ln s-t-2s=g(\rho)>0.
+\]
+
+To conclude existence we must use a second moment, not just growing expectation. We prove the second-moment estimate for arbitrary fixed $\rho$ under the size and first-moment hypotheses just established. In fact the following overlap argument only uses a,z,k=L+O(log L), $\rho^{a}$,$\rho^{z}$=$\Theta$(L/m), m $\rho^{k}$\ensuremath{\leq}L\textasciicircum{}(-2), and exponential growth of the first moment.
+
+For fixed triple T=(A,Z,M0), its event $E_{T}$ consists of the forbidden rectangles A x A, Z x A, Z x M0, row hits to A from outside A union Z, all row hits to Z, non-Z row hits to M0, and Z-to-C column hits. All coordinate blocks in this event are disjoint. A uniquely determines Z and M0. Let S=A union Z union M0, nS=a+z+k=O(L), and let h'=|S intersect S'| and I be the count of common forbidden ordered coordinates for two triples. The individual probability P equals $\rho$\textasciicircum{}(a\textasciicircum{}2+az+zk) R with R=exp(-O(L)).
+
+For h'\ensuremath{\leq}L/2, keep all forbidden coordinates and only hits for rows and columns outside S union S'. These families are disjoint. Put $\ell$=min(a,z,k)=L-O(log L). Two simultaneous misses for a given outside row have probability at most $\rho$\textasciicircum{}(2ell-h'), even when their target sets overlap; the two-term Bonferroni inequality bounds the joint hit probability divided by the product of marginal hit probabilities by 1+O($\rho$\textasciicircum{}(2ell-h')). The analogous bound holds for the two column-hit conditions. Across O(m) outside rows/columns the ratio is 1+o(1), since m $\rho$\textasciicircum{}(2ell-h')\ensuremath{\leq}m\textasciicircum{}(-1/2) poly(L). Removing O(L) original hit conditions costs a factor 1+o(1). Consequently joint/marginal squared probability \ensuremath{\leq}(1+o(1))*B\textasciicircum{}I. Also I\ensuremath{\leq}h'\textasciicircum{}2, and the support-overlap probability for two uniformly independent triples is \ensuremath{\leq}(nS\textasciicircum{}2/(m-nS))\textasciicircum{}h'. Summing over 1\ensuremath{\leq}h'\ensuremath{\leq}L/2 gives o(1) in normalized second moment by the geometric base nS\textasciicircum{}2 B\textasciicircum{}(L/2)/(m-nS)\ensuremath{\to}0. The h'=0 contribution is \ensuremath{\leq}1+o(1).
+
+For h'>L/2, put D=max(a,z,k)=L+O(log L) and $\Delta$=D h'-I. Dropping all hits gives ratio \ensuremath{\leq}B\textasciicircum{}(I+O(L)); support-overlap counting gives B\textasciicircum{}(-L h'+O(h' log L)). Hence the pairs with $\Delta$\ensuremath{\geq}K1 L $log_{B}$ L have normalized contribution o(1) for sufficiently large fixed K1. For the remaining large-overlap pairs set x=|A intersect S'|, y=|Z intersect S'|, w0=|M0 intersect S'|. The forbidden rectangles imply
+
+\[
+\Delta\geq x(D-x)+y(D-x)+w_0(D-y).
+\]
+
+If x\ensuremath{\leq}D/2 then x+y=O(log L), subsequently w0=O(log L), contradicting h'>L/2. Thus x\ensuremath{\geq}D-O(log L). With u=|A intersect A'|, v0=|A intersect Z'| and r0=|A intersect M0'|, the missing common forbidden coordinates include disjoint squares of sizes v0\textasciicircum{}2,r0\textasciicircum{}2 and the rectangle of size u(v0+r0). Thus v0+r0=O(sqrt(L log L)), u\ensuremath{\geq}L/2, and then v0+r0=O(log L). It follows that dA=|A minus A'|=O(log L).
+
+Conditional on $E_{T}$, the disjoint blocks remain independent. A hit-conditioned block has probability \ensuremath{\leq}$\rho^{b}$ of absence of any specified b coordinates, by the exact conditional factor (1-$\rho$\textasciicircum{}(blocksize-b))/(1-$\rho^{blocksize}$)\ensuremath{\leq}1. For another independent A' at distance dA, let e=|(A' minus A) intersect Z|. Absence of both cross directions between A intersect A' and A' minus A has conditional probability \ensuremath{\leq}$\rho$\textasciicircum{}((a-dA)(2dA-e)): the direction out of A is fresh or hit-conditioned, and the reverse direction is hit-conditioned for all added vertices outside Z, while those inside Z already miss A. These coordinates do not intersect the Z-to-C column conditions. Summing choices at fixed dA\ensuremath{\geq}1 is bounded by
+
+\[
+\left[a\rho^{a-d_A}(z+m\rho^{a-d_A})\right]^{d_A}.
+\]
+
+For dA=O(log L) the base is poly(L)/m, so the conditional expectation of all other such independent A' is o(1). Since A uniquely determines its triple, the remaining pairs, including identical A, contribute at most (1+o(1))*E[Y0], negligible compared with its square. The normalized second moment is therefore 1+o(1). Chebyshev gives Y0\ensuremath{\geq}E[Y0]/2 a.a.s., and Markov gives Y0-Y<E[Y0]/2 a.a.s. because E[Y]/E[Y0]\ensuremath{\to}1. Hence Y>0 a.a.s. and p\_($m_{j}$)(F)\ensuremath{\to}1, as asserted.
+
+\section{Fixed phases for \texttt{011010111}}
+
+\subsection{Statement}
+
+Define
+
+\[
+H(t,s)=\begin{cases}2+2\ln t-t-s,&s\geq1,\\3+2\ln t+\ln s-t-2s,&s\leq1,\end{cases}
+\]
+
+and for v>0,
+
+\[
+P_\rho(v)=\max_{i,l\in\mathbb Z}H(v\rho^i,v\rho^l).
+\]
+
+The maximum is attained: every nonempty superlevel set of H is contained in a compact subset of the positive quadrant (proof below). This phase function is invariant under v \ensuremath{\to} v B. It is continuous, since locally only finitely many indices can attain the maximum.
+
+For each fixed v>0, on the integer subsequence $m_{j}$=round(v j B\textasciicircum{}j), j\ensuremath{\to}infinity,
+
+\[
+\lim_{j\to\infty}p_{m_j}(F)=\begin{cases}1,&P_\rho(v)>0,\\0,&P_\rho(v)\leq0.\end{cases}
+\]
+
+The equality case is included, but only for the stated fixed-v subsequences. For arbitrary sequences of m with normalized lattice phase converging to a strictly positive $P_{rho}$(v), the probability tends to 1. A corresponding strict negative phase gives probability tending to 0. No claim about arbitrary approach rates to a zero phase is needed for the following exact full-sequence criterion:
+
+\begin{itemize}
+\item $\rho$\ensuremath{\leq}$\rho_{*}$=(3sqrt(3)-5)/4: $p_{m}$\ensuremath{\to}0 by Appendices A.1--A.4.
+\item $\rho$>$\rho_{*}$ and $P_{rho}$(v)>0 for all v in [1,B]: $p_{m}$\ensuremath{\to}1.
+\item $\rho$>$\rho_{*}$ and $P_{rho}$(v)\ensuremath{\leq}0 for some v in [1,B]: liminf $p_{m}$=0 and limsup $p_{m}$=1.
+\end{itemize}
+
+Thus there is a finite, one-dimensional interval-coverage test at every fixed bias. This is an implicit criterion, not a proved closed-form critical $\rho$ for full-sequence convergence.
+
+\subsection{Upper bound outside finitely many lattice offsets}
+
+The size reduction in Appendix A.1 gives, except with probability o(1), a,z between L-3log\_B L and L+1000log\_B L, and |M0|\ensuremath{\geq}L-3log\_B L, where A is independent, Z is the set of outside-A rows missing A, and M0 is the common nonneighbor set of Z outside A union Z. The actual M-fibre is contained in M0. All rows must hit Z and all non-Z rows must hit M0. The expected necessary count at a,z, with that size restriction on M0, is bounded by
+
+\[
+\begin{gathered}\exp(LH(t_m,s_m)+O((\ln L)^2)),\\
+t_m=m\rho^a/L,\qquad s_m=m\rho^z/L,\end{gathered}
+\]
+
+uniformly. This is the previous first-moment bound including the binomial upper tail for M0.
+
+To justify compactness, write H(t,s)=2+2ln t-t+J(s), where J(s)=-s for s\ensuremath{\geq}1 and J(s)=1+ln s-2s for s\ensuremath{\leq}1. J is continuous, has maximum -ln 2, and tends to minus infinity at 0 and infinity. The function 2+2ln t-t also tends to minus infinity at both ends and has finite maximum. Hence H tends uniformly below any fixed bound when either coordinate leaves a sufficiently large compact subinterval of (0,infinity).
+
+For fixed v and $m_{j}$=round(v j B\textasciicircum{}j), L=j+$log_{B}$ j+O(1). Write a=j+i, z=j+l. Then $t_{m}$=(v+o(1))$\rho^{i}$, $s_{m}$=(v+o(1))$\rho^{l}$, with the same relative error for all offsets. For sufficiently large fixed N, whenever |i|>N or |l|>N, at least one of the coordinates is outside the compact interval required for H\ensuremath{\geq}-1. Such sizes contribute at most O((ln L)\textasciicircum{}2)exp(-L+O((ln L)\textasciicircum{}2))=o(1). The same compactness argument works for normalized phases in any compact positive interval. In particular the maximum defining P is attained and is a finite maximum locally (use the value at i=l=0 as a continuous lower bound). Its continuity follows.
+
+\subsection{Fixed-phase zero result, including critical phases}
+
+For the finitely many remaining fixed offsets i,l set t=v $\rho^{i}$, s=v $\rho^{l}$. The Poisson means satisfy
+
+\[
+\begin{aligned}\lambda_a&=m_j\rho^{j+i}=tj+o(1),\\
+\lambda_z&=m_j\rho^{j+l}=sj+o(1).\end{aligned}
+\]
+
+The errors are exponentially small, since rounding changes m by at most 1. With n=m-a-z, the exact necessary expectation at sizes a,z is at most
+
+\[
+\frac{\lambda_a^a}{a!}\frac{\lambda_a^z}{z!}
+\exp(-\lambda_a-\lambda_z+o(1))\mathbb E[(1-\rho^{K_0})^{m-z}],
+\]
+
+where K0\textasciitilde{}Bin(n,$\rho^{z}$). This upper bound drops the earlier size restriction on K0. Stirling with fixed offsets gives
+
+\[
+\begin{aligned}&\frac{\lambda_a^a}{a!}\frac{\lambda_a^z}{z!}\exp(-\lambda_a-\lambda_z+o(1))\\
+&\qquad{}=O(j^{-1})\exp(j(2+2\ln t-t-s)).\end{aligned}
+\]
+
+For example $\lambda_{a}$\textasciicircum{}(j+i)/(j+i)! is asymptotic to t\textasciicircum{}i (2 $\pi$ j)\textasciicircum{}(-1/2) exp(j(1+ln t)); the same formula holds for l. If s\ensuremath{\geq}1, bound the expectation by one, obtaining O(j\textasciicircum{}-1) exp(j H(t,s)). This tends to zero even at H=0.
+
+If s<1, let $b_{u}$=P(K0=u). The mass at j is asymptotic to pi\_lambda\_z(j) by the relative binomial approximation (j,z=O(L), $\rho^{z}$=O(L/m)). The forward ratios b\_(u+1)/$b_{u}$ for u\ensuremath{\geq}j are bounded by a fixed q<1, since $\lambda_{z}$/j\ensuremath{\to}s<1. The backward ratios b\_(u-1)/$b_{u}$ for u\ensuremath{\leq}j are bounded by a fixed Q, since s>0. Thus the upper tail is \ensuremath{\leq}$b_{j}$/(1-q), and the lower tail at u=j-d, d\ensuremath{\geq}1, has
+
+\[
+b_{j-d}(1-\rho^{j-d})^{m-z}\leq b_jQ^d\exp(-cjB^d)
+\]
+
+for fixed c>0, because (m-z)$\rho^{j}$\textasciitilde{}v j. The sum over d\ensuremath{\geq}1 tends to zero after division by $b_{j}$: B\textasciicircum{}d\ensuremath{\geq}1+(B-1)d yields a geometric upper bound with ratio Q exp(-c j(B-1)). Therefore
+
+\[
+\begin{aligned}\mathbb E[(1-\rho^{K_0})^{m-z}]&=O(\pi_{\lambda_z}(j))\\
+&=O(j^{-1/2})\exp(j(1+\ln s-s)).\end{aligned}
+\]
+
+Consequently the count at the fixed pair is O(j\textasciicircum{}-3/2) exp(j H(t,s)), again tending to zero if H\ensuremath{\leq}0. If $P_{rho}$(v)\ensuremath{\leq}0 every one of the finitely many pairs vanishes; Appendix B.2 and Markov prove p\_($m_{j}$)\ensuremath{\to}0. Notice that the polynomial prefactors have been computed relative to j, not L: this avoids an unjustified substitution at the exact phase boundary, where O(log L) errors can matter.
+
+For a varying phase with strictly negative $P_{rho}$(v), continuity and the uniform bound of Appendix B.2 give a negative margin for every pair, so $p_{m}$\ensuremath{\to}0 without any fixed-phase rate assumption.
+
+\subsection{Positive phases: s\ensuremath{\leq}1}
+
+Suppose H(t,s)>0 for a fixed integer offset pair. Set a=j+i,z=j+l, k=ceil(L+2log\_B L). Then a,z,k=L+O(log L), m $\rho^{a}$/L\ensuremath{\to}t and m $\rho^{z}$/L\ensuremath{\to}s, and m $\rho^{k}$\ensuremath{\leq}L\textasciicircum{}-2. The exact fixed-size necessary expectation is
+
+\[
+(1+o(1))\frac{\lambda_a^a}{a!}\frac{\lambda_a^z}{z!}\exp(-\lambda_a-\lambda_z)\pi_{\lambda_z}(k).
+\]
+
+Its logarithm divided by L tends to 3+2ln t+ln s-t-2s=H(t,s)>0, including s=1. The sufficient expectation has ratio 1+o(1) to this expectation. The full triple second moment in Appendix A.5 uses only these logarithmic sizes, $\rho^{a}$,$\rho^{z}$=$\Theta$(L/m), m $\rho^{k}$\ensuremath{\leq}L\textasciicircum{}-2 and exponential mean growth; it does not require the specific choices z=a+1 or the maximizing t. Therefore $p_{m}$\ensuremath{\to}1 for these sizes. This argument also works along any sequence with these normalized means converging to t,s and positive limiting H.
+
+\subsection{Positive phases: s>1, pair second moment}
+
+For s>1 the typical M0 is larger than L, and unnecessarily forcing it to size L can lose the positive exponent. Instead count pairs T=(A,Z) of disjoint sets with the prescribed a,z satisfying:
+
+\begin{itemize}
+\item A x A and Z x A entirely absent;
+\item every row outside A union Z hits A;
+\item every row hits Z.
+\end{itemize}
+
+Call the event $E_{T}$ and the count X. It uses only columns ending in A union Z, and its disjoint absence and row-hit blocks have product probability
+
+\[
+P=\rho^{a^2+az}(1-\rho^a)^{m-a-z}(1-\rho^z)^m.
+\]
+
+Its exact mean is binom(m,a)binom(m-a,z)P, so
+
+\[
+\frac{\ln\mathbb E[X]}{L}\longrightarrow2+2\ln t-t-s=H(t,s)>0.
+\]
+
+A uniquely determines Z in a successful pair. We show relative variance tending to zero. For two pairs let S=A union Z, S'=A' union Z', h=|S intersect S'|, I=count of common forbidden ordered coordinates, D=max(a,z)=L+O(log L).
+
+For h\ensuremath{\leq}L/2, retain forbidden bits and only row-hit requirements outside S union S'. For each outside row four hits are required, and the joint probability divided by the product of the four marginal hit probabilities is \ensuremath{\leq}1+O($\rho$\textasciicircum{}(2 $\ell$-h)), $\ell$=min(a,z). This follows from two-term Bonferroni for misses, whose pairwise probabilities are bounded by $\rho$\textasciicircum{}(2 $\ell$-h). Row blocks are disjoint and disjoint from forbidden bits. Removing O(L) marginal hit conditions costs 1+o(1), since miss probabilities are O(L/m). Hence joint/marginal ratio \ensuremath{\leq}(1+o(1))B\textasciicircum{}I, uniformly, since m $\rho$\textasciicircum{}(2ell-h)=o(1). For positive h\ensuremath{\leq}L/2 use I\ensuremath{\leq}h\textasciicircum{}2 and support-overlap probability \ensuremath{\leq}((a+z)\textasciicircum{}2/(m-a-z))\textasciicircum{}h; the geometric bound gives total normalized contribution o(1), and h=0 at most 1+o(1).
+
+For h>L/2 use crude ratio B\textasciicircum{}(I+O(L)), since individual hit factors are exp(-O(L)). Support-overlap probability is B\textasciicircum{}(-Lh+O(h log L)). Hence pairs with deficit $\Delta$=Dh-I\ensuremath{\geq}K L $log_{B}$ L are negligible for sufficiently large fixed K. Put x=|A intersect S'|, y=|Z intersect S'|. Restriction of first forbidden set to common support has size x\textasciicircum{}2+yx, giving
+
+\[
+\Delta\geq(x+y)(D-x).
+\]
+
+For remaining pairs, h>L/2 implies x\ensuremath{\geq}D-O(log L). Put u=|A intersect A'|, w=|A intersect Z'|. Forbidden coordinates lost by the second pair include w\textasciicircum{}2 from its reflexive Z' and uw from A' to Z'. They are disjoint, and their sum is \ensuremath{\leq}$\Delta$. Thus w=O(sqrt(L log L)), then u\ensuremath{\geq}L/2, and then w=O(log L). In particular d=|A minus A'|=O(log L).
+
+Conditional on $E_{T}$, absence requirements and nonempty row-hit blocks remain independent. For independent A' at distance d\ensuremath{\geq}1, with e=|(A' minus A) intersect Z|, the cross coordinates from A intersect A' into added vertices are fresh or hit-conditioned, and the reverse cross coordinates from added vertices outside Z are hit-conditioned into A; the other reverse coordinates are already absent. As in the triple proof the conditional probability of independence is at most $\rho$\textasciicircum{}((a-d)(2d-e)). Summing over d=O(log L) bounds the conditional expected number of other such independent A' by the geometric sum with base
+
+\[
+a\rho^{a-d}(z+m\rho^{a-d})=\operatorname{poly}(L)/m.
+\]
+
+This tends to zero uniformly. A'=A allows only the original Z, so all remaining pairs contribute \ensuremath{\leq}(1+o(1)) E[X], negligible against E[X]\textasciicircum{}2. Hence E[X\textasciicircum{}2]/E[X]\textasciicircum{}2\ensuremath{\to}1.
+
+Now complete a fixed successful pair. Conditional on $E_{T}$ the untested columns outside A union Z are fresh. The common nonneighbor set M0 of Z among those columns has binomial size with mean (m-a-z)$\rho^{z}$\textasciitilde{}sL. For any fixed 1<s0<s, Chernoff gives |M0|\ensuremath{\geq}s0 L and |M0|=O(L) except with probability o(1). Conditional on the Z-row column tests determining M0, edges from non-Z rows to M0 and C0 are fresh. The chance some non-Z row misses M0 is at most m $\rho$\textasciicircum{}(s0 L)=m\textasciicircum{}(1-s0)\ensuremath{\to}0, and all non-Z rows hit C0, of size m-O(L), except with probability o(1). The conditional Z-to-C0 law consists of independent nonempty column blocks, so the probability some Z row misses C0 is at most z $\rho$\textasciicircum{}|C0|=o(1). Thus a fixed successful pair completes with conditional probability 1-o(1), uniformly. Count the failed pairs: their mean is o(E[X]); Markov plus the second-moment concentration yields a successful completion a.a.s. This avoids conditioning fresh bits on the outcome of selecting an arbitrary successful pair.
+
+Combining Appendices B.4 and B.5 proves the positive phase assertion, even for varying sequences with the stated limiting normalized means.
+
+\subsection{Full-sequence convergence and interval coverage}
+
+For arbitrary m use j=floor(L-$log_{B}$ L), $v_{m}$=m $\rho^{j}$/L in [1,B). If $P_{rho}$(v)>0 for every v in [1,B], any subsequence of m has a further subsequence on which $v_{m}$\ensuremath{\to}v in that interval. Fix a positive pair of offsets for v and use Appendices B.4 or B.5 with a=j+i,z=j+l. Their size and mean assumptions hold. Thus $p_{m}$\ensuremath{\to}1 on the further subsequence. The subsequence criterion for convergence gives $p_{m}$\ensuremath{\to}1 on the whole sequence. Conversely a phase v with $P_{rho}$(v)\ensuremath{\leq}0 supplies the exact zero subsequence by Appendix B.3. If $\rho$>$\rho_{*}$ Appendix A.5 guarantees a positive subsequence. This proves the full-sequence criterion in Appendix B.1.
+
+For explicit evaluation only d=l-i>0 with r=$\rho^{d}$>$\rho_{*}$ can give positive H. Indeed the maximization in the threshold theorem yields a nonpositive maximum for d\ensuremath{\leq}0 or $\rho^{d}$\ensuremath{\leq}$\rho_{*}$. For each remaining d, the function H(t,rt) is strictly concave on t>0: the two pieces have negative second derivatives and matching first derivatives at rt=1. It has a unique positive maximum and tends to minus infinity at both ends, hence a unique open positivity interval ($\alpha_{d}$,$\beta_{d}$), whose endpoints are the two roots H(t,rt)=0. Define the logarithmic intervals
+
+\[
+I_d=(\log_B\alpha_d,\log_B\beta_d)\pmod{1}.
+\]
+
+Then $P_{rho}$(v)>0 exactly when $log_{B}$ v modulo 1 lies in the union of these finitely many open intervals on the phase circle. Coverage of the entire circle is equivalent to $p_{m}$\ensuremath{\to}1 in the $\rho$>$\rho_{*}$ regime. A missing point implies oscillation. This includes exact endpoint gaps, because Appendix B.3 supplies fixed-phase zero even at equality.
+
+\subsection{Explicit consequences without numerical root assumptions}
+
+At $\rho$=1/10 ($\theta$=0.9) only d=1 can yield a positive value since $\rho^{2}$=0.01<$\rho_{*}$. Its positivity interval lies strictly inside (1,B)=(1,10): H(1,$\rho$)=2-2rho+ln $\rho$<0 and H(B,1)=1+2ln B-B<0; the unique maximum occurs between 1 and B. In particular v=1 has no positive lattice pair. The zero phase $m_{j}$=round(j*10\textasciicircum{}j) contrasts with the positive phase $m_{j}$=round(2.5*j*10\textasciicircum{}j), since 3/(1+2rho)=2.5 and g($\rho$)>0. Thus the last target oscillates at $\theta$=0.9, although its finite-model membership is positive there. More generally for $\rho_{*}$<$\rho$\ensuremath{\leq}1/5, only d=1 can be positive ($\rho^{2}$\ensuremath{\leq}0.04<$\rho_{*}$); H(1,$\rho$)<0 since 2-2rho+ln $\rho$ increases on this range and at 1/5 equals 1.6-ln 5<0. H(B,1)<0 for B\ensuremath{\geq}5 by its decreasing derivative and value 2ln 5-4<0. The maximizer lies between 1 and B; hence v=1 is a zero phase throughout this interval. Thus liminf=0,limsup=1 for 4/5\ensuremath{\leq}$\theta$<$\theta_{*}$.
+
+For $\rho$\ensuremath{\geq}1/3 ($\theta$\ensuremath{\leq}2/3), d=1 alone covers the phase circle. Indeed H(1,$\rho$)=2-2rho+ln $\rho$>0 for 1/3\ensuremath{\leq}$\rho$<1 by concavity and its endpoint values (at 1/3, 4/3-ln 3>0, at 1, zero). Also H(B,1)=1+2ln B-B>0 for 1<B\ensuremath{\leq}3 by concavity and endpoint values (at 1, zero, at 3, 2ln 3-2>0). Strict concavity implies H(t,$\rho$*t)>0 throughout [1,B]. Hence $p_{m}$\ensuremath{\to}1 for every 0<$\theta$\ensuremath{\leq}2/3. These explicit ranges are not asserted sharp; the interval criterion above is exact. The fair-model theorem is consistent with this result.
+
+The phase-circle test does not classify arbitrary transition sequences approaching a zero endpoint at shrinking distance. Such scaling windows remain natural subsequent questions. Appendices C and D give the exact fixed-bias transitions for both exceptional targets. The previous finite-model threshold and counts are unchanged.
+
+\section{Sharp convergence threshold for \texttt{011010111}}
+
+\subsection*{C.0. Theorem}
+
+Put $\rho$=1-$\theta$, B=1/$\rho$, $\rho_{*}$=(3sqrt(3)-5)/4. Define
+
+\[
+\begin{aligned}u(r)&=\frac{2\ln(1/r)}{1-r},\\
+D(r)&=3+3\ln u(r)+2\ln r-(1+2r^2)u(r).\end{aligned}
+\]
+
+There is a unique root $r_{c}$ of D in [1/4,1/3], lying strictly between 251/\texttt{1000} and 252/\texttt{1000}. Numerically $r_{c}$=0.25149763525561764... . Then for the last target F011010111,
+
+\[
+\begin{array}{ll}\rho>r_c:&p_m\to1,\\
+\rho_*<\rho\leq r_c:&\liminf p_m=0,\ \limsup p_m=1,\\
+0<\rho\leq\rho_*:&p_m\to0.\end{array}
+\]
+
+In $\theta$ notation the convergence threshold $\theta_{c}$=1-$r_{c}$\ensuremath{\approx}0.7485023647443824 belongs to the oscillatory interval, while $\theta_{*}$=1-$\rho_{*}$\ensuremath{\approx}0.950961894323342 belongs to the vanishing interval. This completes the full-sequence classification for this target at all fixed biases.
+
+\subsection{Separation of the lattice optimization}
+
+The phase function from Appendix B is $P_{r}$(v)=max\_(i,l integers) H(v r\textasciicircum{}i,v r\textasciicircum{}l), where
+
+\[
+\begin{aligned}H(t,s)&=f(t)+J(s),\\f(t)&=2+2\ln t-t,\\J(s)&=\begin{cases}1+\ln s-2s,&s\leq1,\\-s,&s\geq1.\end{cases}\end{aligned}
+\]
+
+Because the integer indices are independent, the maximum is the sum of separate lattice maxima. The continuous function f increases up to 2 and decreases after 2; J increases up to 1/2 and decreases thereafter. The first adjacent comparison is exact:
+
+\[
+f(t)-f(rt)=2\ln(1/r)-(1-r)t=(1-r)(u-t).
+\]
+
+Consequently f(t) maximizes f over its lattice whenever r u\ensuremath{\leq}t\ensuremath{\leq}u: comparison with smaller neighbors follows from the positive difference for t\ensuremath{\leq}u, and comparison with larger neighbors from the negative difference for t/r\ensuremath{\geq}u. Repeating the comparisons proves the claim for all integer shifts. Each phase has a representative in [ru,u] because the ratio of the endpoints is B.
+
+Appendix B.7 proved $p_{m}$\ensuremath{\to}1 for r\ensuremath{\geq}1/3, oscillation for $\rho_{*}$<r\ensuremath{\leq}1/5, and vanishing for r\ensuremath{\leq}$\rho_{*}$. It remains to decide [1/5,1/3]. All subsequent symbols r denote $\rho$.
+
+For useful monotonic bounds, u=2 $integral_{0}$\textasciicircum{}1 [r+(1-r)x]\textasciicircum{}(-1) dx is strictly decreasing in r; ru and r\textasciicircum{}2u are strictly increasing, by differentiation of each integrand after multiplication by r or r\textasciicircum{}2 (strict on a positive-measure set). Also u>2, since the integrand is >1 for x<1. Values at endpoints used below follow directly from these formulas.
+
+\subsection{No coverage for 1/5\ensuremath{\leq}r\ensuremath{\leq}1/4}
+
+Take the phase represented by t=u, or equivalently t0=ru. These have equal f by the adjacent comparison and are f-maximizers. On this range t0 lies between (ln 5)/2 and (2 ln 4)/3, hence 1/2<t0<1. Since J decreases above 1/2, all larger lattice points have worse J. The next smaller lattice point r t0<1/2, and all further smaller ones have worse J than that point. The remaining comparison is
+
+\[
+\begin{aligned}J(t_0)-J(rt_0)&=\ln(1/r)-2(1-r)t_0\\&=(1-4r)\ln(1/r)\geq0.\end{aligned}
+\]
+
+Thus t0 is also a J-maximizer. At this phase
+
+\[
+P_r(u)=H(t_0,t_0)=3+3\ln t_0-3t_0<0,
+\]
+
+by ln x<x-1 for x!=1. This exact phase therefore supplies a zero subsequence. Appendix A.5 supplies a positive subsequence. Hence the entire stated range oscillates, including r=1/4.
+
+\subsection{Exactly two switching points for 1/4\ensuremath{\leq}r\ensuremath{\leq}1/3}
+
+Set b=u/4. Here 1/2<b<1, ru\ensuremath{\geq}b, r\textasciicircum{}2u<1/2, and r\textasciicircum{}2u\ensuremath{\leq}b. For the last bound use r\textasciicircum{}2\ensuremath{\leq}1/9<1/4. For the stronger r\textasciicircum{}2u<1/2 use u\ensuremath{\leq}u(1/4)=8 ln 4/3 and hence r\textasciicircum{}2u\ensuremath{\leq}8 ln 4/27<1/2. Also ru>1/2. These estimates follow by the monotonicity above and elementary endpoint values.
+
+On this range the adjacent J-difference J(s)-J(rs) is strictly decreasing in s. For s\ensuremath{\leq}1 it equals ln B-2(1-r)s; for 1\ensuremath{\leq}s\ensuremath{\leq}1/r its derivative is -1-1/s+2r<0; for s\ensuremath{\geq}1/r it equals -(1-r)s. The pieces match. Its unique zero is b=u/4<1. Therefore a lattice J-maximizer is any s in [r b,b], by the same adjacent-comparison argument as for f.
+
+Choose t in [ru,u] to maximize f. Since t\ensuremath{\geq}ru\ensuremath{\geq}b, the J-maximizer can be chosen to be rt when t\ensuremath{\leq}b/r and r\textasciicircum{}2t when t\ensuremath{\geq}b/r. Indeed rt ranges between r\textasciicircum{}2u\ensuremath{\geq}rb (because ru\ensuremath{\geq}b) and b on the first interval. On the second interval r\textasciicircum{}2t ranges between rb and r\textasciicircum{}2u\ensuremath{\leq}b. The switch b/r lies in [ru,u] because r\textasciicircum{}2\ensuremath{\leq}1/4\ensuremath{\leq}r. Thus
+
+\[
+P_r(t)=\begin{cases}H(t,rt),&ru\leq t\leq b/r,\\H(t,r^2t),&b/r\leq t\leq u.\end{cases}
+\]
+
+The two functions agree at the switch. On each interval they are strictly concave as functions of t (negative second derivatives in H; or f and J are concave). Thus the minimum over the full period is achieved at one of its endpoints or the switch. The two outer endpoints have equal phase value by periodicity. Hence
+
+\[
+\begin{aligned}\min_v P_r(v)&=\min(D(r),E(r)),\\D(r)&=H(u,r^2u)=f(u)+J(r^2u),\\E(r)&=H(b/r,b)=f(b/r)+J(b).\end{aligned}
+\]
+
+The displayed formula for D follows by substitution since r\textasciicircum{}2u<1.
+
+Both functions are strictly increasing on [1/4,1/3]. For D, u decreases while u>2, so f(u) increases. Also r\textasciicircum{}2u increases and stays below 1/2, so J(r\textasciicircum{}2u) increases. For E, b/r=u/(4r) strictly decreases while remaining >2 (at r=1/3 it equals (9/4)ln 3>2). Consequently f(b/r) increases. And b decreases while remaining >1/2, so J(b) increases. These arguments need no derivative of the phase maximizer.
+
+\subsection{Signs and the unique transition}
+
+The following strict numerical inequalities can be certified by rational arithmetic with the elementary logarithm series
+
+\[
+\begin{aligned}\ln x&=2\sum_{k=0}^{N-1}\frac{y^{2k+1}}{2k+1}+\mathcal R,\qquad y=\frac{x-1}{x+1},\\
+|\mathcal R|&\leq\frac{2|y|^{2N+1}}{(2N+1)(1-y^2)}.\end{aligned}
+\]
+
+For clarity, using N=60 and outward fixed-point rounding at scale 10\textasciicircum{}18 gives the following conservative rational enclosures (the independent actual integer-arithmetic evaluation obtained narrower intervals):
+
+\[
+\begin{aligned}-0.003005&<D(251/1000)<-0.003004,\\
+0.003020&<D(252/1000)<0.003022,\\
+0.001577&<E(251/1000)<0.001578.\end{aligned}
+\]
+
+These can be reproduced by taking lower and upper logarithm bounds at the rational endpoints after each arithmetic operation, since ln is increasing. In particular D has exactly one root $r_{c}$ in (0.251,0.252) by continuity and strict monotonicity. For r\ensuremath{\leq}$r_{c}$ in [1/4,1/3], D\ensuremath{\leq}0, so the phase u is nonpositive. For r>$r_{c}$ both D>0 and E>0 (E is increasing and already positive at 0.251). Thus the phase circle is covered precisely when r>$r_{c}$. At equality the phase u has $P_{r}$(u)=0 (E>0); the exact fixed-phase upper bound of Appendix B gives a zero subsequence, not an inconclusive leading exponent.
+
+Apply the full-sequence criterion and combine with Appendix C.2 and the outer ranges in Appendix B.7 to prove the theorem.
+
+The approximations $r_{c}$\ensuremath{\approx}0.25149763525561764, $\theta_{c}$\ensuremath{\approx}0.7485023647443824 are from floating-point bisection and are not used in the proof. The sign bracket above is certified by a separate integer-arithmetic computation; the exact root definition is the mathematical statement. Transition windows for sequences with bias changing with m, and arbitrary shrinking approaches to a critical lattice phase, are not claimed. Independent review, Lean verification, and literature priority remain pending.
+
+\section{Sharp phase theorem for \texttt{011011101}}
+
+\subsection*{D.0. Theorem}
+
+Let F=\texttt{011011101}, with labels C,A,V,Z, and missing arrows exactly A\ensuremath{\to}V, V\ensuremath{\to}V, Z\ensuremath{\to}A. Fix edge probability $\theta$ in (0,1), including loops, and put $\rho$=1-$\theta$, B=1/$\rho$, L=$log_{B}$ m. Let T>2 be the unique root of 2+2 ln T-T=0. Then
+
+\[
+\theta_0=1-\frac1{eT}\approx0.9313234165433595,
+\]
+
+and the complete fixed-bias classification is
+
+\[
+\begin{array}{ll}0<\theta<\theta_0:&p_m(F)\to1,\\
+\theta_0\leq\theta<1:&\liminf p_m(F)=0,\ \limsup p_m(F)=1.\end{array}
+\]
+
+In particular the endpoint belongs to the oscillatory range, and no fixed bias gives a zero full-sequence limit.
+
+More precisely, for fixed v>0 and $m_{j}$=round(v j B\textasciicircum{}j),
+
+\[
+\lim_{j\to\infty}p_{m_j}(F)=\begin{cases}1,&\exists i\in\mathbb Z:\ e^{-1}<v\rho^i<T,\\0,&\text{otherwise}.\end{cases}
+\]
+
+If the phase is strictly positive, the same limit one holds along arbitrary sequences with normalized phase tending to v. Exact zero phases are proved for fixed-v subsequences, not all shrinking boundary approaches.
+
+\subsection{Necessary conditions and uniform logarithmic size bound}
+
+Let b0=L-3 $log_{B}$ L, h=ceil(128 L). The probability of an entirely absent h-by-h rectangle is \ensuremath{\leq}B\textasciicircum{}(2hL-h\textasciicircum{}2)=exp(-$\Omega$(L\textasciicircum{}2)). Outside this exceptional event an independent fibre has b<h. Also with probability 1-o(1), no successful map can have b<b0 or z<b0. For b the label-specific tiny-fibre argument in the proof of Theorem 2 of the main text applies: the only universally incoming labels are C,Z, whose missing outgoing signatures are empty and \{A\}, respectively. Neither misses exactly V. On the complement of the rectangle exception the large labels form a complete core. For any fixed small disjoint fibres (each <h), an outside row that misses precisely V among these fibres and receives an edge from every small fibre would have to have a universal incoming label missing exactly V. Such a witness is impossible under a successful map. Its independent tests over outside vertices have success probability \ensuremath{\geq}$\rho^{b}$ $\theta^{7}$, and the probability of no witness when b<b0 is exp(-$\Omega$(L\textasciicircum{}3)). The number of small-fibre configurations is exp(O(L\textasciicircum{}2)), so a union bound gives o(1). The tests are not conditioned on the rectangle event. For z the simpler union bound suffices: if a set of size z<b0 is hit by every row, its probability for fixed set is (1-$\rho^{z}$)\textasciicircum{}m\ensuremath{\leq}exp(-L\textasciicircum{}3). Summing over \ensuremath{\leq}m\textasciicircum{}(ceil(b0)+1) such choices gives o(1). Thus, up to a probability o(1), restrict b0\ensuremath{\leq}b<h and z\ensuremath{\geq}b0.
+
+Consequently the label-specific exclusions apply. Except with probability o(1), every successful map has b=|V| in [b0,h), where b0=L-3log\_B L, h=ceil(128L), and z=|Z|\ensuremath{\geq}b0. Here V is independent, A is exactly the outside rows missing V, and Z is exactly the outside-(A union V) rows missing A. All rows hit Z. For a fixed b-subset V conditional on independence, reveal its columns; then a=|A| is Bin(m-b,$\rho^{b}$). Conditional on this history the columns of A are fresh and z is Bin(m-b-a,$\rho^{a}$). The independent-set mean
+
+\[
+N_b=\binom mb\rho^{b^2}\leq(e\lambda/b)^b,\qquad\lambda=m\rho^b,
+\]
+
+is uniformly \ensuremath{\leq}exp(400 L ln L) on [b0,h) for large m because $\lambda$\ensuremath{\leq}L\textasciicircum{}3 and b\ensuremath{\leq}129L.
+
+Take K=\texttt{1000} and u=L+K $log_{B}$ L. If a>u then the conditional mean of z is \ensuremath{\leq}L\textasciicircum{}(-K). By the binomial upper-tail bound, the probability of z\ensuremath{\geq}b0 is \ensuremath{\leq}exp(-(K+1+o(1))L ln L), uniformly. Multiplication by $N_{b}$ and summing O(L) sizes shows that such a cannot occur in a successful map except with probability o(1). Also if b>u then $\lambda$\ensuremath{\leq}L\textasciicircum{}(-K), and the independent-set mean itself is exp(-$\Omega$(L ln L)), with a summable bound over O(L) sizes. Thus restrict b to [b0,u], a\ensuremath{\leq}u, z\ensuremath{\geq}b0.
+
+Write t=$\lambda$/L. Then b=L+O(log L) and |ln t|=O(log L) uniformly. Stirling gives
+
+\[
+\ln N_b\leq L(1+\ln t)+O((\ln L)^2).
+\]
+
+If t\ensuremath{\leq}1, drop the a condition; if t\ensuremath{\geq}1, use the binomial lower-tail exponential Markov bound with parameter ln t (valid even if u exceeds the mean):
+
+\[
+\begin{aligned}\Pr(a\leq u\mid V\text{ independent})&\leq\exp(\mu(1/t-1)+u\ln t),\\\mu&=(m-b)\rho^b.\end{aligned}
+\]
+
+Since $\mu$=tL-O(L\textasciicircum{}4/m), the log bound is L(1-t+ln t)+O((ln L)\textasciicircum{}2), uniformly for t\ensuremath{\geq}1. Thus the expected necessary count at size b, keeping only a\ensuremath{\leq}u, is \ensuremath{\leq}exp(L G(t)+O(log\textasciicircum{}2 L)), where
+
+\[
+G(t)=\begin{cases}1+\ln t,&t\leq1,\\2+2\ln t-t,&t\geq1.\end{cases}
+\]
+
+G is continuous, tends to minus infinity at both ends, and is positive precisely on (1/e,T). For fixed v and b=j+i, t=(v+o(1))$\rho^{i}$; the relative error is independent of i. All but finitely many offsets i give G(t)<-1 uniformly, and their count is negligible by the bound just proved and the O(log L) size range.
+
+\subsection{Exact zero phases, including endpoints}
+
+Along $m_{j}$=round(v j B\textasciicircum{}j), for a fixed remaining offset i put t=v $\rho^{i}$. Then $\lambda$=t j+o(1), b=j+i, L=j+$log_{B}$ j+O(1). In particular
+
+\[
+N_b=O(j^{-1/2})\exp(j(1+\ln t))
+\]
+
+by the falling factorial approximation and Stirling with fixed offset. If t\ensuremath{\leq}1/e this tends to zero, including at equality.
+
+For t\ensuremath{\geq}T we need to control the forced A-size more precisely than a\ensuremath{\leq}u. Choose a fixed positive integer K1 so large that v $\rho^{K1}$ is sufficiently small. Conditional on the V-column history with a>j+K1, the mean of z is \ensuremath{\leq}m $\rho$\textasciicircum{}(j+K1)=(v $\rho^{K1}$+o(1))j. Since b0/j\ensuremath{\to}1, the binomial upper-tail bound for z\ensuremath{\geq}b0 gives
+
+\[
+\Pr(z\geq b_0\mid V\text{-column history})\leq\exp(-cj),
+\]
+
+where c can be made arbitrarily large by increasing K1 (from (e $\mu$/ceil(b0))\textasciicircum{}ceil(b0)). Take c>1+ln t. Multiplying by $N_{b}$ gives negligible expected count for this large-a range. This uses the conditional z law before exposing A columns, not conditioning on successful completion.
+
+On a\ensuremath{\leq}j+K1, the binomial mean of a is (m-b)$\rho^{b}$=t j+o(1), with t\ensuremath{\geq}T>1. The mass at j+K1 is (1+o(1)) times its Poisson mass of parameter $\lambda$; this follows by relative binomial approximation for size O(j), q=$\rho^{b}$=O(j/m). All backward ratios of consecutive masses below j+K1 are bounded by a fixed q0<1, since (j+K1)/$\lambda$\ensuremath{\to}1/t<1. Thus
+
+\[
+\begin{aligned}\Pr(a\leq j+K_1\mid V\text{ independent})&\leq C\pi_\lambda(j+K_1)\\&=O(j^{-1/2})\exp(j(1+\ln t-t)).\end{aligned}
+\]
+
+Multiplying by $N_{b}$ bounds the count by O(j\textasciicircum{}-1) exp(j(2+2ln t-t)), which tends to zero for t\ensuremath{\geq}T, including the equality case. The argument includes the z\ensuremath{\geq}b0 exception from Appendix D.1. Sum the finitely many offsets. If no lattice value lies in (1/e,T), the necessary witness count tends to zero after removing o(1) exceptions, so $p_{m}$\ensuremath{\to}0. At endpoints a zero leading exponent alone would not justify this conclusion; the exact fixed-phase prefactors are essential.
+
+\subsection{Positive phases: choose an A-size strictly below L}
+
+Suppose t is strictly in (1/e,T), with b=j+i and m $\rho^{b}$/L\ensuremath{\to}t, either along the exact phase or along an arbitrary sequence of normalized phases tending to v. Choose a fixed $\alpha$ in (0,1) so that
+
+\[
+R(t,\alpha)=1+\ln t+\alpha(1+\ln(t/\alpha))-t>0.
+\]
+
+Such an $\alpha$ always exists. For t<1 take $\alpha$=t, yielding R=1+ln t>0. For 1\ensuremath{\leq}t<T, at $\alpha$=1 the expression is 2+2ln t-t>0 (including t=1), so by continuity a sufficiently close $\alpha$<1 works. Set a=floor($\alpha$ L). These sizes are positive and b=L+O(log L); a/L\ensuremath{\to}$\alpha$<1.
+
+For disjoint sets V,A of sizes b,a, let E\_(V,A) be the event that V is independent and A is exactly the outside-V rows missing V. This uses only V columns and is the conjunction of the absent rectangles V x V, A x V and independent nonempty row-hit blocks to V for all other rows. A successful pair is uniquely determined by V. Write X for the number of such pairs. Its exact mean is
+
+\[
+\mathbb E[X]=\binom mb\binom{m-b}{a}\rho^{b^2+ab}(1-\rho^b)^{m-b-a}.
+\]
+
+Falling factorial estimates and Stirling yield ln E[X]/L\ensuremath{\to}R(t,$\alpha$)>0. Explicitly the leading factors are ($\lambda^{b}$/b!)($\lambda^{a}$/a!)exp(-$\lambda$+o(1)); b/L\ensuremath{\to}1,a/L\ensuremath{\to}$\alpha$ and $\lambda$/L\ensuremath{\to}t.
+
+\subsection{Pair second moment with unequal fibre scales}
+
+For two pairs let S=V union A, S'=V' union A', h'=|S intersect S'|, I the number of common forbidden ordered coordinates. The individual probability is $\rho$\textasciicircum{}(b\textasciicircum{}2+ab) times exp(-O(L)). Let D=max(b,a)=b=L+O(log L). The supports have size a+b=O(L).
+
+For h'\ensuremath{\leq}L/2, retain all forbidden bits and only the two row-hit requirements for rows outside S union S'. These blocks are disjoint from forbidden bits and independent across rows. The joint probability for a row to hit both V,V' is 1-2rho\textasciicircum{}b+$\rho$\textasciicircum{}(2b-|V intersect V'|). Compared with (1-$\rho^{b}$)\textasciicircum{}2 its ratio is \ensuremath{\leq}1+O($\rho$\textasciicircum{}(2b-h')). Across at most m rows this is 1+o(1), since b=L+O(log L). Dropping O(L) other marginal row hits costs only 1+o(1). The joint/marginal squared probability is therefore \ensuremath{\leq}(1+o(1))*B\textasciicircum{}I. As I\ensuremath{\leq}h'\textasciicircum{}2, the normalized contribution of positive h'\ensuremath{\leq}L/2 is o(1) using the support intersection bound ((a+b)\textasciicircum{}2/(m-a-b))\textasciicircum{}h' and the geometric base ((a+b)\textasciicircum{}2 B\textasciicircum{}(L/2)/(m-a-b))\ensuremath{\to}0. The zero-overlap contribution is at most 1+o(1). Notice that no lower bound near L for a is needed in this argument because every hit block ends in V.
+
+For h'>L/2, dropping all hits gives ratio \ensuremath{\leq}B\textasciicircum{}(I+O(L)); the support-overlap bound is B\textasciicircum{}(-L h'+O(h' log L)). Therefore pairs with deficit $\Delta$=Dh'-I\ensuremath{\geq}K2 L $log_{B}$ L give o(1) normalized contribution for sufficiently large fixed K2. For other pairs put x=|V intersect S'| and y=|A intersect S'|. The first forbidden set restricted to the common support has x\textasciicircum{}2+yx=h'x coordinates, so $\Delta$\ensuremath{\geq}h'(D-x). Thus x=D-O(log L). With u=|V intersect V'|, w=|V intersect A'|, the lost forbidden coordinates include the square w\textasciicircum{}2 and the rectangle uw (A' is reflexive and V' reaches A'). Hence w\textasciicircum{}2+uw\ensuremath{\leq}$\Delta$. First w=O(sqrt(L log L)), then u\ensuremath{\geq}L/2 and w=O(log L). Consequently d=|V minus V'|=O(log L).
+
+Condition on the first successful pair. For another independent V' at distance d\ensuremath{\geq}1 let e=|(V' minus V) intersect A|. Independence of V' requires both cross directions between V intersect V' and the added vertices to be absent. Outgoing coordinates from V to added vertices are fresh (they end outside V); reverse coordinates from added vertices outside A are hit-conditioned into V, and those from A already absent. The blocks are disjoint. A block conditioned nonempty has probability at most $\rho^{q}$ that a specified q-bit subset is absent, by its exact conditional formula. Thus the conditional probability of V' independence is at most $\rho$\textasciicircum{}((b-d)(2d-e)). Sum over possible V' of fixed d by binomial upper bounds to obtain
+
+\[
+\left[b\rho^{b-d}(a+m\rho^{b-d})\right]^d.
+\]
+
+For d=O(log L) the base is poly(L)/m and the sum over positive d is o(1). Since V uniquely determines its A, the conditional count of other successful pairs in this near-aligned range is o(1), and identical V contributes exactly one. Thus the remaining pairs contribute at most (1+o(1))*E[X], negligible relative to E[X]\textasciicircum{}2. The three ranges exhaust the second moment, which is (1+o(1))*E[X]\textasciicircum{}2.
+
+\subsection{Completion of a successful pair}
+
+Given a fixed successful V,A pair, all columns outside V are still fresh because the pair event uses V columns only. Expose A columns. Every row in V union A hits A except with probability at most (a+b)$\rho^{a}$=o(1), since $\alpha$>0. Define Z as all rows outside V union A missing A. Its binomial mean is (m-a-b)$\rho^{a}$=m\textasciicircum{}(1-$\alpha$+o(1)). Chernoff gives polynomially growing |Z| and |Z|\ensuremath{\leq}m/4 a.a.s. (e.g. |Z|\ensuremath{\geq}m\textasciicircum{}((1-$\alpha$)/2) eventually on a high-probability event). Let C be the complement, of size \ensuremath{\geq}m/2. Conditional on the V,A column history, remaining columns ending in Z or C are fresh; their choices are functions of that history. All rows hit both Z and C except with probability at most m($\rho$\textasciicircum{}|Z|+$\rho$\textasciicircum{}|C|)=o(1) on the size event. All four fibres are nonempty and exactly the required successor statuses hold.
+
+The fixed-pair failure probability is o(1), uniformly in the pair. The expected count of failed pairs is o(E[X]); Markov and the preceding concentration of X show at least one successful completed pair a.a.s. This proves $p_{m}$\ensuremath{\to}1 whenever t is in the positive interval. As the estimates use only the limiting means with a fixed positive margin, the same result holds for varying phases tending to a positive phase. This is the new step extending the earlier typical-A construction to rare A-sizes.
+
+\subsection{Full-sequence transition}
+
+The positive interval (1/e,T) is open and has multiplicative ratio e T. Its logarithmic image on the phase circle (modulo ln B) covers that circle exactly when ln(e T)>ln B, equivalently $\rho$>1/(e T). To see this directly, scale any v by integer powers of B to lie in [1/e,B/e). If B<e T then a boundary value 1/e can be moved to B/e which is strictly between 1/e and T; all others already lie inside. If B\ensuremath{\geq}e T the phase v=1/e has no lattice point strictly in the interval, because its next larger value B/e\ensuremath{\geq}T. This remains true at equality. A positive phase, for example v=1/2, exists for every $\rho$.
+
+If the circle is covered, every sequence of m has a further subsequence on which j=floor(L-$log_{B}$ L) and $v_{m}$=m $\rho^{j}$/L in [1,B) converge in phase to some v in [1,B]. Choose one positive offset and apply Appendices D.3--D.5. The subsequence criterion yields $p_{m}$\ensuremath{\to}1. If not covered, Appendix D.2 gives a zero subsequence and the positive phase gives a one subsequence. This proves the theorem, including the exact critical bias $\theta_{0}$. The value T is the unique root greater than 2 because the function 2+2ln T-T decreases strictly there from a positive value to minus infinity.
+
+Together with Appendix C, the earlier 92 uniformly vanishing types and 10 uniformly positive types, this gives the full existence-limit or oscillation classification of all 104 four-point central isomorphism classes at every fixed edge bias. This does not classify the probability along arbitrary shrinking critical phase windows, all larger targets, or the full almost-sure logic. Literature priority, independent review and Lean verification remain pending.
+
+
+\section*{References}
+
+[1] V. Goranko and B. Kapron. The Modal Logic of the Countable Random Frame. Archive for Mathematical Logic 42 (2003), 221--243. \url{https://doi.org/10.1007/s001530100135}
+
+[2] V. Goranko. The modal logic of almost sure frame validities in the finite. Advances in Modal Logic 13 (2020), 249--268. \url{https://www.aiml.net/volumes/volume13/Goranko.pdf} (mirror \url{https://titan.dcs.bbk.ac.uk/volumes/volume13/Goranko.pdf}).
+
+[3] J.-M. Le Bars. The 0-1 law fails for frame satisfiability of propositional modal logic. LICS 2002, 225--234. \url{https://doi.org/10.1109/LICS.2002.1029831}
+
+[4] R. F. Schamm. Zero-One Laws and Almost Sure Validities on Finite Structures. MSc short dissertation, Rand Afrikaans University, 2002. Sections 3.3.5--3.3.6; Figure 4.1; appendix. (The figure ordering has not been visually verified.)
+
+[5] V. V. Sliusarev. Modal Logics of Almost Sure Validities and Zero-One Laws in Horn Classes. Doklady Mathematics 110 (2024), 442--449. \url{https://doi.org/10.1134/S1064562424601446}
+
+[6] V. Sliusarev. Modal logics of almost sure validities in some classes of euclidean and transitive frames. \url{https://arxiv.org/abs/2406.10770} (2024 preprint; later publication details to verify).
+
+[7] V. V. Sliusarev. Modal Logic of Random Kripke Frames. PhD thesis, 2026. English summary (2025), \url{https://www.hse.ru/data/2025/10/24/1949835949/2resume_en.pdf} ; defence record \url{https://www.hse.ru/sci/diss/1034821759} .
+
+[8] J.-M. Le Bars. A Sharp Threshold for a Non-monotone Digraph Property. In *Mathematics and Computer Science II: Algorithms, Trees, Combinatorics and Probabilities*, Trends in Mathematics, Birkhäuser, 2002, pp. 197--211. Author-hosted text: \url{https://lebarsj.users.greyc.fr/publications/3tournament.pdf} ; volume: \url{https://link.springer.com/book/10.1007/978-3-0348-8211-8} (Section 2, kernel size estimates and first/second moments).
+
+[9] K. Ikeda and K. Okamoto. On Random Kripke Frames. RIMS Kokyuroku 1602 (2008), 74--84 (Japanese; author names as printed: Ikeda and Okamoto). \url{https://www.kurims.kyoto-u.ac.jp/~kyodo/kokyuroku/contents/pdf/1602-11.pdf} . Definitions 23--25, Propositions 27--28, Theorem 29, and Theorem 30.
+
+Further bibliography and evidence status: \texttt{RELATED\_WORK}.
+
+
+\end{document}
