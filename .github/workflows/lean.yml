@@ -12,6 +12,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Exact phase-theorem witness and overlap audit
+        run: python3 experiments/phase_theorems_exact_audit.py
+      - name: Forbidden-degree criterion finite audit
+        run: python3 experiments/degree_criterion_audit.py
+      - name: Exact convergence-threshold sign certificate
+        run: python3 experiments/sharp_convergence_sign_certificate.py
       - name: Exhaustive finite quotient audit
         run: python3 experiments/finite_quotient_audit.py
       - name: Exact random-frame counts for n=3,4
