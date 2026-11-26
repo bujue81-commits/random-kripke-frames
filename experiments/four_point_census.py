@@ -37,6 +37,13 @@ def forbidden_degree(R):
             and all(sum(A[i])+sum(A[j][i] for j in range(r))>=2
                     for i in range(r)))
 
+def no_singleton_miss_degree(R):
+    r=len(R)-1
+    A=[[1-R[i+1][j+1] for j in range(r)] for i in range(r)]
+    return (all(sum(A[i])+sum(A[j][i] for j in range(r))>=2 for i in range(r))
+            and all(not all(row[i] for row in R) or R[i].count(0)!=1
+                    for i in range(len(R))))
+
 def census():
     classes={}
     for bits in product((0,1),repeat=9):
@@ -55,13 +62,14 @@ def census():
             bad |= (k==2 and s=='0') or (k==3 and s in ZERO3)
         status=('excluded' if bad else 'cycle' if key=='001100010'
                 else 'positive' if signature(R) else 'degree' if forbidden_degree(R)
+                else 'no_singleton' if no_singleton_miss_degree(R)
                 else 'unresolved')
         if key not in classes:
             classes[key]=[0,status]
         assert classes[key][1]==status
         classes[key][0]+=1
     for status,want in [('excluded',(70,339)),('cycle',(1,2)),
-                        ('positive',(5,19)),('degree',(11,62)),('unresolved',(17,90))]:
+                        ('positive',(5,19)),('degree',(11,62)),('no_singleton',(8,39)),('unresolved',(9,51))]:
         found=[(s,n) for s,(n,t) in classes.items() if t==status]
         assert (len(found),sum(n for _,n in found))==want
         print(status,want,sorted(s for s,_ in found))
