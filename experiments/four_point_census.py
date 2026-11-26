@@ -44,6 +44,18 @@ def no_singleton_miss_degree(R):
             and all(not all(row[i] for row in R) or R[i].count(0)!=1
                     for i in range(len(R))))
 
+def complete_core_signature(R):
+    n=len(R)
+    for flags in product((0,1),repeat=n-1):
+        S=[j for j in range(1,n) if flags[j-1]]
+        U=[j for j in range(n) if j not in S]
+        if not all(R[i][j] for i in U for j in U):
+            continue
+        representatives=[u for u in U if all(R[j][u] for j in S)]
+        if len({tuple(R[u][j] for j in S) for u in representatives})==2**len(S):
+            return True
+    return False
+
 def census():
     classes={}
     for bits in product((0,1),repeat=9):
@@ -63,13 +75,14 @@ def census():
         status=('excluded' if bad else 'cycle' if key=='001100010'
                 else 'positive' if signature(R) else 'degree' if forbidden_degree(R)
                 else 'no_singleton' if no_singleton_miss_degree(R)
+                else 'complete_core' if complete_core_signature(R)
                 else 'unresolved')
         if key not in classes:
             classes[key]=[0,status]
         assert classes[key][1]==status
         classes[key][0]+=1
     for status,want in [('excluded',(70,339)),('cycle',(1,2)),
-                        ('positive',(5,19)),('degree',(11,62)),('no_singleton',(8,39)),('unresolved',(9,51))]:
+                        ('positive',(5,19)),('degree',(11,62)),('no_singleton',(8,39)),('complete_core',(4,24)),('unresolved',(5,27))]:
         found=[(s,n) for s,(n,t) in classes.items() if t==status]
         assert (len(found),sum(n for _,n in found))==want
         print(status,want,sorted(s for s,_ in found))
