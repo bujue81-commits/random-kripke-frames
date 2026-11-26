@@ -76,13 +76,15 @@ def census():
                 else 'positive' if signature(R) else 'degree' if forbidden_degree(R)
                 else 'no_singleton' if no_singleton_miss_degree(R)
                 else 'complete_core' if complete_core_signature(R)
+                else 'forced_fibre' if key in {'001011101','001101011'}
+                else 'dominating_reserve' if key=='100111111'
                 else 'unresolved')
         if key not in classes:
             classes[key]=[0,status]
         assert classes[key][1]==status
         classes[key][0]+=1
     for status,want in [('excluded',(70,339)),('cycle',(1,2)),
-                        ('positive',(5,19)),('degree',(11,62)),('no_singleton',(8,39)),('complete_core',(4,24)),('unresolved',(5,27))]:
+                        ('positive',(5,19)),('degree',(11,62)),('no_singleton',(8,39)),('complete_core',(4,24)),('forced_fibre',(2,12)),('dominating_reserve',(1,3)),('unresolved',(2,12))]:
         found=[(s,n) for s,(n,t) in classes.items() if t==status]
         assert (len(found),sum(n for _,n in found))==want
         print(status,want,sorted(s for s,_ in found))
