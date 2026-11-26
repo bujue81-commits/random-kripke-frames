@@ -47,9 +47,19 @@ Formalization plan (after actual Lean builds are confirmed):
 - [x] Main manuscript draft with explicit proof dependency map.
 - [x] Independent finite algorithm recomputation.
 - [x] First-pass internal proof audit.
-- [ ] Standalone typeset manuscript with full proofs.
+- [x] Integrated full-proof Markdown manuscript v0.2 (MANUSCRIPT_FULL.md).
+- [x] Explicit finite classification certificates for all 104 four-point types and 70 quotient maps.
+- [ ] Typeset and compile the integrated manuscript (not yet a PDF or LaTeX submission).
 - [ ] Verify primary-source priority; full external mathematical review.
 - [ ] Obtain current CI and verify pending Lean modules.
 - [ ] Formalize finite census and then selected asymptotic lemmas.
 - [ ] Set author/affiliation with researcher and disclose AI assistance according to venue rules; never invent independent proof verification or attribution.
 - [ ] Author approval before any public submission. No submission or merge performed.
+
+## v0.2 integration audit
+
+The full Markdown text at 724fa1533f1ae80abc900134c5f1fcf1d3e4785c incorporates the five exceptional-target arguments, exact forced-pair formulas, full overlap second moment, finite enumeration pseudocode, explicit characteristic formula and prime-cycle quotient proof. The previous main text remains unchanged. The three-point catalogue was independently recomputed: 10 canonical classes, seven negative and three positive, with exactly two minimal negative classes. Burnside counts 10 and 104 were derived explicitly. No remaining external proof-file dependency; supplementary links concern reproducibility and bibliographic evidence. This is not yet a typeset/compiled submission.
+
+The per-type CSV at 4ab0f876c10259d3631731b6b6a8b4259d34ea92 includes 70 explicit maps onto one of the smaller minimal targets; the JS generator checked direct successor-image equality for each and exhaustively checked no smaller minimal image for the other 34 canonical types. 9322960083eb675069d5930331d8c06ca8c2cbf1 provides a Python checker (execution not confirmed). 74b37abaf9ff324c35ff07091c292af368f58da6 integrates it into CI. These are finite certificates, not probability proofs.
+
+Repeated literature search located Schamm's dissertation through indexed expiring signed PDF URLs and the University of Johannesburg output index, but the repository page returned 403; no figure image recovered. The Goranko 2020 mirror primary text was accessible, but page screenshot returned 404. No priority claim. No new Lean source or verified run.
