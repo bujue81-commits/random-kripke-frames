@@ -5,3 +5,4 @@ import RandomKripke.F0001Witness
 import RandomKripke.GorankoEtaCounterexample
 import RandomKripke.ChainFrames
 import RandomKripke.ChainEdgeCounting
+import RandomKripke.FourPointCensus
