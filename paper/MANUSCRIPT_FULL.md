@@ -307,7 +307,7 @@ The function f is concave (f''=-3/t^2), so its minimum on [sqrt(2),2sqrt(2)] is 
 
 #### 5.4.4. Set-up for the second moment
 
-For target 011010111 relabel vertices C,A,Z,M, where C is universal and the only forbidden arrows are A->A, Z->A, Z->M (M is the B label in the previous notes). Put L=log_2 m, rho=1/2, and choose
+For target 011010111 relabel vertices C,A,Z,M, where C is universal and the only forbidden arrows are A->A, Z->A, Z->M. Put L=log_2 m, rho=1/2, and choose
 
     a=round(L-log_2 L-1), z=a+2, k=ceil(L+2 log_2 L),
     s=a+z+k, c=m-s.
@@ -324,7 +324,7 @@ Use the necessary exact-M witness count Y0 of Sections 5.4.2–5.4.3 at precisel
 
 The forbidden Z-to-M rectangle and the C-column hit requirement make M precisely the common nonneighbors of Z outside A union Z; likewise Z is exactly the set of outside-A rows missing A. Hence for each A there is at most one successful triple. All the specified forbidden rectangles and the individual row/column hit blocks are mutually disjoint coordinate sets. In particular their probabilities multiply. The forbidden set H_T has size Q=a^2+za+zk, the same for every triple. Write P=P(E_T)=rho^Q times the hit factor R. The hit factor satisfies R=exp(-O(L)), since rho^a,rho^z=Theta(L/m), rho^k<=1/(m L^2), and there are O(m) requirements. Let N=(m)_s/(a!z!k!) be the number of triples.
 
-The previous first moment shows E[Y0]=NP>=exp(0.47 L) for sufficiently large m (E[Y]/E[Y0]=1+o(1), where Y additionally requires every row to hit C). We prove E[Y0^2]/E[Y0]^2=1+o(1). Then concentration and Markov on Y0-Y give Y>0 a.a.s., hence p_m->1.
+Section 5.4.3 shows E[Y0]=NP>=exp(0.47 L) for sufficiently large m (E[Y]/E[Y0]=1+o(1), where Y additionally requires every row to hit C). We prove E[Y0^2]/E[Y0]^2=1+o(1). Then concentration and Markov on Y0-Y give Y>0 a.a.s., hence p_m->1.
 
 #### 5.4.5. Small support overlap: h<=L/2
 
@@ -495,7 +495,7 @@ The explicit construction of Q is forced by surjectivity and the two bounded-mor
 | remaining positive cases | 3 | 15 |
 | total | 104 | 512 |
 
-There are 454 labelled negative and 58 labelled positive matrices, with central label fixed. These are not counts of all labelled central frames with the center unspecified. The Python reproducibility script [four_point_census.py](../experiments/four_point_census.py) uses a finer partition of proof methods. The independent audit checked all 24 permutations (not just the six peripheral permutations) and all 25,600 labelled surjections to 2- or 3-point sets for the 512 matrices. The two algorithms agree.
+There are 454 labelled negative and 58 labelled positive matrices, with central label fixed. These are not counts of all labelled central frames with the center unspecified. The Python reproducibility script [four_point_census.py](../experiments/four_point_census.py) uses a finer partition of proof methods. For each of the 104 canonical encodings the accompanying [classification certificate](four_point_classification.csv) records its orbit size, limit, minimality status and proof method. Each of the 70 inherited-zero classes includes an explicit surjection onto one of the smaller minimal vanishing targets (0, 0001, or 1001); all 70 such certificates have been checked by direct successor-image equality. The separate checker [verify_paper_certificate.py](../experiments/verify_paper_certificate.py) verifies the finite certificates and exhaustively excludes smaller minimal images for the other classes. The asymptotic limits are supplied by the proofs above, not by the finite checker. The independent audit checked all 24 permutations (not just the six peripheral permutations) and all 25,600 labelled surjections to 2- or 3-point sets for the 512 matrices. The two algorithms agree.
 
 ## 7. Modal consequences and independence
 
