@@ -24,6 +24,8 @@ jobs:
         run: python3 experiments/last_forced_pair_audit.py
       - name: Forced-fibre weighted probability audit
         run: python3 experiments/forced_fibre_audit.py
+      - name: Verify explicit manuscript classification certificates
+        run: python3 experiments/verify_paper_certificate.py
       - name: Independent manuscript census cross-check
         run: python3 experiments/manuscript_census_crosscheck.py
       - name: Four-point census and central-cycle quotient audit
