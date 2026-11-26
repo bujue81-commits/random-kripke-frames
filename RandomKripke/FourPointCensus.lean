@@ -242,4 +242,44 @@ theorem census4_certificate_coverage :
     certificateCentral4Codes = inheritedCentral4Codes := by
   native_decide
 
+/-- The six explicit maps are exactly the injective self-maps fixing 0.
+    On a finite set such maps are permutations. -/
+theorem census4_permutations_complete :
+    ∀ p : Fin 4 → Fin 4,
+      p ∈ censusPermutations4 ↔
+        p 0 = 0 ∧ (∀ i j : Fin 4, p i = p j → i = j) := by
+  native_decide
+
+theorem census4_canonical_bound :
+    ∀ n : Fin 512, canonicalCentral4 n < 512 := by
+  native_decide
+
+def canonicalRepresentative4 (n : Fin 512) : Fin 512 :=
+  ⟨canonicalCentral4 n, census4_canonical_bound n⟩
+
+def recodedCentral4 (n : Fin 512) (p : Fin 4 → Fin 4) : Fin 512 :=
+  ⟨relabelCentral4 n p % 512, Nat.mod_lt _ (by decide)⟩
+
+/-- Relabelling by any of the six peripheral permutations preserves the
+    canonical code. -/
+theorem census4_canonical_invariant :
+    ∀ n : Fin 512, ∀ p : Fin 4 → Fin 4,
+      p ∈ censusPermutations4 →
+        canonicalCentral4 (recodedCentral4 n p) = canonicalCentral4 n := by
+  native_decide
+
+theorem census4_representative_canonical :
+    ∀ n : Fin 512, canonicalRepresentative4 n ∈ canonicalCentral4Codes := by
+  native_decide
+
+/-- The selected representative is actually related by a listed relabelling,
+    not just an arbitrary code with the same numerical minimum. -/
+theorem census4_representative_witness :
+    ∀ n : Fin 512, ∃ p : Fin 4 → Fin 4,
+      p ∈ censusPermutations4 ∧
+        (∀ i j : Fin 4,
+          central4Frame (canonicalRepresentative4 n) i j =
+            central4Frame n (p i) (p j)) := by
+  native_decide
+
 end RandomKripke
