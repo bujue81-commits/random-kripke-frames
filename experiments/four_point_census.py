@@ -30,6 +30,13 @@ def signature(R):
                 return True
     return False
 
+def forbidden_degree(R):
+    r=len(R)-1
+    A=[[1-R[i+1][j+1] for j in range(r)] for i in range(r)]
+    return (all(sum(A[i][j] for i in range(r))>=1 for j in range(r))
+            and all(sum(A[i])+sum(A[j][i] for j in range(r))>=2
+                    for i in range(r)))
+
 def census():
     classes={}
     for bits in product((0,1),repeat=9):
@@ -47,13 +54,14 @@ def census():
             s=''.join(str(int(j in q[i])) for i in range(1,k) for j in range(1,k))
             bad |= (k==2 and s=='0') or (k==3 and s in ZERO3)
         status=('excluded' if bad else 'cycle' if key=='001100010'
-                else 'positive' if signature(R) else 'unresolved')
+                else 'positive' if signature(R) else 'degree' if forbidden_degree(R)
+                else 'unresolved')
         if key not in classes:
             classes[key]=[0,status]
         assert classes[key][1]==status
         classes[key][0]+=1
     for status,want in [('excluded',(70,339)),('cycle',(1,2)),
-                        ('positive',(5,19)),('unresolved',(28,152))]:
+                        ('positive',(5,19)),('degree',(11,62)),('unresolved',(17,90))]:
         found=[(s,n) for s,(n,t) in classes.items() if t==status]
         assert (len(found),sum(n for _,n in found))==want
         print(status,want,sorted(s for s,_ in found))
