@@ -6,11 +6,13 @@ on:
     branches: ["research/**"]
     paths:
       - "paper/manuscript.tex"
+      - "paper/manuscript_biased.tex"
       - ".github/workflows/paper.yml"
   pull_request:
     branches: ["main"]
     paths:
       - "paper/manuscript.tex"
+      - "paper/manuscript_biased.tex"
       - ".github/workflows/paper.yml"
 
 permissions:
@@ -18,6 +20,10 @@ permissions:
 
 jobs:
   latex:
+    strategy:
+      fail-fast: false
+      matrix:
+        source: [manuscript, manuscript_biased]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -28,13 +34,13 @@ jobs:
       - name: Compile full manuscript
         run: |
           mkdir -p paper/build
-          latexmk -pdf -interaction=nonstopmode -halt-on-error -file-line-error -outdir=paper/build paper/manuscript.tex
+          latexmk -pdf -interaction=nonstopmode -halt-on-error -file-line-error -outdir=paper/build paper/${{ matrix.source }}.tex
       - name: Upload PDF and compiler log
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: manuscript-and-build-log
+          name: ${{ matrix.source }}-and-build-log
           path: |
-            paper/build/manuscript.pdf
-            paper/build/manuscript.log
+            paper/build/${{ matrix.source }}.pdf
+            paper/build/${{ matrix.source }}.log
           if-no-files-found: warn
