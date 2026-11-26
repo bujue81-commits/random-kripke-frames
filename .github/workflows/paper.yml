@@ -7,12 +7,14 @@ on:
     paths:
       - "paper/manuscript.tex"
       - "paper/manuscript_biased.tex"
+      - "experiments/extract_display_regression.py"
       - ".github/workflows/paper.yml"
   pull_request:
     branches: ["main"]
     paths:
       - "paper/manuscript.tex"
       - "paper/manuscript_biased.tex"
+      - "experiments/extract_display_regression.py"
       - ".github/workflows/paper.yml"
 
 permissions:
@@ -31,6 +33,21 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y --no-install-recommends latexmk texlive-latex-extra texlive-fonts-recommended lmodern
+      - name: Compile isolated display math regression
+        if: matrix.source == 'manuscript_biased'
+        run: |
+          python3 experiments/extract_display_regression.py
+          cd paper/build
+          latexmk -pdf -interaction=nonstopmode -halt-on-error -file-line-error display-test.tex
+      - name: Upload display math regression PDF and log
+        if: always() && matrix.source == 'manuscript_biased'
+        uses: actions/upload-artifact@v4
+        with:
+          name: display-math-regression
+          path: |
+            paper/build/display-test.pdf
+            paper/build/display-test.log
+          if-no-files-found: warn
       - name: Compile full manuscript
         run: |
           mkdir -p paper/build
