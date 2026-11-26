@@ -18,6 +18,8 @@ jobs:
         run: python3 experiments/exact_random_frames.py
       - name: Exhaustive chain edge cardinality audit
         run: python3 experiments/chain_edge_counting_audit.py
+      - name: Final four-point overlap inequality audit
+        run: python3 experiments/last_overlap_audit.py
       - name: Last four-point forced-pair probability audit
         run: python3 experiments/last_forced_pair_audit.py
       - name: Forced-fibre weighted probability audit
