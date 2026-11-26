@@ -41,7 +41,7 @@ Minimal means no nonisomorphic proper surjective bounded-morphic image has vanis
 
 For a central F with r peripherals put A_ij=1 if the peripheral arrow i->j is missing, 0 otherwise. Write q=sum A_ij and g_i=sum_j(A_ij+A_ji). A missing loop contributes twice to g_i.
 
-**Theorem 2 (no singleton miss and degree).** Assume every g_i>=2, and no label with a universal incoming column has exactly one missing outgoing arrow. Then d=q-r>=0 and
+**Theorem 2 (no singleton miss and degree).** Assume r>=1, every g_i>=2, and no label with a universal incoming column has exactly one missing outgoing arrow. Then d=q-r>=0 and
 
     log_B p_m(F) = -d b^2+O_F,theta(L).
 
