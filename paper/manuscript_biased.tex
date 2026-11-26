@@ -572,9 +572,9 @@ for some fixed c>0, because $\lambda_{a}$/a=v is bounded below and z=O(L). The s
 Multiply by (2) and use z=a+1. The resulting count is at most a constant times
 
 \[
-\begin{aligned}&\frac{\lambda_a}{a+1}\left(\frac{\lambda_a^a}{a!}\right)^2
-\frac{\lambda_z^a}{a!}\exp(-\lambda_a-2\lambda_z)\\
-&\quad{}\leq Ca^{-3/2}\exp(a[3+2\ln v+\ln w-v-2w]).
+ \begin{aligned}
+ &\frac{\lambda_a}{a+1}\left(\frac{\lambda_a^a}{a!}\right)^2\frac{\lambda_z^a}{a!}\exp(-\lambda_a-2\lambda_z)\\
+ &\quad{}\leq Ca^{-3/2}\exp(a[3+2\ln v+\ln w-v-2w]).
 \end{aligned}
 \]
 
@@ -695,8 +695,8 @@ The errors are exponentially small, since rounding changes m by at most 1. With 
 where K0\textasciitilde{}Bin(n,$\rho^{z}$). This upper bound drops the earlier size restriction on K0. Stirling with fixed offsets gives
 
 \[
-\begin{aligned}&\frac{\lambda_a^a}{a!}\frac{\lambda_a^z}{z!}\exp(-\lambda_a-\lambda_z+o(1))\\
-&\qquad{}=O(j^{-1})\exp(j(2+2\ln t-t-s)).\end{aligned}
+\begin{gathered}\frac{\lambda_a^a}{a!}\frac{\lambda_a^z}{z!}\exp(-\lambda_a-\lambda_z+o(1))\\
+{}=O(j^{-1})\exp(j(2+2\ln t-t-s)).\end{gathered}
 \]
 
 For example $\lambda_{a}$\textasciicircum{}(j+i)/(j+i)! is asymptotic to $t^{i}$ (2 $\pi$ j)\textasciicircum{}(-1/2) exp(j(1+ln t)); the same formula holds for l. If s\ensuremath{\geq}1, bound the expectation by one, obtaining O($j^{-1}$) exp(j H(t,s)). This tends to zero even at H=0.
