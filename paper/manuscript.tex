@@ -8,6 +8,7 @@
 \usepackage{fvextra}
 \usepackage[hidelinks]{hyperref}
 \usepackage{microtype}
+\newtheorem{theorem}{Theorem}
 \setlength{\emergencystretch}{3em}
 \setcounter{secnumdepth}{3}
 \title{Almost-Sure Bounded-Morphic Images of Random Kripke Frames: A Complete Classification of Central Frames on at Most Four Vertices}
@@ -43,7 +44,7 @@ This is equivalent to the usual forth and back conditions. Denote the existence 
 
 Represent a central target with r noncentral labels by the r-by-r peripheral adjacency matrix written in row-major bit order. All arrows incident with the distinguished central label 0 are present. Take the lexicographically least encoding under simultaneous peripheral row/column permutation as canonical. This counts unpointed isomorphism classes: any isomorphism sends a central vertex to a central vertex, and any two central vertices can be exchanged by an automorphism, since both their rows and columns are universal.
 
-\textbf{Theorem 1 (small central-frame classification).} For every central target on at most four vertices, $p_{m}(F)$ converges to 0 or 1. The numbers of isomorphism classes and minimal vanishing classes are as follows.
+\begin{theorem}[Small central-frame classification]\label{thm:classification} For every central target on at most four vertices, $p_{m}(F)$ converges to 0 or 1. The numbers of isomorphism classes and minimal vanishing classes are as follows.
 
 \begin{center}\small
 \begin{tabular}{lllll}
@@ -60,37 +61,45 @@ vertices & all & p\ensuremath{\to}0 & p\ensuremath{\to}1 & minimal p\ensuremath{
 
 Minimal means no nonisomorphic proper surjective bounded-morphic image has vanishing probability. The canonical minimal two- and three-point encodings are 0, \texttt{0001} and \texttt{1001}. The complete four-point classifier is given in Section 6.
 
-\textbf{Proof strategy.} Composition makes vanishing probability propagate from a quotient to its source target: if $F \twoheadrightarrow  H$ then $p_{m}(F)\leq p_{m}(H)$. Classify the other targets using Theorems 2 and 3 and the five exceptional encodings in Section 5. The finite orbit and quotient census is a deterministic calculation, with full pseudocode below and a reproducible Python implementation. Every category is covered by a probability proof; numerical experiments do not determine any asymptotic label.
+\end{theorem}
+
+\noindent\textbf{Proof strategy.} Composition makes vanishing probability propagate from a quotient to its source target: if $F \twoheadrightarrow  H$ then $p_{m}(F)\leq p_{m}(H)$. Classify the other targets using Theorems 2 and 3 and the five exceptional encodings in Section 5. The finite orbit and quotient census is a deterministic calculation, with full pseudocode below and a reproducible Python implementation. Every category is covered by a probability proof; numerical experiments do not determine any asymptotic label.
 
 \section{Vanishing criterion}
 
-For a central F with r peripherals put $A_{ij}=1$ if the peripheral arrow $i\to j$ is missing, 0 otherwise. Write $q=\sum  A_{ij}$ and g\_i=sum\_j(A\_ij+A\_ji). A missing loop contributes twice to $g_{i}$.
+For a central F with r peripherals put $A_{ij}=1$ if the peripheral arrow $i\to j$ is missing, 0 otherwise. Write $q=\sum  A_{ij}$ and $g_i=\sum_j(A_{ij}+A_{ji})$. A missing loop contributes twice to $g_{i}$.
 
-\textbf{Theorem 2 (no singleton miss and degree).} Assume every $g_{i}\geq 2$, and no label with a universal incoming column has exactly one missing outgoing arrow. Then $d=q-r\geq 0$ and
+\begin{theorem}[No singleton miss and degree]\label{thm:degree}
+Assume $r\geq1$, every $g_{i}\geq 2$, and no label with a universal incoming column has exactly one missing outgoing arrow. Then $d=q-r\geq 0$ and
 
 \[
 \log_B p_m(F)=-db^2+O_{F,\theta}(L).
 \]
 
 When $d=0$, moreover $p_{m}(F)=O(L^{-r/2})$. In particular every such target vanishes. This holds at every fixed bias.
+\end{theorem}
 
-\textbf{Proof.} Fix a large C depending only on r, and put $h=\operatorname{ceil}(C L), b_{0}=L-3 \log _{B} L$. The probability of an empty ordered h-by-h rectangle is at most $B^{2hL-h^{2}}$. Outside that event, the labels whose fibres have size $\geq h$ form a complete reflexive core U. Fix all the other small fibres, whose union has $O(L)$ vertices. If fibre i has size $<b_{0}$, a row outside the union which misses precisely i among the small fibres and receives an arrow from each small fibre would have a universally incoming target label missing precisely i, contrary to the hypothesis. These independent outside-row tests each succeed with probability $\geq \rho ^{a_{i}} \theta ^{2|S|-1}$, where S is the set of small labels. Their absence has probability $\exp (-\Omega (L^{3}))$; union over $B^{O}(L^{2})$ choices of small fibres leaves a negligible event. The empty-rectangle term is negligible at the stated scale by increasing C.
+\begin{proof} Fix a large C depending only on r, and put $h=\operatorname{ceil}(C L), b_{0}=L-3 \log _{B} L$. The probability of an empty ordered h-by-h rectangle is at most $B^{2hL-h^{2}}$. Outside that event, the labels whose fibres have size $\geq h$ form a complete reflexive core U. Fix all the other small fibres, whose union has $O(L)$ vertices. If fibre i has size $<b_{0}$, a row outside the union which misses precisely i among the small fibres and receives an arrow from each small fibre would have a universally incoming target label missing precisely i, contrary to the hypothesis. These independent outside-row tests each succeed with probability $\geq \rho ^{a_{i}} \theta ^{2|S|-1}$, where S is the set of small labels. Their absence has probability $\exp (-\Omega (L^{3}))$; union over $B^{O}(L^{2})$ choices of small fibres leaves a negligible event. The empty-rectangle term is negligible at the stated scale by increasing C.
 
 For remaining peripheral sizes $a_{i}\geq b_{0} \text{ and } T=\sum  a_{i}$, the forbidden-coordinate count $Q=\sum  A_{ij} a_{i} a_{j}$ is at least $q b_{0}^{2}+2b_{0}(T-r b_{0})$. Since the multinomial factor is $\leq m^{T}, T>CL$ contributes $B^{-d L^{2}-\Omega (L^{2})}$ after summing at most $m^{r}$ vectors. For $T\leq CL$, the central fibre has size $\geq m/2$ and factorial bounds give $\log _{B}$ multinomial \ensuremath{\leq}bT+O(L). The derivatives of Q-bT are positive on all $a_{i}\geq b_{0}$. Clip sizes below b upward to b: with $\delta _{i}=(b-a_{i})_{+}$ this gives Q-bT\ensuremath{\geq}d $b^{2}-O(L)\sum  \delta _{i}$. Central rows must hit each peripheral fibre; the logarithm of this hit factor is at most $-L \sum _{\delta _{i}>0} B^{\delta _{i}}/(2 \ln  B)$. This absorbs each positive linear deficit since $K t-B^{t}/(2 \ln  B)$ is bounded above. Sum $O(L^{r})$ vectors for the upper logarithmic rate.
 
 For the lower rate use balanced peripheral fibres of size $a=\operatorname{ceil} b$. Their number N has $\log _{B} N=r b^{2}+O(L)$. For any fixed map the full success probability is at least $c_{m} \rho ^{q a^{2}}, c_{m}=\exp (-2(r+1)L)$, by independence of forbidden rectangles and required-hit row blocks. If $k_{i}$ vertices of first peripheral fibre i lie outside a second map's peripheral support, the forbidden rectangle $ij$ loses at least $a(k_{i}+k_{j})/2$ coordinates. Hence the union of forbidden sets has size $\geq q a^{2}+a k$ with $k=\sum  k_{i}$. Count at most $\operatorname{binom}(ra,k)\operatorname{binom}(m-ra,k)r^{ra}$ second maps per k. The $\sum $ of their joint probabilities is at most $\rho ^{q a^{2}}(2r)^{ra} \exp (m \rho ^{a}), \text{ and } m \rho ^{a}\leq L$. Cauchy-Schwarz gives a lower bound with $\log _{B}$ at least $-d b^{2}-O(L)$.
 
-In the critical case $q=r$ all incidence degrees are two. Orient the degree-two undirected multigraph of missing arrows cyclically component by component; loops and double edges are allowed. This produces a permutation $\sigma $ with $Q=\sum  a_{i} a_{\sigma }(i)$. With $\lambda _{i}=m \rho ^{a_{i}}$, the main-range selected expectation is at most $(1+o(1))$ times the $\sum  \text{ of } \prod _{i} \pi _{\lambda _{\sigma }(i)}(a_{i})$, where $\pi _{\lambda }(k)=e^{-\lambda }\lambda ^{k}/k!$. By Stirling, if any normalized mean lies outside $[1/2,2]$, that term is exponentially small in L. Otherwise every $a_{i}=b+O(1)$, leaving $O(1)$ integer vectors, each $O(L^{-r/2})$. The discarded tails remain negligible. This proves the critical bound. QED.
+In the critical case $q=r$ all incidence degrees are two. Orient the degree-two undirected multigraph of missing arrows cyclically component by component; loops and double edges are allowed. This produces a permutation $\sigma $ with $Q=\sum  a_{i} a_{\sigma }(i)$. With $\lambda _{i}=m \rho ^{a_{i}}$, the main-range selected expectation is at most $(1+o(1))$ times the $\sum  \text{ of } \prod _{i} \pi _{\lambda _{\sigma }(i)}(a_{i})$, where $\pi _{\lambda }(k)=e^{-\lambda }\lambda ^{k}/k!$. By Stirling, if any normalized mean lies outside $[1/2,2]$, that term is exponentially small in L. Otherwise every $a_{i}=b+O(1)$, leaving $O(1)$ integer vectors, each $O(L^{-r/2})$. The discarded tails remain negligible. This proves the critical bound.
+\end{proof}
 
 For $r=1$ the missing peripheral loop satisfies both hypotheses; its image probability is $O(L^{-1/2})$. The loopless and reciprocal-gap cases are also covered at the level of existence probability, since the only universal incoming column is the center and every peripheral incidence degree is at least two. Their unrestricted first-moment and resonance results are not needed here.
 
 \section{Positive criterion}
 
-\textbf{Theorem 3 (complete-core signatures).} Suppose the target admits a partition $U,S$ with U nonempty and complete reflexive, such that every subset J of S is the outgoing S-neighborhood of some $u_{J}$ in U that receives all S arrows. Then at every fixed bias $p_{m}(F)\geq 1-\exp (-c m)$ for some $c>0$ and sufficiently large m.
+\begin{theorem}[Complete-core signatures]\label{thm:core} Suppose the target admits a partition $U,S$ with U nonempty and complete reflexive, such that every subset J of S is the outgoing S-neighborhood of some $u_{J}$ in U that receives all S arrows. Then at every fixed bias $p_{m}(F)\geq 1-\exp (-c m)$ for some $c>0$ and sufficiently large m.
 
-\textbf{Proof.} If S is empty a balanced deterministic partition suffices by union bound. Otherwise choose singleton S-fibres in a fixed reserve W of half the source vertices: examine disjoint ordered tuples until one realizes the induced S-relation. This succeeds with exponentially high probability. For every nonselected vertex x record its outgoing and incoming signatures relative to the selected tuple, $J(x) \text{ and } I(x)$. Outside W all $4^{|}S|$ exact signature pairs occur linearly many times, except with exponentially small probability. Allocate a disjoint linear-size group of exact signatures $(J_{u},I_{u})$ to each u in U, splitting groups as needed. Assign all leftover vertices of signature J to $u_{J}$, which accepts every incoming signature. The exact groups guarantee each required S-to-U hit and exclude every forbidden one.
+\end{theorem}
 
-Conditional on the tuple tests (inside W) and signature exposures (incident to the selected tuple), all edges from nonselected rows to vertices outside W are fresh: none of these coordinates was tested. Every U-fibre has a linear-size part outside W, so all U-to-U hits hold with exponentially high probability by union bound. Tuple tests handle S-to-S; signatures handle U-to-S and S-to-U. This produces a full surjective bounded morphism. QED.
+\begin{proof} If S is empty a balanced deterministic partition suffices by union bound. Otherwise choose singleton S-fibres in a fixed reserve W of half the source vertices: examine disjoint ordered tuples until one realizes the induced S-relation. This succeeds with exponentially high probability. For every nonselected vertex x record its outgoing and incoming signatures relative to the selected tuple, $J(x) \text{ and } I(x)$. Outside W all $4^{|}S|$ exact signature pairs occur linearly many times, except with exponentially small probability. Allocate a disjoint linear-size group of exact signatures $(J_{u},I_{u})$ to each u in U, splitting groups as needed. Assign all leftover vertices of signature J to $u_{J}$, which accepts every incoming signature. The exact groups guarantee each required S-to-U hit and exclude every forbidden one.
+
+Conditional on the tuple tests (inside W) and signature exposures (incident to the selected tuple), all edges from nonselected rows to vertices outside W are fresh: none of these coordinates was tested. Every U-fibre has a linear-size part outside W, so all U-to-U hits hold with exponentially high probability by union bound. Tuple tests handle S-to-S; signatures handle U-to-S and S-to-U. This produces a full surjective bounded morphism.
+\end{proof}
 
 \section{Exceptional targets}
 
@@ -135,7 +144,7 @@ This is the binomial theorem after weighting the forced A-set by $q_{b}^{a}$. Fo
 \leq \exp(O(L^6/m))\pi_\lambda(b),
 \]
 
-where pi\_l(k)=exp(-l)l\textasciicircum{}k/k!, using $b=O(L)$. For the normalized means $t_{b}=\lambda /b$, the successive ratio is $\rho \,b/(b+1)<\rho $. Thus $O_{\theta }(1)$ indices have $t_{b}$ in $[1/2,2]$, and Stirling bounds each mass by $O(L^{-1/2})$ there. All other $O(L)$ indices contribute $\exp (-\Omega (L))$ since $t-1-\ln  t$ has positive lower bound outside that interval and $b\geq L/2$. Summing and adding negligible exceptions proves $p_{m}=O(L^{-1/2})$.
+where $\pi_l(k)=e^{-l}l^k/k!$, using $b=O(L)$. For the normalized means $t_{b}=\lambda /b$, the successive ratio is $\rho \,b/(b+1)<\rho $. Thus $O_{\theta }(1)$ indices have $t_{b}$ in $[1/2,2]$, and Stirling bounds each mass by $O(L^{-1/2})$ there. All other $O(L)$ indices contribute $\exp (-\Omega (L))$ since $t-1-\ln  t$ has positive lower bound outside that interval and $b\geq L/2$. Summing and adding negligible exceptions proves $p_{m}=O(L^{-1/2})$.
 
 \subsubsection{Target \texttt{001101011}}
 
@@ -159,7 +168,7 @@ Write $t=\lambda /b$. The last two factors equal $t^{a}\,\pi _{b\,\rho ^{a}}(a)$
 
 First discard $a>K \log _{B} L$ for fixed $K=8$. Since $\lambda \leq L^{3}, \lambda ^{a}\,\rho ^{a^{2}}/a! \leq  B^{3a \log _{B} L-a^{2}}\leq B^{-a^{2}/2}$ for these a, and the other factors are $\leq 1$ apart from the uniform prefactor. Summing over $O(L^{2})$ pairs yields $o((L \log  L)^{-1/2})$.
 
-For remaining $a\leq K \log _{B} L$, the last factors are at most $\exp (O((\ln  L)^{2}))$ uniformly (use $\lambda \leq L^{3}$ and drop exp(-b*rho\textasciicircum{}a)). If $|t-1|>L^{-1/4}$, the rate function $I(t)=t-1-\ln  t$ is $\geq c L^{-1/2}$ for a fixed $c>0$ and sufficiently large L. This follows from its second derivative $1/t^{2}$ on $[1/2,2]$ and positive minima outside that interval. Thus $\pi _{\lambda }(b)\leq O(\exp (-c' \sqrt{L}))$ by Stirling since $b\geq L/2$. Even after $O(L \log  L)$ pairs these terms are negligible.
+For remaining $a\leq K \log _{B} L$, the last factors are at most $\exp (O((\ln  L)^{2}))$ uniformly (use $\lambda \leq L^{3}$ and drop $\exp(-b\rho^a)$). If $|t-1|>L^{-1/4}$, the rate function $I(t)=t-1-\ln  t$ is $\geq c L^{-1/2}$ for a fixed $c>0$ and sufficiently large L. This follows from its second derivative $1/t^{2}$ on $[1/2,2]$ and positive minima outside that interval. Thus $\pi _{\lambda }(b)\leq O(\exp (-c' \sqrt{L}))$ by Stirling since $b\geq L/2$. Even after $O(L \log  L)$ pairs these terms are negligible.
 
 In the remaining range $|t-1|\leq L^{-1/4}$, the decreasing geometric ratio of $t_{b}$ implies at most one integer b for large L. Also $t^{a}\leq \exp (O(\log  L/L^{1/4}))\leq 2, \text{ and } \pi _{\lambda }(b)=O(L^{-1/2})$. Finally, uniformly as $b\to \infty $,
 
@@ -179,7 +188,7 @@ Theorem 3 does not apply for $k\geq 2$: among the universal incoming labels only
 
 Take a deterministic reserve $W \text{ of } \operatorname{floor}(m/2)$ vertices and $t=\operatorname{ceil}(L-(3/2)\log _{B} L)$. We claim that with probability $1-o(1)$ there is a t-subset D of W hit by every source row (including rows in D). This choice is measurable using only edges ending in W.
 
-Let X count such t-subsets, $q=\rho ^{t}, N=|W|, \text{ and } P_{0}=(1-q)^{m}$ the success probability of each fixed D. Then $E[X]=\operatorname{binom}(N,t)P_{0}>0$. For two t-subsets with intersection size j, the probability of both hits in each row is $1-2q+\rho ^{2t-j}$, so the ratio of their joint success probability to $P_{0}^{2}$ is
+Let X count such t-subsets, $q=\rho ^{t}, N=|W|, \text{ and } P_{0}=(1-q)^{m}$ the success probability of each fixed D. Then $\mathbb E[X]=\operatorname{binom}(N,t)P_{0}>0$. For two t-subsets with intersection size j, the probability of both hits in each row is $1-2q+\rho ^{2t-j}$, so the ratio of their joint success probability to $P_{0}^{2}$ is
 
 \[
 \left[1+\frac{\rho^{2t-j}-q^2}{(1-q)^2}\right]^m
@@ -192,7 +201,7 @@ for large m. The formula follows from independence of rows and inclusion-exclusi
 2^t\left(\frac{t}{N-t}\right)^{\lceil t/2\rceil}=\exp(-\Omega(L^2)).
 \]
 
-Indeed fix the first set and union bound over subsets of $\operatorname{ceil}(t/2)$ of it; the probability any such subset lies in the second is $(t)_{\ell }/(N)_{\ell } \leq (t/(N-t))^{\ell }$. Therefore $E[X^{2}]/E[X]^{2}\leq 1+o(1)$, with the high-overlap contribution negligible. Cauchy-Schwarz gives $P(X>0)\geq E[X]^{2}/E[X^{2}]=1-o(1)$. The event and a deterministic selected successful D depend only on edges ending in W.
+Indeed fix the first set and union bound over subsets of $\operatorname{ceil}(t/2)$ of it; the probability any such subset lies in the second is $(t)_{\ell }/(N)_{\ell } \leq (t/(N-t))^{\ell }$. Therefore $\mathbb E[X^{2}]/\mathbb E[X]^{2}\leq 1+o(1)$, with the high-overlap contribution negligible. Cauchy-Schwarz gives $\Pr(X>0)\geq \mathbb E[X]^{2}/\mathbb E[X^{2}]=1-o(1)$. The event and a deterministic selected successful D depend only on edges ending in W.
 
 \subsubsection{Construct all fibres using fresh edges}
 
@@ -238,7 +247,7 @@ Let X count b-subsets V with no ordered internal edge, including loops. Its expe
 \ln\mathbb E[X]=b(1+\ln(\lambda/b))-\tfrac12\ln(2\pi b)+o(1).
 \]
 
-In particular $E[X]\geq \exp (c L)$ for some $c>0$.
+In particular $\mathbb E[X]\geq \exp (c L)$ for some $c>0$.
 
 For independent uniform b-subsets the intersection size j has probability $P_{j}=\operatorname{binom}(b,j)\operatorname{binom}(m-b,b-j)/\operatorname{binom}(m,b)$. Joint independence of the two sets requires $2b^{2}-j^{2}$ absent ordered coordinates, so
 
@@ -258,7 +267,7 @@ P_j\rho^{-j^2}
 \end{aligned}
 \]
 
-The geometric $base$ tends to zero because $b=L-O(\log  L)$. Summing gives $o(1)$ since $E[X]$ grows exponentially. The $j=0$ contribution is $\leq 1$. Thus $\operatorname{Var}(X)/E[X]^{2}=o(1), \text{ and } X\geq E[X]/2$ with probability $1-o(1)$.
+The geometric $base$ tends to zero because $b=L-O(\log  L)$. Summing gives $o(1)$ since $\mathbb E[X]$ grows exponentially. The $j=0$ contribution is $\leq 1$. Thus $\operatorname{Var}(X)/\mathbb E[X]^{2}=o(1), \text{ and } X\geq \mathbb E[X]/2$ with probability $1-o(1)$.
 
 \subsubsection{Complete a fixed independent B-fibre with high conditional probability}
 
@@ -284,7 +293,7 @@ All rows therefore hit Z and C, precisely the required universal columns. The B-
 
 \subsubsection{Avoid adaptive-choice bias by counting bad independent sets}
 
-Let $X_{bad}$ count independent b-subsets V for which the deterministic completion rule above fails to produce a surjective bounded morphism. The conditional estimates for each fixed V give $E[X_{bad}]=o(E[X])$ by linearity; no independence across different V is needed. Markov yields $X_{bad}<E[X]/2$ with probability $1-o(1)$. Section 1 gives $X\geq E[X]/2$ with probability $1-o(1)$, so with probability tending to one at least one independent V has a successful completion. We do not select an independent set using arbitrary edge information and then assume its external edges remain fresh. This counting argument proves the theorem.
+Let $X_{bad}$ count independent b-subsets V for which the deterministic completion rule above fails to produce a surjective bounded morphism. The conditional estimates for each fixed V give $\mathbb E[X_{bad}]=o(\mathbb E[X])$ by linearity; no independence across different V is needed. Markov yields $X_{bad}<\mathbb E[X]/2$ with probability $1-o(1)$. Section 1 gives $X\geq \mathbb E[X]/2$ with probability $1-o(1)$, so with probability tending to one at least one independent V has a successful completion. We do not select an independent set using arbitrary edge information and then assume its external edges remain fresh. This counting argument proves the theorem.
 
 \subsection{Exact forced-pair second moment: \texttt{011010111}}
 
@@ -379,7 +388,7 @@ Let $\lambda _{a}=m\,\rho ^{a}=t L \text{ and } \lambda _{z}=m\,\rho ^{z}=t L/4$
 \exp(-\lambda_a-\lambda_z)\pi_{\lambda_z}(k),
 \]
 
-where pi\_l(k)=exp(-l)*l\textasciicircum{}k/k!. The relative errors in the multinomial and binomial approximations are $O(L^{2}/m)$: for the latter, $n=m-O(L), k=O(L), \text{ and } \rho ^{z}=O(L/m)$. Also $m\,\rho ^{k}\leq L^{-2}$; hence the M-hit factor tends to 1, the C-hit factors and J do as well because $c=m-O(L)$. These estimates apply to both necessary and sufficient restricted expectations.
+where $\pi_l(k)=e^{-l}l^k/k!$. The relative errors in the multinomial and binomial approximations are $O(L^{2}/m)$: for the latter, $n=m-O(L), k=O(L), \text{ and } \rho ^{z}=O(L/m)$. Also $m\,\rho ^{k}\leq L^{-2}$; hence the M-hit factor tends to 1, the C-hit factors and J do as well because $c=m-O(L)$. These estimates apply to both necessary and sufficient restricted expectations.
 
 For x in a fixed compact positive interval and $u=L+O(\log  L)$, Stirling's formula gives
 
@@ -396,7 +405,7 @@ uniformly. Substitution yields
 \end{aligned}
 \]
 
-The function f is concave $(f''=-3/t^{2})$, so its minimum on $[\sqrt{2},2\sqrt{2}]$ is at an endpoint. The values are $3-0.5 \ln  2-3 \sqrt{2}/2 \text{ and } 3+2.5 \ln  2-3 \sqrt{2}$, respectively; both exceed 0.48. Thus $E[Y]\geq \exp (0.47 L)$ for sufficiently large m. The restricted necessary and sufficient expectations have ratio tending to one, because the extra C-hit factors tend uniformly to one.
+The function f is concave $(f''=-3/t^{2})$, so its minimum on $[\sqrt{2},2\sqrt{2}]$ is at an endpoint. The values are $3-0.5 \ln  2-3 \sqrt{2}/2 \text{ and } 3+2.5 \ln  2-3 \sqrt{2}$, respectively; both exceed 0.48. Thus $\mathbb E[Y]\geq \exp (0.47 L)$ for sufficiently large m. The restricted necessary and sufficient expectations have ratio tending to one, because the extra C-hit factors tend uniformly to one.
 
 \subsubsection{Set-up for the second moment}
 
@@ -421,9 +430,9 @@ Use the necessary exact-M witness count $Y_{0}$ of Sections 5.4.2--5.4.3 at prec
 \item Each column in C receives at least one edge from Z.
 \end{itemize}
 
-The forbidden Z-to-M rectangle and the C-column hit requirement make M precisely the common nonneighbors of Z outside A union Z; likewise Z is exactly the set of outside-A rows missing A. Hence for each A there is at most one successful triple. All the specified forbidden rectangles and the individual row/column hit blocks are mutually disjoint coordinate sets. In particular their probabilities multiply. The forbidden set $H_{T}$ has size Q=a\textasciicircum{}2+za+zk, the same for every triple. Write $P=P(E_{T})=\rho ^{Q}$ times the hit factor R. The hit factor satisfies $R=\exp (-O(L))$, since $\rho ^{a},\rho ^{z}=\Theta (L/m), \rho ^{k}\leq 1/(m L^{2})$, and there are $O(m)$ requirements. Let $N=(m)_{s}/(a!z!k!)$ be the number of triples.
+The forbidden Z-to-M rectangle and the C-column hit requirement make M precisely the common nonneighbors of Z outside A union Z; likewise Z is exactly the set of outside-A rows missing A. Hence for each A there is at most one successful triple. All the specified forbidden rectangles and the individual row/column hit blocks are mutually disjoint coordinate sets. In particular their probabilities multiply. The forbidden set $H_{T}$ has size $Q=a^2+za+zk$, the same for every triple. Write $P=\Pr(E_{T})=\rho ^{Q}$ times the hit factor R. The hit factor satisfies $R=\exp (-O(L))$, since $\rho ^{a},\rho ^{z}=\Theta (L/m), \rho ^{k}\leq 1/(m L^{2})$, and there are $O(m)$ requirements. Let $N=(m)_{s}/(a!z!k!)$ be the number of triples.
 
-Section 5.4.3 shows E[Y0]=NP\ensuremath{\geq}exp(0.47 L) for sufficiently large m (E[Y]/E[Y0]=1+o(1), where Y additionally requires every row to hit C). We prove $E[Y_{0}^{2}]/E[Y_{0}]^{2}=1+o(1)$. Then concentration and Markov on $Y_{0}-Y$ give $Y>0 a.a.s.$, hence $p_{m}\to 1$.
+Section 5.4.3 shows E[Y0]=NP\ensuremath{\geq}exp(0.47 L) for sufficiently large m (E[Y]/E[Y0]=1+o(1), where Y additionally requires every row to hit C). We prove $\mathbb E[Y_{0}^{2}]/\mathbb E[Y_{0}]^{2}=1+o(1)$. Then concentration and Markov on $Y_{0}-Y$ give $Y>0 a.a.s.$, hence $p_{m}\to 1$.
 
 \subsubsection{Small support overlap: h\ensuremath{\leq}L/2}
 
@@ -431,7 +440,7 @@ For two triples $T,T'$ let $S=A \cup  Z \cup  M, S'=A' \cup  Z' \cup  M', h=|S \
 
 For an upper bound on the joint event, retain only hit requirements for rows outside $S \cup  S'$ and for columns outside $S \cup  S'$. More precisely, each such outside row must hit all six blocks $A,Z,M,A',Z',M'$, and each outside column must receive an edge from both $Z \text{ and } Z'$. These row tests and column tests use disjoint families of coordinates, also disjoint from the forbidden coordinates. Different rows are independent, and different columns are independent.
 
-Let $\ell =\min (a,z,k)=L-O(\log  L)$. For a given outside row, the probability of missing any one of its six blocks is rho\textasciicircum{}size. For any pair of these misses the joint probability is $\leq \rho ^{2\ell -h}$, since the two blocks overlap in at most h vertices (within one triple they are disjoint). By the two-term Bonferroni bound, the probability of all six hits is at most $1-\sum $ of single miss probabilities $+15\,\rho ^{2\ell -h}$. The product of the six single hit probabilities is at least $1-\sum $ of single miss probabilities, and tends uniformly to one. Consequently the ratio of the joint row probability to that product is $\leq 1+O(\rho ^{2\ell -h})$. For an outside column the two hit tests from $Z,Z'$ satisfy the same bound by inclusion-exclusion. Thus over at most $2m$ outside rows and columns the product of these ratios is $\leq \exp (O(m\,\rho ^{2\ell -h}))=1+o(1)$ uniformly for $h\leq L/2$.
+Let $\ell =\min (a,z,k)=L-O(\log  L)$. For a given outside row, the probability of missing any one of its six blocks is $\rho^{\text{size}}$. For any pair of these misses the joint probability is $\leq \rho ^{2\ell -h}$, since the two blocks overlap in at most h vertices (within one triple they are disjoint). By the two-term Bonferroni bound, the probability of all six hits is at most $1-\sum $ of single miss probabilities $+15\,\rho ^{2\ell -h}$. The product of the six single hit probabilities is at least $1-\sum $ of single miss probabilities, and tends uniformly to one. Consequently the ratio of the joint row probability to that product is $\leq 1+O(\rho ^{2\ell -h})$. For an outside column the two hit tests from $Z,Z'$ satisfy the same bound by inclusion-exclusion. Thus over at most $2m$ outside rows and columns the product of these ratios is $\leq \exp (O(m\,\rho ^{2\ell -h}))=1+o(1)$ uniformly for $h\leq L/2$.
 
 In each individual $E_{T} (\text{ and } E_{T}')$ all the original hit blocks are independent. The requirements dropped in this upper bound number $O(s)$ per event: they are row hits for rows in the union of supports and column hits for columns in that union. Their product of probabilities is $1-o(1)$, because each miss has probability $\leq \rho ^{\ell }=O(L/m)$. Therefore uniformly for $h\leq L/2$,
 
@@ -446,7 +455,7 @@ For $h=0$, this is $\leq 1+o(1)$. For $h\geq 1, I\leq h^{2}$ because every commo
 \leq\left(\frac{s^2}{m-s}\right)^h.
 \]
 
-For $1\leq h\leq L/2$, the product of this bound and $2^{h^{2}}$ is at most $(s^{2}\,2^{L/2}/(m-s))^{h}$. The $base$ tends to zero, and the geometric series over positive h is $o(1)$. Hence all pairs with $h\leq L/2$ contribute at most $(1+o(1))\,E[Y_{0}]^{2}$.
+For $1\leq h\leq L/2$, the product of this bound and $2^{h^{2}}$ is at most $(s^{2}\,2^{L/2}/(m-s))^{h}$. The $base$ tends to zero, and the geometric series over positive h is $o(1)$. Hence all pairs with $h\leq L/2$ contribute at most $(1+o(1))\,\mathbb E[Y_{0}]^{2}$.
 
 \subsubsection{Large overlaps with a deficit}
 
@@ -461,13 +470,13 @@ Dh-I&\geq x(D-x)+y(D-x)+w(D-y).
 
 The same statements hold on exchanging $T,T'$. Denote the deficit $D h-I$ by $\Delta $.
 
-For arbitrary pairs, dropping all hits gives the crude ratio $P(E_{T} \text{ and } E_{T}')/P^{2} \leq \rho ^{-I}\,R^{-2}=2^{I+O(L)}$, uniformly. The support intersection counting bound above gives, for any $h\geq 1$,
+For arbitrary pairs, dropping all hits gives the crude ratio $\Pr(E_{T} \text{ and } E_{T}')/P^{2} \leq \rho ^{-I}\,R^{-2}=2^{I+O(L)}$, uniformly. The support intersection counting bound above gives, for any $h\geq 1$,
 
 \[
 \Pr(|S\cap S'|=h)\leq 2^{-Lh+O(h\log L)}.
 \]
 
-Here $s=O(L)$. Therefore pairs with $h>L/2 \text{ and } \Delta \geq K L \log _{2} L$ contribute $o(E[Y_{0}]^{2})$, for any sufficiently large fixed K. Indeed $I=D$ h-Delta, $(D-L)h=O(L \log  L)$, and one can choose K strictly larger than the fixed constants in all $O(L \log  L)$ upper bounds, so the normalized $\sum $ over $O(L)$ sizes is at most $O(L)\,2^{-L \log _{2} L}$ eventually. No independence of these pairs is assumed.
+Here $s=O(L)$. Therefore pairs with $h>L/2 \text{ and } \Delta \geq K L \log _{2} L$ contribute $o(\mathbb E[Y_{0}]^{2})$, for any sufficiently large fixed K. Indeed $I=D$ h-Delta, $(D-L)h=O(L \log  L)$, and one can choose K strictly larger than the fixed constants in all $O(L \log  L)$ upper bounds, so the normalized $\sum $ over $O(L)$ sizes is at most $O(L)\,2^{-L \log _{2} L}$ eventually. No independence of these pairs is assumed.
 
 \subsubsection{Structural lemma for the remaining large overlaps}
 
@@ -489,7 +498,7 @@ All constants are uniform in the pairs, depending only on the fixed K and the ch
 
 \subsubsection{Conditional bound for near-identical A sets}
 
-Fix T and condition on $E_{T}$. Since the event is a conjunction of disjoint coordinate-block constraints, these blocks remain independent conditional on $E_{T}$; untested coordinates remain fresh. Within a row-hit block conditioned to contain at least one present edge, the probability that any specified subset of b coordinates is absent is $\leq \rho ^{b}$, since its exact probability is rho\textasciicircum{}b*(1-rho\textasciicircum{}(blocksize-b))/(1-rho\textasciicircum{}blocksize). This also covers a whole block (probability zero).
+Fix T and condition on $E_{T}$. Since the event is a conjunction of disjoint coordinate-block constraints, these blocks remain independent conditional on $E_{T}$; untested coordinates remain fresh. Within a row-hit block conditioned to contain at least one present edge, the probability that any specified subset of b coordinates is absent is $\leq \rho ^{b}$, since its exact probability is $\rho^b(1-\rho^{n-b})/(1-\rho^n)$, where $n$ is the block size. This also covers a whole block (probability zero).
 
 For $A'$ of size a with $d=|A \setminus  A'|\geq 1$, write $F=A \cap  A'$ (size a-d) and G=A' minus A (size d). Let $e=|G \cap  Z|$. Independence of $A'$ requires all F x G and G x F coordinates absent. Conditional on $E_{T}$:
 
@@ -499,7 +508,7 @@ For $A'$ of size a with $d=|A \setminus  A'|\geq 1$, write $F=A \cap  A'$ (size 
 \item Rows in G intersect Z already miss A. The coordinate blocks used in the first two items are distinct even though their endpoints may overlap: the former have source in A and destination outside A, the latter source outside A and destination in A. No column constraint from Z to C intersects either group (source in the former is A; destination in the latter is A).
 \end{itemize}
 
-It follows that P(A' independent | E\_T)\ensuremath{\leq}rho\textasciicircum{}((a-d)(2d-e)). We have ignored other constraints on $A'$ and thus obtained an upper bound.
+It follows that $\Pr(A'\text{ independent}\mid E_T)\leq\rho^{(a-d)(2d-e)}$. We have ignored other constraints on $A'$ and thus obtained an upper bound.
 
 Sum this bound over all $A'$ with $1\leq d\leq K_{1} \log _{2} L$. For each $d,e$, at most $\operatorname{binom}(a,d)\operatorname{binom}(z,e)\operatorname{binom}(m-a-z,d-e)$ choices. Using $\operatorname{binom}(n,j)\leq n^{j}$ and the binomial theorem (whose coefficients are \ensuremath{\geq}1), the $\sum $ for a fixed d is bounded by
 
@@ -517,7 +526,7 @@ This conditional calculation is the essential improvement over bounding the enti
 
 \subsubsection{Conclusion}
 
-Sections 5.4.5--5.4.8 exhaust all ordered pairs. They show $E[Y_{0}^{2}]\leq (1+o(1))\,E[Y_{0}]^{2}$; the reverse asymptotic lower bound follows from variance nonnegativity. Chebyshev gives $Y_{0}\geq E[Y_{0}]/2 a.a.s$. From the preceding fixed-size first moment, $E[Y_{0}-Y]=o(E[Y_{0}])$ because the added C hits fail with probability $o(1)$ given $E_{T}$ (uniformly, with c=m-O(L)). Markov gives $Y_{0}-Y<E[Y_{0}]/2 a.a.s$. Consequently $Y>0 a.a.s.$; a sufficient witness yields the desired surjective bounded morphism.
+Sections 5.4.5--5.4.8 exhaust all ordered pairs. They show $\mathbb E[Y_{0}^{2}]\leq (1+o(1))\,\mathbb E[Y_{0}]^{2}$; the reverse asymptotic lower bound follows from variance nonnegativity. Chebyshev gives $Y_{0}\geq \mathbb E[Y_{0}]/2 a.a.s$. From the preceding fixed-size first moment, $\mathbb E[Y_{0}-Y]=o(\mathbb E[Y_{0}])$ because the added C hits fail with probability $o(1)$ given $E_{T}$ (uniformly, with c=m-O(L)). Markov gives $Y_{0}-Y<\mathbb E[Y_{0}]/2 a.a.s$. Consequently $Y>0 a.a.s.$; a sufficient witness yields the desired surjective bounded morphism.
 
 Thus $p_{m}(F011010111)\to 1$ in the fair model. QED.
 
@@ -658,9 +667,9 @@ Write $\chi _{F}^{d}$ for the ordinary-modal translation [U]=box box and <U\ensu
 \Pr(R^2\text{ is not universal})\leq m^2(1-\theta^2)^{m-2}.
 \]
 
-For a fixed ordered pair $(x,y)$, the two edges through each intermediate vertex outside $\{x,y\}$ are distinct, independent, and disjoint across intermediates, including when $x=y$. Each path succeeds with probability $\theta ^{2}$. Union over the $m^{2}$ ordered pairs proves the bound. Thus Pr(G\_m validates chi\_F\textasciicircum{}d) differs from $1-p_{m}(F)$ by at most the displayed error.
+For a fixed ordered pair $(x,y)$, the two edges through each intermediate vertex outside $\{x,y\}$ are distinct, independent, and disjoint across intermediates, including when $x=y$. Each path succeeds with probability $\theta ^{2}$. Union over the $m^{2}$ ordered pairs proves the bound. Thus $\Pr(G_m\models\chi_F^d)$ differs from $1-p_{m}(F)$ by at most the displayed error.
 
-By [2, Proposition 3.5], all finite central targets validate $\mathrm{ML}^{r}$. For any almost-surely valid formula phi and target F with $p_{m}(F)\to 1, F$ must validate phi: otherwise each source with a bounded morphism onto F would falsify phi by preservation of frame validity, contradicting almost-sure validity. Conversely $p_{m}(F)\to 0$ makes $\chi _{F}^{d}$ almost surely valid and false in F. Therefore the 1,1,3,12 positive central types on one through four vertices are exactly the finite models of $\mathrm{ML}^{as}$ in these sizes within the central class (and noncentral finite frames cannot validate ML\textasciicircum{}r). This strengthens the characteristic-formula census to a finite-model census in these sizes only.
+By [2, Proposition 3.5], all finite central targets validate $\mathrm{ML}^{r}$. For any almost-surely valid formula phi and target F with $p_{m}(F)\to 1, F$ must validate phi: otherwise each source with a bounded morphism onto F would falsify phi by preservation of frame validity, contradicting almost-sure validity. Conversely $p_{m}(F)\to 0$ makes $\chi _{F}^{d}$ almost surely valid and false in F. Therefore the 1,1,3,12 positive central types on one through four vertices are exactly the finite models of $\mathrm{ML}^{as}$ in these sizes within the central class (and noncentral finite frames cannot validate $\mathrm{ML}^{r}$). This strengthens the characteristic-formula census to a finite-model census in these sizes only.
 
 There are 25 minimal vanishing types on at most four points. For distinct minimal types $F,H$, no surjective bounded morphism $F\to H$ exists, by minimality if H is smaller, impossibility of surjection if H is larger, and bijective bounded morphism implying isomorphism if sizes agree. Every F thus validates $\mathrm{ML}^{r}$ and all the other minimal types' translated characteristic formulas, but falsifies its own. Normal modal soundness proves mutual independence of these 25 axiom schemes over $\mathrm{ML}^{r}$. This is not an axiomatization of all $\mathrm{ML}^{as}$.
 
@@ -690,7 +699,7 @@ The main census is proved for fair edges, not all fixed biases. In particular Se
 
 [2] V. Goranko. The modal logic of almost sure frame validities in the finite. Advances in Modal Logic 13 (2020), 249--268. \url{https://www.aiml.net/volumes/volume13/Goranko.pdf} (mirror \url{https://titan.dcs.bbk.ac.uk/volumes/volume13/Goranko.pdf}).
 
-$[3] J.-M$. Le Bars. The $0-1$ law fails for frame satisfiability of propositional modal logic. LICS 2002, 225--234. \url{https://doi.org/10.1109/LICS.2002.1029831}
+[3] J.-M. Le Bars. The $0-1$ law fails for frame satisfiability of propositional modal logic. LICS 2002, 225--234. \url{https://doi.org/10.1109/LICS.2002.1029831}
 
 [4] R. F. Schamm. Zero-One Laws and Almost Sure Validities on Finite Structures. MSc short dissertation, Rand Afrikaans University, 2002. Sections 3.3.5--3.3.6; Figure 4.1; appendix. (The figure ordering has not been visually verified; do not claim a correction of a specific cell.)
 
