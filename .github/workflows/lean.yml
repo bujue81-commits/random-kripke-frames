@@ -18,6 +18,8 @@ jobs:
         run: python3 experiments/exact_random_frames.py
       - name: Exhaustive chain edge cardinality audit
         run: python3 experiments/chain_edge_counting_audit.py
+      - name: Four-point census and central-cycle quotient audit
+        run: python3 experiments/four_point_census.py
       - name: Two-peripheral reciprocal-gap probability and overlap audit
         run: python3 experiments/two_peripheral_gap_audit.py
       - name: Loopless-target overlap and biased probability audit
